@@ -1,7 +1,2 @@
 # hello-word
-Test to branches
-GIT CUI
-
-12312123
-
-adsfasdfasdfasf
+学习在GIT上搭建Web站点
