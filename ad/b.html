@@ -176,7 +176,7 @@
             input.style.top = oCssObj.y *scale+ "px";
             input.style.width = (oCssObj.width - 10)*scale + "px";
             input.style.height = oCssObj.height*scale  + "px";
-            input.style.lineHeight = oCssObj.height + "px";
+            input.style.lineHeight = oCssObj.height*scale  + "px";
             if (!document.createElement("canvas").getContext) {
                 input.style.background = "#fff";
             }
