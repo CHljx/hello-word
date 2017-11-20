@@ -11,7 +11,7 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="authoring-tool" content="Adobe_Animate_CC">
-	<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no;"/>
+	<meta name=viewport content="width=device-width,initial-scale=1,minimum-scale=1,user-scalable=no"/>
 	<title>b</title>
 	<style>
 		/**
@@ -23,8 +23,7 @@
 			margin: 0px;
 			background-color: #000;
 			overflow: hidden;
-			text-align: left;
-			max-width:100%;
+			text-align: center;
 		}
 
 		/**
@@ -34,9 +33,12 @@
 			position: relative;
 			margin: 0 auto;
 			padding: 0px;
-			max-width:100%;
+			max-width:750px;
 		}
 
+		canvas{
+			margin:auto;
+		}
 		/**
         * 文本框
         * IE9 情况下background：transparetn导致文本框不可用，设置IE9Hack
@@ -76,10 +78,16 @@
 			display: none;
 		}
 
+		input#agreeCheck {
+			width: auto;
+			height: auto;
+		}
 
+		#agree {
+			background: none;
+		}
 	</style>
-	<script src="https://code.jquery.com/jquery-git.js"></script>
-	<!-- write your code here -->
+	<script src="https://code.jquery.com/jquery-git.js"></script>	<!-- write your code here -->
 	<script src="libs/createjs-2015.11.26.min.js"></script>
 	<script src="b.js"></script>
 	<script>
@@ -103,6 +111,7 @@
             //This function is always called, irrespective of the content. You can use the variable "stage" after it is created in token create_stage.
             var queue = evt.target;
             var ssMetadata = lib.ssMetadata;
+            var eStage=document.getElementById("Stage");
             for (i = 0; i < ssMetadata.length; i++) {
                 ss[ssMetadata[i].name] = new createjs.SpriteSheet({
                     "images": [queue.getResult(ssMetadata[i].name)],
@@ -119,7 +128,7 @@
             //Code to support hidpi screens and responsive scaling.
             (function (isResp, respDim, isScale, scaleType) {
                 var lastW, lastH, lastS = 1;
-                //window.addEventListener('resize', resizeCanvas);
+//                window.addEventListener('resize', resizeCanvas);
                 resizeCanvas();
                 function resizeCanvas() {
                     var w = lib.properties.width, h = lib.properties.height;
@@ -144,8 +153,8 @@
                     }
                     canvas.width = w * pRatio * sRatio;
                     canvas.height = h * pRatio * sRatio;
-                    canvas.style.width = w * sRatio + 'px';
-                    canvas.style.height = h * sRatio + 'px';
+                    eStage.style.width=canvas.style.width = w * sRatio + 'px';
+                    eStage.style.height=canvas.style.height = h * sRatio + 'px';
                     stage.scaleX = pRatio * sRatio;
                     stage.scaleY = pRatio * sRatio;
                     scale=sRatio;
@@ -216,9 +225,9 @@
 	<!-- write your code here -->
 </head>
 <body onload="init();" style="margin:0px;">
-<div id="Stage" class="stage" style="">
+<div id="Stage" class="stage">
 	<!--Canvas 画布-->
-	<canvas id="canvas" style="display: block; ">
+	<canvas id="canvas" style="display: block; background-color:rgba(255, 255, 255, 1.00)">
 	</canvas>
 	<!--登录窗口-->
 	<div>
