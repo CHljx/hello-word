@@ -120,7 +120,7 @@
             //Code to support hidpi screens and responsive scaling.
             (function (isResp, respDim, isScale, scaleType) {
                 var lastW, lastH, lastS = 1;
-                window.addEventListener('resize', resizeCanvas);
+                //window.addEventListener('resize', resizeCanvas);
                 resizeCanvas();
                 function resizeCanvas() {
                     var w = lib.properties.width, h = lib.properties.height;
@@ -216,10 +216,10 @@
 	</script>
 	<!-- write your code here -->
 </head>
-<body onload="init();" style="margin:0px;background:green;">
-<div id="Stage" class="stage" style="background:yellow">
+<body onload="init();" style="margin:0px;">
+<div id="Stage" class="stage" style="">
 	<!--Canvas 画布-->
-	<canvas id="canvas" style="display: block; background-color:red;">
+	<canvas id="canvas" style="display: block; ">
 	</canvas>
 	<!--登录窗口-->
 	<div>
