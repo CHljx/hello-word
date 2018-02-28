@@ -1,1 +1,0 @@
-[{"id":1,"name":"\u6bcf\u65e5\u6570\u636e","url":"\/index.php?c=dashboard&a=dashboard_wx"}]
