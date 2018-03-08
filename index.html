@@ -1,16 +1,59 @@
-<!DOCTYPE html><html><head><meta charset="utf-8"><title>H5自营移动平台</title><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1"><script type="text/javascript">(function (doc, win) {
-        var docEl = doc.documentElement,
-        resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize',
-        recalc = function () {
-        var clientWidth = docEl.clientWidth;
-        if (!clientWidth) return;
-        if (clientWidth >= 750) {
-            docEl.style.fontSize = '100px';
-        } else {
-            docEl.style.fontSize = 100 * (clientWidth / 750) + 'px';
-        }
-        };
-        if (!doc.addEventListener) return;
-        win.addEventListener(resizeEvt, recalc, false);
-        recalc();
-})(document, window);</script><link href="asset/css/h5.min.css?45f9c0a004d47af6891d" rel="stylesheet"></head><body><div class="page" id="page" data-mindate="2016-05" data-date-type="month" data-menuitem="./data/mob_item.js"><header class="page-header"><nav><ul class="nav-list"><li class="item active">大天使之剑</li><li class="item">大天使之剑</li><li class="item">大天使之剑</li><li class="item">大天使之剑</li><li class="item">大天使之剑</li><li class="item">大天使之剑</li><li class="item">大天使之剑</li><li class="item">大天使之剑</li><li class="item">大天使之剑</li><li class="item">大天使之剑</li></ul></nav></header><div class="page-content h5-mobile"><div class="toolbar"><span class="active">今天</span><span>昨天</span><span>最近3天</span><span>最近7天</span></div><div class="content"><div class="box-flex flex-col"><div class="title">IOS设备</div><div class="box"><div class="col"><div class="item"><div class="box"><span>收入分成</span><span>109,452.85</span></div></div><div class="item"><div class="box"><span>收入分成</span><span>109,452.85</span></div></div><div class="item"><div class="box"><span>收入分成</span><span>109,452.85</span></div></div></div><div class="col"><div class="item"><div class="box"><span>收入分成</span><span>109,452.85</span></div></div><div class="item"><div class="box"><span>收入分成</span><span>109,452.85</span></div></div><div class="item"><div class="box"><span>收入分成</span><span>109,452.85</span></div></div></div><div class="col"><div class="item"><div class="box"><span>收入分成</span><span>109,452.85</span></div></div><div class="item"><div class="box"><span>收入分成</span><span>109,452.85</span></div></div></div></div></div><divs class="box-flex flex-col"><div class="title">Android设备</div><div class="box"><div class="col"><div class="item"><div class="box"><span>收入分成</span><span>109,452.85</span></div></div><div class="item"><div class="box"><span>收入分成</span><span>109,452.85</span></div></div><div class="item"><div class="box"><span>收入分成</span><span>109,452.85</span></div></div></div><div class="col"><div class="item"><div class="box"><span>收入分成</span><span>109,452.85</span></div></div><div class="item"><div class="box"><span>收入分成</span><span>109,452.85</span></div></div><div class="item"><div class="box"><span>收入分成</span><span>109,452.85</span></div></div></div><div class="col"><div class="item"><div class="box"><span>收入分成</span><span>109,452.85</span></div></div><div class="item"><div class="box"><span>收入分成</span><span>109,452.85</span></div></div></div></div></divs></div></div><div class="page-footer">2015-05-03</div></div><script type="text/javascript" src="asset/js/index.min.js?45f9c0a004d47af6891d"></script></body></html>
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>H5自营移动平台</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1">
+    <script type="text/javascript">
+        (function (doc, win) {
+            var docEl = doc.documentElement,
+                resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize',
+                recalc = function () {
+                    var clientWidth = docEl.clientWidth;
+                    if (!clientWidth) return;
+                    if (clientWidth >= 750) {
+                        docEl.style.fontSize = '100px';
+                    } else {
+                        docEl.style.fontSize = 100 * (clientWidth / 750) + 'px';
+                    }
+                };
+            if (!doc.addEventListener) return;
+            win.addEventListener(resizeEvt, recalc, false);
+            recalc();
+        })(document, window);
+    </script>
+    <link href="./css/index.css?de36826754612d1d2e2a" rel="stylesheet"></head>
+<body>
+<div class="page" id="page" data-mindate="2018-01-02" data-date-type="day" data-mainbar="http://hy.mobtj.37wan.com/index.php?c=h5tj&a=main_bar">
+    <header class="page-header">
+        <nav>
+            <ul class="nav-list" data-key="game_id">
+            </ul>
+        </nav>
+    </header>
+    <div class="page-content h5-quota" data-view="app/h5quatoView" data-url="http://hy.mobtj.37wan.com/index.php?c=h5tj&a=dashboard">
+        <div class="toolbar">
+            <span class="item active js-today" data-type="1">今天</span>
+            <span class="item" data-type="2">前1天</span>
+            <span class="item" data-type="3">最近3天</span>
+            <span class="item" data-type="4">最近7天</span>
+        </div>
+        <div class="content-body flex-col flex-1">
+            <div class="box flex-col flex-1">
+                <div class="title box-title"><span class="box-title-icon icon-android"></span><span>安卓设备</span></div>
+                <div class="flex-col flex-1 box-content js-android load">
+                </div>
+            </div>
+            <div class="box flex-col flex-1">
+                <div class="title box-title"><span class="box-title-icon icon-ios"></span><span>IOS设备</span></div>
+                <div class="flex-col flex-1 box-content js-ios load">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="page-footer"><span class="icon-clandar"></span><span class="input-date"></span></div>
+</div>
+<script src="./js/lib/require.min.js" type="text/javascript" data-main="./js/index"></script>
+</body>
+</html>
