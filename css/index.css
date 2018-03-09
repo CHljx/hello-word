@@ -42,10 +42,10 @@ ul {
           box-sizing: border-box;
   white-space: nowrap;
   overflow-x: auto;
-  display: -webkit-box;
+  /*display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
-  display: flex;
+  display: flex;*/
 }
 .page-header .nav-list .item {
   border-bottom: 0.06rem solid #2e3458;
