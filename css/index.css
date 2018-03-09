@@ -61,6 +61,8 @@ ul {
   -webkit-flex-basis: 100%;
       -ms-flex-preferred-size: 100%;
           flex-basis: 100%;
+		  display:inline-block;
+		  margin:0px 2px;
 }
 .page-header .nav-list .item.active {
   border-color: #0197ff;
