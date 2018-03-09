@@ -50,6 +50,7 @@ ul {
 .page-header .nav-list .item {
   border-bottom: 0.06rem solid #2e3458;
   padding: 0.03rem .36rem;
+
   height: 1rem;
   line-height: 1rem;
   -webkit-box-sizing: border-box;
@@ -62,7 +63,7 @@ ul {
       -ms-flex-preferred-size: 100%;
           flex-basis: 100%;
 		  display:inline-block;
-		  margin:0px 2px;
+		  background:red;
 }
 .page-header .nav-list .item.active {
   border-color: #0197ff;
