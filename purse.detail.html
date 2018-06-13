@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=0.5, maximum-scale=2.0, user-scalable=no">
+    <link href="./static/css/mui.css" rel="stylesheet" type="text/css">
+    <link href="./static/css/mui.picker.min.css" rel="stylesheet" type="text/css">
+    <link href="./static/css/iconfont.css" rel="stylesheet" type="text/css">
+    <script>
+      var defaultFontSize=0;
+      function getDefaultFS(){
+          var d = window.document.createElement('div');
+          d.style.width = '1rem';
+          d.style.display = "none";
+          var head = window.document.getElementsByTagName('head')[0];
+          head.appendChild(d);
+          defaultFontSize = parseFloat(window.getComputedStyle(d, null).getPropertyValue('width'));
+          d.remove();
+      }
+      function adapt(designWidth, rem2px) {
+          var head = window.document.getElementsByTagName('head')[0];
+          document.documentElement.style.fontSize = window.innerWidth / designWidth * rem2px / defaultFontSize * 100 + '%';
+          var st = document.createElement('style');
+           var portrait = "@media screen and (min-width: " + window.innerWidth + "px) {html{font-size:" + ((window.innerWidth / (designWidth / rem2px) / defaultFontSize) * 100) + "%;}}";
+           var landscape = "@media screen and (min-width: " + window.innerHeight + "px) {html{font-size:" + ((window.innerHeight / (designWidth / rem2px) / defaultFontSize) * 100) + "%;}}"
+           st.innerHTML = portrait + landscape;
+           head.appendChild(st);
+      };
+      getDefaultFS();
+      adapt(750, 100);
+      window.addEventListener("resize",function(){
+          adapt(750, 100);
+      })
+    </script>
+  <link href="static/css/mui_base.min.css" rel="stylesheet"><link href="static/css/mui_purse_detail.min.css" rel="stylesheet"></head>
+  <body id="app_purse-detail">
+    <header class="mui-bar mui-bar-nav">
+      <div class="mui-bar-header"><a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+        <h1 class="mui-title">收支明细</h1>
+        <div class="mui-pull-right"><span class="mr">筛选</span><i class="mui-icon mui-icon-arrowdown mui-icon-sm"></i></div>
+      </div>
+    </header>
+    <div class="mui-content">
+      <div class="panel pt-sm">
+        <table class="detail-table">
+          <thead>
+            <tr>
+              <th class="mui-text-left">时间</th>
+              <th class="mui-text-center">类型</th>
+              <th class="mui-text-right">金额</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="mui-text-left">2018.02.16 14:00</td>
+              <td class="mui-text-center">充值</td>
+              <td class="mui-text-right"><span>-￥</span><span>1880</span></td>
+            </tr>
+            <tr>
+              <td class="mui-text-left">2018.02.16 14:00</td>
+              <td class="mui-text-center">充值</td>
+              <td class="mui-text-right"><span>-￥</span><span>2068</span></td>
+            </tr>
+            <tr>
+              <td class="mui-text-left">2018.02.16 14:00</td>
+              <td class="mui-text-center">充值</td>
+              <td class="mui-text-right"><span>-￥</span><span>2256</span></td>
+            </tr>
+            <tr>
+              <td class="mui-text-left">2018.02.16 14:00</td>
+              <td class="mui-text-center">充值</td>
+              <td class="mui-text-right"><span>-￥</span><span>2444</span></td>
+            </tr>
+            <tr>
+              <td class="mui-text-left">2018.02.16 14:00</td>
+              <td class="mui-text-center">充值</td>
+              <td class="mui-text-right"><span>-￥</span><span>2632</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <script src="./static/js/lib/mui.js"></script>
+    <script src="./static/js/lib/mui.picker.min.js"></script>
+    <script>
+      (function ($) {
+          $.init();
+      })(mui);
+    </script></body>
+</html>

@@ -1,0 +1,17 @@
+table {
+  width: 100%;
+}
+table tr {
+  height: .9rem;
+  border-bottom: 0.01rem solid #e5e5e5;
+}
+table thead {
+  font-size: .26rem;
+}
+table tbody {
+  font-size: .24rem;
+}
+.detail-table th {
+  width: 33.33333333%;
+  font-weight: normal;
+}

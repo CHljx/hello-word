@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=0.5, maximum-scale=2.0, user-scalable=no">
+    <link href="./static/css/mui.css" rel="stylesheet" type="text/css">
+    <link href="./static/css/mui.picker.min.css" rel="stylesheet" type="text/css">
+    <link href="./static/css/iconfont.css" rel="stylesheet" type="text/css">
+    <script>
+      var defaultFontSize=0;
+      function getDefaultFS(){
+          var d = window.document.createElement('div');
+          d.style.width = '1rem';
+          d.style.display = "none";
+          var head = window.document.getElementsByTagName('head')[0];
+          head.appendChild(d);
+          defaultFontSize = parseFloat(window.getComputedStyle(d, null).getPropertyValue('width'));
+          d.remove();
+      }
+      function adapt(designWidth, rem2px) {
+          var head = window.document.getElementsByTagName('head')[0];
+          document.documentElement.style.fontSize = window.innerWidth / designWidth * rem2px / defaultFontSize * 100 + '%';
+          var st = document.createElement('style');
+           var portrait = "@media screen and (min-width: " + window.innerWidth + "px) {html{font-size:" + ((window.innerWidth / (designWidth / rem2px) / defaultFontSize) * 100) + "%;}}";
+           var landscape = "@media screen and (min-width: " + window.innerHeight + "px) {html{font-size:" + ((window.innerHeight / (designWidth / rem2px) / defaultFontSize) * 100) + "%;}}"
+           st.innerHTML = portrait + landscape;
+           head.appendChild(st);
+      };
+      getDefaultFS();
+      adapt(750, 100);
+      window.addEventListener("resize",function(){
+          adapt(750, 100);
+      })
+    </script>
+  <link href="static/css/mui_base.min.css" rel="stylesheet"><link href="static/css/mui_purse_deposit.min.css" rel="stylesheet"></head>
+  <body id="app_order-add">
+    <header class="mui-bar mui-bar-nav">
+      <div class="mui-bar-header"><a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+        <h1 class="mui-title">提交订单</h1>
+      </div>
+    </header>
+    <div class="mui-content">
+      <div class="panel full">
+        <div class="mui-text-center"><span>已冻结押金（元）</span>
+          <div class="money"><span>￥</span><span class="num">10000</span></div>
+        </div>
+        <div>
+          <button class="btn-normal active block">退卡</button>
+        </div>
+      </div>
+    </div>
+    <script src="./static/js/lib/mui.js"></script>
+    <script src="./static/js/lib/mui.picker.min.js"></script>
+    <script>
+      (function ($) {
+          $.init();
+      })(mui);
+    </script></body>
+</html>

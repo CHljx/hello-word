@@ -1,0 +1,10 @@
+.money {
+  padding: .45rem 0 2.6rem;
+  display: block;
+  font-size: .48rem;
+  height: .8rem;
+  line-height: .8rem;
+}
+.money .num {
+  font-size: .8rem;
+}

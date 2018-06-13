@@ -1,0 +1,38 @@
+.mui-content {
+  background: #f8f8f8!important;
+  line-height: .4rem;
+}
+.mui-content p {
+  margin: 0px;
+  padding: 0px;
+  color: inherit;
+  font-size: .25rem;
+}
+.img-cash {
+  width: .56rem;
+  height: .5rem;
+  vertical-align: middle;
+}
+.strong-cash {
+  font-size: .6rem;
+}
+input.input-cash {
+  font-size: .25rem;
+  border: 0px;
+  outline: 0;
+  height: .5rem;
+  padding-left: 0px;
+  margin-bottom: 0px;
+}
+#app_purse-cash {
+  padding-bottom: 1.7rem;
+}
+#app_purse-cash .icon-right {
+  font-size: 0.4rem;
+}
+#app_purse-cash .link {
+  white-space: nowrap;
+  word-break: keep-all;
+  word-wrap: normal;
+  line-height: .5rem;
+}

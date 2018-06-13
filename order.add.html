@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=0.5, maximum-scale=2.0, user-scalable=no">
+    <link href="./static/css/mui.css" rel="stylesheet" type="text/css">
+    <link href="./static/css/mui.picker.min.css" rel="stylesheet" type="text/css">
+    <link href="./static/css/iconfont.css" rel="stylesheet" type="text/css">
+    <script>
+      var defaultFontSize=0;
+      function getDefaultFS(){
+          var d = window.document.createElement('div');
+          d.style.width = '1rem';
+          d.style.display = "none";
+          var head = window.document.getElementsByTagName('head')[0];
+          head.appendChild(d);
+          defaultFontSize = parseFloat(window.getComputedStyle(d, null).getPropertyValue('width'));
+          d.remove();
+      }
+      function adapt(designWidth, rem2px) {
+          var head = window.document.getElementsByTagName('head')[0];
+          document.documentElement.style.fontSize = window.innerWidth / designWidth * rem2px / defaultFontSize * 100 + '%';
+          var st = document.createElement('style');
+           var portrait = "@media screen and (min-width: " + window.innerWidth + "px) {html{font-size:" + ((window.innerWidth / (designWidth / rem2px) / defaultFontSize) * 100) + "%;}}";
+           var landscape = "@media screen and (min-width: " + window.innerHeight + "px) {html{font-size:" + ((window.innerHeight / (designWidth / rem2px) / defaultFontSize) * 100) + "%;}}"
+           st.innerHTML = portrait + landscape;
+           head.appendChild(st);
+      };
+      getDefaultFS();
+      adapt(750, 100);
+      window.addEventListener("resize",function(){
+          adapt(750, 100);
+      })
+    </script>
+  <link href="static/css/mui_base.min.css" rel="stylesheet"><link href="static/css/mui_order_add.min.css" rel="stylesheet"></head>
+  <body id="app_order-add">
+    <header class="mui-bar mui-bar-nav">
+      <div class="mui-bar-header"><a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+        <h1 class="mui-title">提交订单</h1>
+      </div>
+    </header>
+    <div class="mui-content">
+      <div class="panel">
+        <div class="mui-media mui-media_car"><img class="mui-media-object mui-pull-left" src="./static/img/car.jpg">
+          <div class="mui-media-body">
+            <div><span class="strong">路虎 揽胜</span><span class="car-shift">自</span>
+              <p class="performance-items"><span class="item">2017款</span><span class="item">3.0T</span><span class="item">运动版</span></p>
+            </div>
+            <div class="appearance-items"><span class="item">粤A****62</span><span class="item">5座</span><span class="item">全景</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="panel">
+        <div class="order-times">
+          <div class="time"><span class="weak">取车时间</span><span>06-01-08：00</span></div>
+          <div class="time-range"><span>7天</span></div>
+          <div class="time"><span class="weak">还车时间</span><span>06-01-08：00</span></div>
+        </div>
+        <div><span class="weak order-address-header">取车网点</span>
+          <div class="align-item flex-top">
+            <div class="order-address"><span class="address">棠下上社</span><span class="weak">广州天河中山大道荷光路901号</span><span class="weak">(营业时间：08:00~22:00)</span></div><span class="link">修改</span>
+          </div><span class="weak order-address-header">还车车网点</span>
+          <div class="align-item flex-top">
+            <div class="order-address"><span class="address">棠下上社</span><span class="weak">广州天河中山大道荷光路901号</span><span class="weak">(营业时间：08:00~22:00)</span></div><span class="link">修改</span>
+          </div>
+        </div>
+      </div>
+      <div class="panel pt"><span class="cost-header"><i class="icon-font icon-list"></i> 费用明细</span>
+        <div class="align-item">
+          <div><span class="cost-name">租金 <i class="icon-font icon-order link"></i></span></div>
+          <div><span class="item-cost">￥250</span></div>
+        </div>
+        <div class="align-item">
+          <div><span class="cost-name">平台保障费 <i class="icon-font icon-order link"></i></span><span class="weak">￥30*1天</span></div>
+          <div><span class="item-cost">￥250</span></div>
+        </div>
+        <div class="align-item">
+          <div><span class="cost-name">补充险 <i class="icon-font icon-order link"></i></span><span class="weak">￥30*1天</span></div>
+          <div><span class="item-cost">￥250 <i class="icon-font icon-right clr-active"></i></span></div>
+        </div>
+        <div class="align-item">
+          <div><span class="item-name">可用优惠卷</span></div>
+          <div><span class="clr-active">可用四张</span><span class="mui-icon mui-icon-arrowright"></span></div>
+        </div>
+      </div>
+      <div class="panel pb">
+        <div class="align-item"><span>驾驶出广州</span>
+          <div class="mui-switch mui-active mui-switch-mini">
+            <div class="mui-switch-handle"></div>
+          </div>
+        </div>
+        <div><span class="weak">请填写目的地城市</span></div>
+      </div>
+      <div class="panel pb">
+        <div class="align-item"><span>总计：</span>
+          <div><span class="clr-active">￥2450</span><span class="weak">（含保险税）</span></div>
+        </div>
+        <div class="agree">
+          <p><i class="icon-font icon-right clr-active"></i> 我已阅读并同意 <a class="link">《包子共享汽车用户服务协议》</a></p>
+        </div>
+        <div><span class="btn-normal active block">立即支付</span></div>
+      </div>
+    </div>
+    <script src="./static/js/lib/mui.js"></script>
+    <script src="./static/js/lib/mui.picker.min.js"></script>
+    <script>
+      (function ($) {
+          $.init();
+      })(mui);
+    </script></body>
+</html>
