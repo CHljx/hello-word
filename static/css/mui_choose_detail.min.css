@@ -353,7 +353,7 @@
   color: #3c3c3c;
 }
 #app_choose-detail .mui-bar {
-  background: rgba(247, 247, 247, 0);
+  background: rgba(0, 0, 0, 0);
 }
 #app_choose-detail .mui-bar .mui-icon,
 #app_choose-detail .mui-bar .icon-font {
