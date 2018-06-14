@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=0.5, maximum-scale=2.0, user-scalable=no">
     <link href="./static/css/mui.css" rel="stylesheet" type="text/css">
     <link href="./static/css/mui.picker.min.css" rel="stylesheet" type="text/css">
     <link href="./static/css/iconfont.css" rel="stylesheet" type="text/css">
+    <link href="./static/css/mui_choose_detail.min.css" rel="stylesheet" type="text/css">
     <script>
       var defaultFontSize=0;
       function getDefaultFS(){
@@ -31,10 +33,10 @@
           adapt(750, 100);
       })
     </script>
-  <link href="static/css/mui_base.min.css" rel="stylesheet"><link href="static/css/mui_choose_detail.min.css" rel="stylesheet"></head>
+  <link href="static/css/mui_base.min.css" rel="stylesheet"></head>
   <body id="app_choose-detail">
     <header class="mui-bar mui-bar-transparent">
-      <div class="mui-bar-header"><a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a><a class="icon-font icon-heart mui-pull-right"></a></div>
+      <div class="mui-bar-header"><a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a><a class="icon-font icon-heart mui-pull-right" id="js-like"></a></div>
     </header>
     <div class="mui-content">
       <div class="mui-slider" id="slider_car-imgs">
@@ -70,10 +72,10 @@
       </div>
       <div class="panel">
         <div class="align-item"><span class="panel-header">选择租用时间</span></div>
-        <div class="align-item">
-          <div class="calendar" role="calendar" id="calendar">
-            <div class="input-box" role="start" placeholder="开始时间">开始时间</div><span class="calendar-rang-text">~</span>
-            <div class="input-box" role="end" placeholder="结束时间">结束时间</div>
+        <div role="calendar" id="calendar">
+          <div class="flex-row calendar-input">
+            <div class="input-box" role="start">请选择开始时间</div><span class="calendar-rang-text">~</span>
+            <div class="input-box" role="end">请选择结束时间</div>
           </div>
         </div>
       </div>
@@ -183,23 +185,19 @@
           /**
           *   日历控件封装，可通过calendar.getStart()/getEnd() 方法分别获取开始结束时间
           * */
-          var calendar=new Calendar({el: document.querySelector("#calendar")})
-          /*
-          * 监控日历绘制，这个时候通过AJAX请求获取每天对应金额
-          * month:YYYY-MM格式，如2018-6
-           */
-          calendar.onDraw(function(month){
-      
-              var _self=this;
-              /*
-              * 设置每天金额，Key对应每一天
-               */
-              _self.dateObj={
-                  "2018-06-13":"￥1000",
-                  "2018-06-14": "￥1200"
-              };
-              _self.redrawCalendar();
+          var calendar=new Calendar({
+              el: document.querySelector("#calendar"),
+              tips:["￥1000","￥2000","￥2000","￥2000"]
           })
+      
+          document.getElementById("js-like").addEventListener("tap",function(){
+              var eThis=this;
+              if(eThis.classList.contains("clr-active")){
+                  eThis.classList.remove("clr-active");
+              }else{
+                  eThis.classList.add("clr-active")
+              }
+          });
       }
     </script>
   <script type="text/javascript" src="static/js/mui_base.min.js"></script></body>
