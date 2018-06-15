@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=0.5, maximum-scale=2.0, user-scalable=no">
+    <link href="./static/css/mui.css" rel="stylesheet" type="text/css">
+    <link href="./static/css/mui.picker.min.css" rel="stylesheet" type="text/css">
+    <link href="./static/css/iconfont.css" rel="stylesheet" type="text/css">
+    <link href="./static/css/mui_coupon.min.css" rel="stylesheet" type="text/css">
+    <script>
+      var defaultFontSize=0;
+      function getDefaultFS(){
+          var d = window.document.createElement('div');
+          d.style.width = '1rem';
+          d.style.display = "none";
+          var head = window.document.getElementsByTagName('head')[0];
+          head.appendChild(d);
+          defaultFontSize = parseFloat(window.getComputedStyle(d, null).getPropertyValue('width'));
+          d.remove();
+      }
+      function adapt(designWidth, rem2px) {
+          var head = window.document.getElementsByTagName('head')[0];
+          document.documentElement.style.fontSize = window.innerWidth / designWidth * rem2px / defaultFontSize * 100 + '%';
+          var st = document.createElement('style');
+           var portrait = "@media screen and (min-width: " + window.innerWidth + "px) {html{font-size:" + ((window.innerWidth / (designWidth / rem2px) / defaultFontSize) * 100) + "%;}}";
+           var landscape = "@media screen and (min-width: " + window.innerHeight + "px) {html{font-size:" + ((window.innerHeight / (designWidth / rem2px) / defaultFontSize) * 100) + "%;}}"
+           st.innerHTML = portrait + landscape;
+           head.appendChild(st);
+      };
+      getDefaultFS();
+      adapt(750, 100);
+      window.addEventListener("resize",function(){
+          adapt(750, 100);
+      })
+    </script>
+  <link href="static/css/mui_base.min.css" rel="stylesheet"></head>
+  <body id="app_coupon-list">
+    <header class="mui-bar mui-bar-nav">
+      <div class="mui-bar-header"><a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+        <h1 class="mui-title">优惠卷</h1>
+      </div>
+    </header>
+    <div class="mui-content">
+      <div class="panel">
+        <ul class="tab">
+          <li class="tab-item"><a class="item-content" href="#">未使用</a></li>
+          <li class="tab-item"><a class="item-content active" href="#">已经过期</a></li>
+        </ul>
+      </div>
+      <div class="panel pt">
+        <div class="coupon-list">
+          <div class="coupon-item disabled">
+            <div class="rt-mark">已经过期</div>
+            <div class="left-side">
+              <div class="num"><span class="rmb">￥</span><span>20</span></div>
+              <div class="condition"><span>满400可用</span></div>
+            </div>
+            <div class="right-side">
+              <div class="info">
+                <div class="name"><span>[活动券]</span><span>【端午出游季】</span></div>
+                <div class="condition">  租金蛮400可用</div>
+                <p class="time"><span>2018-08-18 ~ 2018-08-20</span></p>
+              </div>
+              <div class="comment">
+                <div class="comment-title"><span>使用说明</span><span class="mui-pull-right mui-icon mui-icon-arrowdown js-dropdown"></span></div>
+                <div class="detail">这是简单说明</div>
+              </div>
+            </div>
+          </div>
+          <div class="coupon-item disabled">
+            <div class="rt-mark">已经过期</div>
+            <div class="left-side">
+              <div class="num"><span class="rmb">￥</span><span>20</span></div>
+              <div class="condition"><span>满400可用</span></div>
+            </div>
+            <div class="right-side">
+              <div class="info">
+                <div class="name"><span>[活动券]</span><span>【端午出游季】</span></div>
+                <div class="condition">  租金蛮400可用</div>
+                <p class="time"><span>2018-08-18 ~ 2018-08-20</span></p>
+              </div>
+              <div class="comment">
+                <div class="comment-title"><span>使用说明</span><span class="mui-pull-right mui-icon mui-icon-arrowdown js-dropdown"></span></div>
+                <div class="detail">这是简单说明</div>
+              </div>
+            </div>
+          </div>
+          <div class="coupon-item disabled">
+            <div class="rt-mark">已经过期</div>
+            <div class="left-side">
+              <div class="num"><span class="rmb">￥</span><span>20</span></div>
+              <div class="condition"><span>满400可用</span></div>
+            </div>
+            <div class="right-side">
+              <div class="info">
+                <div class="name"><span>[活动券]</span><span>【端午出游季】</span></div>
+                <div class="condition">  租金蛮400可用</div>
+                <p class="time"><span>2018-08-18 ~ 2018-08-20</span></p>
+              </div>
+              <div class="comment">
+                <div class="comment-title"><span>使用说明</span><span class="mui-pull-right mui-icon mui-icon-arrowdown js-dropdown"></span></div>
+                <div class="detail">这是简单说明</div>
+              </div>
+            </div>
+          </div>
+          <div class="coupon-item disabled">
+            <div class="rt-mark">已经过期</div>
+            <div class="left-side">
+              <div class="num"><span class="rmb">￥</span><span>20</span></div>
+              <div class="condition"><span>满400可用</span></div>
+            </div>
+            <div class="right-side">
+              <div class="info">
+                <div class="name"><span>[活动券]</span><span>【端午出游季】</span></div>
+                <div class="condition">  租金蛮400可用</div>
+                <p class="time"><span>2018-08-18 ~ 2018-08-20</span></p>
+              </div>
+              <div class="comment">
+                <div class="comment-title"><span>使用说明</span><span class="mui-pull-right mui-icon mui-icon-arrowdown js-dropdown"></span></div>
+                <div class="detail">这是简单说明</div>
+              </div>
+            </div>
+          </div>
+          <div class="coupon-item disabled">
+            <div class="rt-mark">已经过期</div>
+            <div class="left-side">
+              <div class="num"><span class="rmb">￥</span><span>20</span></div>
+              <div class="condition"><span>满400可用</span></div>
+            </div>
+            <div class="right-side">
+              <div class="info">
+                <div class="name"><span>[活动券]</span><span>【端午出游季】</span></div>
+                <div class="condition">  租金蛮400可用</div>
+                <p class="time"><span>2018-08-18 ~ 2018-08-20</span></p>
+              </div>
+              <div class="comment">
+                <div class="comment-title"><span>使用说明</span><span class="mui-pull-right mui-icon mui-icon-arrowdown js-dropdown"></span></div>
+                <div class="detail">这是简单说明</div>
+              </div>
+            </div>
+          </div>
+          <div class="coupon-item disabled">
+            <div class="rt-mark">已经过期</div>
+            <div class="left-side">
+              <div class="num"><span class="rmb">￥</span><span>20</span></div>
+              <div class="condition"><span>满400可用</span></div>
+            </div>
+            <div class="right-side">
+              <div class="info">
+                <div class="name"><span>[活动券]</span><span>【端午出游季】</span></div>
+                <div class="condition">  租金蛮400可用</div>
+                <p class="time"><span>2018-08-18 ~ 2018-08-20</span></p>
+              </div>
+              <div class="comment">
+                <div class="comment-title"><span>使用说明</span><span class="mui-pull-right mui-icon mui-icon-arrowdown js-dropdown"></span></div>
+                <div class="detail">这是简单说明</div>
+              </div>
+            </div>
+          </div>
+          <div class="coupon-item disabled">
+            <div class="rt-mark">已经过期</div>
+            <div class="left-side">
+              <div class="num"><span class="rmb">￥</span><span>20</span></div>
+              <div class="condition"><span>满400可用</span></div>
+            </div>
+            <div class="right-side">
+              <div class="info">
+                <div class="name"><span>[活动券]</span><span>【端午出游季】</span></div>
+                <div class="condition">  租金蛮400可用</div>
+                <p class="time"><span>2018-08-18 ~ 2018-08-20</span></p>
+              </div>
+              <div class="comment">
+                <div class="comment-title"><span>使用说明</span><span class="mui-pull-right mui-icon mui-icon-arrowdown js-dropdown"></span></div>
+                <div class="detail">这是简单说明</div>
+              </div>
+            </div>
+          </div>
+          <div class="coupon-item disabled">
+            <div class="rt-mark">已经过期</div>
+            <div class="left-side">
+              <div class="num"><span class="rmb">￥</span><span>20</span></div>
+              <div class="condition"><span>满400可用</span></div>
+            </div>
+            <div class="right-side">
+              <div class="info">
+                <div class="name"><span>[活动券]</span><span>【端午出游季】</span></div>
+                <div class="condition">  租金蛮400可用</div>
+                <p class="time"><span>2018-08-18 ~ 2018-08-20</span></p>
+              </div>
+              <div class="comment">
+                <div class="comment-title"><span>使用说明</span><span class="mui-pull-right mui-icon mui-icon-arrowdown js-dropdown"></span></div>
+                <div class="detail">这是简单说明</div>
+              </div>
+            </div>
+          </div>
+          <div class="coupon-item disabled">
+            <div class="rt-mark">已经过期</div>
+            <div class="left-side">
+              <div class="num"><span class="rmb">￥</span><span>20</span></div>
+              <div class="condition"><span>满400可用</span></div>
+            </div>
+            <div class="right-side">
+              <div class="info">
+                <div class="name"><span>[活动券]</span><span>【端午出游季】</span></div>
+                <div class="condition">  租金蛮400可用</div>
+                <p class="time"><span>2018-08-18 ~ 2018-08-20</span></p>
+              </div>
+              <div class="comment">
+                <div class="comment-title"><span>使用说明</span><span class="mui-pull-right mui-icon mui-icon-arrowdown js-dropdown"></span></div>
+                <div class="detail">这是简单说明</div>
+              </div>
+            </div>
+          </div>
+          <div class="coupon-item disabled">
+            <div class="rt-mark">已经过期</div>
+            <div class="left-side">
+              <div class="num"><span class="rmb">￥</span><span>20</span></div>
+              <div class="condition"><span>满400可用</span></div>
+            </div>
+            <div class="right-side">
+              <div class="info">
+                <div class="name"><span>[活动券]</span><span>【端午出游季】</span></div>
+                <div class="condition">  租金蛮400可用</div>
+                <p class="time"><span>2018-08-18 ~ 2018-08-20</span></p>
+              </div>
+              <div class="comment">
+                <div class="comment-title"><span>使用说明</span><span class="mui-pull-right mui-icon mui-icon-arrowdown js-dropdown"></span></div>
+                <div class="detail">这是简单说明</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="./static/js/lib/mui.js"></script>
+    <script src="./static/js/lib/mui.picker.min.js"></script>
+    <script>
+      (function ($) {
+          $.init();
+          $(".coupon-list").on("tap",".coupon-item",function(){
+              var eThis=this;
+              if(eThis.classList.contains("active")){
+                  eThis.classList.remove("active")
+              }else{
+                  eThis.classList.add("active")
+              }
+          })
+          $(".coupon-list").on("tap",".comment",function(e){
+              var eThis=this;
+              e.preventDefault();
+              var dropdownIcon=eThis.querySelector(".js-dropdown")
+              if(eThis.classList.contains("show")){
+                  dropdownIcon.classList.add("mui-icon-arrowup");
+                  dropdownIcon.classList.remove("mui-icon-arrowdown");
+                  eThis.classList.remove("show")
+              }else{
+                  dropdownIcon.classList.remove("mui-icon-arrowup");
+                  dropdownIcon.classList.add("mui-icon-arrowdown");
+                  eThis.classList.add("show")
+              }
+              return false;
+          })
+      })(mui);
+    </script>
+  <script type="text/javascript" src="static/js/mui_base.min.js"></script></body>
+</html>
