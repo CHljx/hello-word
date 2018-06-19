@@ -187,7 +187,11 @@
           * */
           var calendar=new Calendar({
               el: document.querySelector("#calendar"),
-              tips:["￥1000","￥2000","￥2000","￥2000"]
+              minDate:"2018-06-29",
+              tips:{
+                  "2018-06-29":"￥1000",
+                  "2018-06-30":"￥1222"
+              }
           })
       
           document.getElementById("js-like").addEventListener("tap",function(){
