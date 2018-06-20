@@ -34,7 +34,7 @@
       })
     </script>
   <link href="static/css/mui_base.min.css" rel="stylesheet"></head>
-  <body id="app_coupon-list">
+  <body id="app_coupon-my">
     <header class="mui-bar mui-bar-nav">
       <div class="mui-bar-header"><a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
         <h1 class="mui-title">优惠卷</h1>
@@ -43,12 +43,194 @@
     <div class="mui-content">
       <div class="panel">
         <ul class="tab">
-          <li class="tab-item"><a class="item-content active" href="#">未使用</a></li>
-          <li class="tab-item"><a class="item-content" href="#">已经过期</a></li>
+          <li class="tab-item"><a class="item-content active" id="tagActive" href="#">未使用</a></li>
+          <li class="tab-item"><a class="item-content" id="tagDisabled" href="#">已经过期</a></li>
         </ul>
       </div>
-      <div class="panel pt">
-        <div class="coupon-list">
+      <div class="coupon-box">
+        <div class="coupon-list right" id="disabled">
+          <div class="coupon-item disabled">
+            <div class="rt-mark">已经过期</div>
+            <div class="left-side">
+              <div class="num"><span class="rmb">￥</span><span>20</span></div>
+              <div class="condition"><span>满400可用</span></div>
+            </div>
+            <div class="right-side">
+              <div class="info">
+                <div class="name"><span>[活动券]</span><span>【端午出游季】</span></div>
+                <div class="condition">  租金蛮400可用</div>
+                <p class="time"><span>2018-08-18 ~ 2018-08-20</span></p>
+              </div>
+              <div class="comment">
+                <div class="comment-title"><span>使用说明</span><span class="mui-pull-right mui-icon mui-icon-arrowdown js-dropdown"></span></div>
+                <div class="detail">这是简单说明</div>
+              </div>
+            </div>
+          </div>
+          <div class="coupon-item disabled">
+            <div class="rt-mark">已经过期</div>
+            <div class="left-side">
+              <div class="num"><span class="rmb">￥</span><span>20</span></div>
+              <div class="condition"><span>满400可用</span></div>
+            </div>
+            <div class="right-side">
+              <div class="info">
+                <div class="name"><span>[活动券]</span><span>【端午出游季】</span></div>
+                <div class="condition">  租金蛮400可用</div>
+                <p class="time"><span>2018-08-18 ~ 2018-08-20</span></p>
+              </div>
+              <div class="comment">
+                <div class="comment-title"><span>使用说明</span><span class="mui-pull-right mui-icon mui-icon-arrowdown js-dropdown"></span></div>
+                <div class="detail">这是简单说明</div>
+              </div>
+            </div>
+          </div>
+          <div class="coupon-item disabled">
+            <div class="rt-mark">已经过期</div>
+            <div class="left-side">
+              <div class="num"><span class="rmb">￥</span><span>20</span></div>
+              <div class="condition"><span>满400可用</span></div>
+            </div>
+            <div class="right-side">
+              <div class="info">
+                <div class="name"><span>[活动券]</span><span>【端午出游季】</span></div>
+                <div class="condition">  租金蛮400可用</div>
+                <p class="time"><span>2018-08-18 ~ 2018-08-20</span></p>
+              </div>
+              <div class="comment">
+                <div class="comment-title"><span>使用说明</span><span class="mui-pull-right mui-icon mui-icon-arrowdown js-dropdown"></span></div>
+                <div class="detail">这是简单说明</div>
+              </div>
+            </div>
+          </div>
+          <div class="coupon-item disabled">
+            <div class="rt-mark">已经过期</div>
+            <div class="left-side">
+              <div class="num"><span class="rmb">￥</span><span>20</span></div>
+              <div class="condition"><span>满400可用</span></div>
+            </div>
+            <div class="right-side">
+              <div class="info">
+                <div class="name"><span>[活动券]</span><span>【端午出游季】</span></div>
+                <div class="condition">  租金蛮400可用</div>
+                <p class="time"><span>2018-08-18 ~ 2018-08-20</span></p>
+              </div>
+              <div class="comment">
+                <div class="comment-title"><span>使用说明</span><span class="mui-pull-right mui-icon mui-icon-arrowdown js-dropdown"></span></div>
+                <div class="detail">这是简单说明</div>
+              </div>
+            </div>
+          </div>
+          <div class="coupon-item disabled">
+            <div class="rt-mark">已经过期</div>
+            <div class="left-side">
+              <div class="num"><span class="rmb">￥</span><span>20</span></div>
+              <div class="condition"><span>满400可用</span></div>
+            </div>
+            <div class="right-side">
+              <div class="info">
+                <div class="name"><span>[活动券]</span><span>【端午出游季】</span></div>
+                <div class="condition">  租金蛮400可用</div>
+                <p class="time"><span>2018-08-18 ~ 2018-08-20</span></p>
+              </div>
+              <div class="comment">
+                <div class="comment-title"><span>使用说明</span><span class="mui-pull-right mui-icon mui-icon-arrowdown js-dropdown"></span></div>
+                <div class="detail">这是简单说明</div>
+              </div>
+            </div>
+          </div>
+          <div class="coupon-item disabled">
+            <div class="rt-mark">已经过期</div>
+            <div class="left-side">
+              <div class="num"><span class="rmb">￥</span><span>20</span></div>
+              <div class="condition"><span>满400可用</span></div>
+            </div>
+            <div class="right-side">
+              <div class="info">
+                <div class="name"><span>[活动券]</span><span>【端午出游季】</span></div>
+                <div class="condition">  租金蛮400可用</div>
+                <p class="time"><span>2018-08-18 ~ 2018-08-20</span></p>
+              </div>
+              <div class="comment">
+                <div class="comment-title"><span>使用说明</span><span class="mui-pull-right mui-icon mui-icon-arrowdown js-dropdown"></span></div>
+                <div class="detail">这是简单说明</div>
+              </div>
+            </div>
+          </div>
+          <div class="coupon-item disabled">
+            <div class="rt-mark">已经过期</div>
+            <div class="left-side">
+              <div class="num"><span class="rmb">￥</span><span>20</span></div>
+              <div class="condition"><span>满400可用</span></div>
+            </div>
+            <div class="right-side">
+              <div class="info">
+                <div class="name"><span>[活动券]</span><span>【端午出游季】</span></div>
+                <div class="condition">  租金蛮400可用</div>
+                <p class="time"><span>2018-08-18 ~ 2018-08-20</span></p>
+              </div>
+              <div class="comment">
+                <div class="comment-title"><span>使用说明</span><span class="mui-pull-right mui-icon mui-icon-arrowdown js-dropdown"></span></div>
+                <div class="detail">这是简单说明</div>
+              </div>
+            </div>
+          </div>
+          <div class="coupon-item disabled">
+            <div class="rt-mark">已经过期</div>
+            <div class="left-side">
+              <div class="num"><span class="rmb">￥</span><span>20</span></div>
+              <div class="condition"><span>满400可用</span></div>
+            </div>
+            <div class="right-side">
+              <div class="info">
+                <div class="name"><span>[活动券]</span><span>【端午出游季】</span></div>
+                <div class="condition">  租金蛮400可用</div>
+                <p class="time"><span>2018-08-18 ~ 2018-08-20</span></p>
+              </div>
+              <div class="comment">
+                <div class="comment-title"><span>使用说明</span><span class="mui-pull-right mui-icon mui-icon-arrowdown js-dropdown"></span></div>
+                <div class="detail">这是简单说明</div>
+              </div>
+            </div>
+          </div>
+          <div class="coupon-item disabled">
+            <div class="rt-mark">已经过期</div>
+            <div class="left-side">
+              <div class="num"><span class="rmb">￥</span><span>20</span></div>
+              <div class="condition"><span>满400可用</span></div>
+            </div>
+            <div class="right-side">
+              <div class="info">
+                <div class="name"><span>[活动券]</span><span>【端午出游季】</span></div>
+                <div class="condition">  租金蛮400可用</div>
+                <p class="time"><span>2018-08-18 ~ 2018-08-20</span></p>
+              </div>
+              <div class="comment">
+                <div class="comment-title"><span>使用说明</span><span class="mui-pull-right mui-icon mui-icon-arrowdown js-dropdown"></span></div>
+                <div class="detail">这是简单说明</div>
+              </div>
+            </div>
+          </div>
+          <div class="coupon-item disabled">
+            <div class="rt-mark">已经过期</div>
+            <div class="left-side">
+              <div class="num"><span class="rmb">￥</span><span>20</span></div>
+              <div class="condition"><span>满400可用</span></div>
+            </div>
+            <div class="right-side">
+              <div class="info">
+                <div class="name"><span>[活动券]</span><span>【端午出游季】</span></div>
+                <div class="condition">  租金蛮400可用</div>
+                <p class="time"><span>2018-08-18 ~ 2018-08-20</span></p>
+              </div>
+              <div class="comment">
+                <div class="comment-title"><span>使用说明</span><span class="mui-pull-right mui-icon mui-icon-arrowdown js-dropdown"></span></div>
+                <div class="detail">这是简单说明</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="coupon-list" id="active">
           <div class="coupon-item">
             <div class="rt-mark">即将过期</div>
             <div class="left-side">
@@ -231,15 +413,40 @@
           </div>
         </div>
       </div>
-      <div class="panel fixed-bottom pb pt">
-        <button class="btn-normal active block">立即使用</button>
-      </div>
     </div>
     <script src="./static/js/lib/mui.js"></script>
     <script src="./static/js/lib/mui.picker.min.js"></script>
     <script>
       (function ($) {
+          var eCurrent=document.getElementById("active"),
+              eNext=document.getElementById("disabled"),
+              eActive=document.getElementById("active"),
+              eDisabled=document.getElementById("disabled"),
+              eTagActive=document.getElementById("tagActive"),
+              eTagDisabled = document.getElementById("tagDisabled");
           $.init();
+          $("#app_coupon-my").on("tap", "#tagActive", function () {
+              if(this.classList.contains("active")){
+                  return;
+              }
+             showActive();
+          });
+          $("#app_coupon-my").on("tap", "#tagDisabled", function () {
+              if (this.classList.contains("active")) {
+                  return;
+              }
+              showDisabled();
+          });
+         $("#app_coupon-my").on("swipeleft",".coupon-box",function(){
+              if(eCurrent.getAttribute("id")=="active"){
+                  showDisabled();
+              }
+          });
+          $("#app_coupon-my").on("swiperight", ".coupon-box", function () {
+              if (eCurrent.getAttribute("id") == "disabled") {
+                  showActive();
+              }
+          });
           $(".coupon-list").on("tap",".coupon-item",function(){
               var eThis=this;
               if(eThis.classList.contains("active")){
@@ -263,6 +470,23 @@
               }
               return false;
           })
+      
+          function showActive(){
+              eNext.classList.remove("left");
+              eCurrent.classList.add("right");
+              eCurrent = eActive;
+              eNext = eDisabled;
+              eTagActive.classList.add("active");
+              eTagDisabled.classList.remove("active");
+          }
+          function showDisabled(){
+              eCurrent.classList.add("left");
+              eNext.classList.remove("right");
+              eCurrent = eDisabled;
+              eNext = eActive;
+              eTagActive.classList.remove("active");
+              eTagDisabled.classList.add("active");
+          }
       })(mui);
     </script>
   <script type="text/javascript" src="static/js/mui_base.min.js"></script></body>

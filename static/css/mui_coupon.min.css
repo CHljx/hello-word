@@ -8,6 +8,37 @@
   color: inherit;
   font-size: .25rem;
 }
+.coupon-box {
+  padding-top: .38rem;
+  background: #fff;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  top: 1.35rem;
+  border-top: .15rem solid #f8f8f8;
+}
+.coupon-list {
+  position: absolute;
+  padding: 0 .34rem;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  top: .38rem;
+  overflow: auto;
+  -webkit-transition: all .3s;
+  transition: all .3s;
+}
+.coupon-list.left {
+  -webkit-transform: translateX(-100%);
+      -ms-transform: translateX(-100%);
+          transform: translateX(-100%);
+}
+.coupon-list.right {
+  -webkit-transform: translateX(100%);
+      -ms-transform: translateX(100%);
+          transform: translateX(100%);
+}
 .coupon-item {
   min-height: 1.95rem;
   display: -webkit-box;
