@@ -161,19 +161,51 @@
       -ms-flex-pack: end;
           justify-content: flex-end;
 }
-.name {
-  margin-bottom: .3rem;
-  font-size: .24rem;
-  text-align: center;
+.mui-content {
+  background: #f8f8f8!important;
+  line-height: .4rem;
 }
-.stars-box {
-  text-align: center;
+.mui-content p {
+  margin: 0px;
+  padding: 0px;
+  color: inherit;
+  font-size: .25rem;
+}
+#app_car-return .order-info {
+  padding-top: .15rem;
+}
+#app_car-return .imgs-box {
+  padding-bottom: .2rem;
+}
+#app_car-return .img-box {
   margin-bottom: .4rem;
+  width: 5.05rem;
+  margin-left: auto;
+  margin-right: auto;
+  position: relative;
 }
-.stars-box .stars {
-  font-size: .4rem!important;
-  margin: 0 .2rem;
+#app_car-return .img-box img {
+  border-radius: .05rem;
+  width: 100%;
 }
-.not-name {
-  padding: .8rem 0 .2rem;
+#app_car-return .img-box .js-delete {
+  font-size: .34rem;
+  position: absolute;
+  top: 0;
+  right: 0;
+  -webkit-transform: translate(30%, -30%);
+      -ms-transform: translate(30%, -30%);
+          transform: translate(30%, -30%);
+}
+#app_car-return .img-box:last-of-type {
+  margin-bottom: 0px;
+}
+#app_car-return .js-chooseRepair.active i {
+  color: #D12119;
+}
+#app_car-return #damaged-box {
+  display: none;
+}
+#app_car-return #damaged-box.show {
+  display: block;
 }

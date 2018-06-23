@@ -354,11 +354,7 @@
   color: #3c3c3c;
 }
 #app_choose-detail .mui-bar {
-  background: rgba(0, 0, 0, 0);
-}
-#app_choose-detail .mui-bar .mui-icon,
-#app_choose-detail .mui-bar .icon-font {
-  color: #fff;
+  background: rgba(187, 187, 187, 0);
 }
 #slider_car-imgs img {
   height: 5rem;
