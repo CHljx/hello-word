@@ -1,3 +1,20 @@
+.mui-switch {
+  width: .81rem;
+  height: .37rem;
+}
+.mui-switch.mui-active {
+  background: #D12119;
+  border-color: #D12119;
+}
+.mui-switch.mui-active .mui-switch-handle {
+  -webkit-transform: translate(0.43rem, 0);
+      -ms-transform: translate(0.43rem, 0);
+          transform: translate(0.43rem, 0);
+}
+.mui-switch .mui-switch-handle {
+  height: .32rem;
+  width: .35rem;
+}
 #app_order-add .mui-content {
   background: #f8f8f8;
   line-height: .4rem;
@@ -10,21 +27,6 @@
 }
 .mui-icon {
   font-size: .34rem;
-}
-.mui-switch {
-  width: .81rem;
-  height: .37rem;
-}
-.mui-switch.mui-active {
-  background: #D12119;
-  border-color: #D12119;
-}
-.mui-switch.mui-active .mui-switch-handle {
-  height: .32rem;
-  width: .35rem;
-  -webkit-transform: translate(0.4rem, 0);
-      -ms-transform: translate(0.4rem, 0);
-          transform: translate(0.4rem, 0);
 }
 .mui-media_car {
   border-bottom: 0.01rem solid #e5e5e5;

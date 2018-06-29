@@ -42,7 +42,7 @@
     </header>
     <div class="mui-content">
       <div class="panel pt">
-        <div class="coupon-list">
+        <div class="coupon-list" style="top: .7rem;padding-bottom: 1.8rem;">
           <div class="coupon-item">
             <div class="left-side">
               <div class="num"><span class="rmb">￥</span><span>20</span></div>
@@ -237,12 +237,14 @@
               e.preventDefault();
               var dropdownIcon=eThis.querySelector(".js-dropdown")
               if(eThis.classList.contains("show")){
-                  dropdownIcon.classList.add("mui-icon-arrowup");
-                  dropdownIcon.classList.remove("mui-icon-arrowdown");
-                  eThis.classList.remove("show")
-              }else{
+
                   dropdownIcon.classList.remove("mui-icon-arrowup");
                   dropdownIcon.classList.add("mui-icon-arrowdown");
+                  eThis.classList.remove("show")
+              }else{
+
+                  dropdownIcon.classList.add("mui-icon-arrowup");
+                  dropdownIcon.classList.remove("mui-icon-arrowdown");
                   eThis.classList.add("show")
               }
               return false;

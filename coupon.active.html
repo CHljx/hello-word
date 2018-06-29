@@ -40,7 +40,7 @@
         <h1 class="mui-title">优惠卷</h1>
       </div>
     </header>
-    <div class="mui-content">
+    <div class="mui-content" style="background:#f8f8f8!important">
       <div class="panel">
         <ul class="tab">
           <li class="tab-item"><a class="item-content active" id="tagActive" href="#">未使用</a></li>
@@ -460,12 +460,14 @@
               e.preventDefault();
               var dropdownIcon=eThis.querySelector(".js-dropdown")
               if(eThis.classList.contains("show")){
-                  dropdownIcon.classList.add("mui-icon-arrowup");
-                  dropdownIcon.classList.remove("mui-icon-arrowdown");
-                  eThis.classList.remove("show")
-              }else{
+
                   dropdownIcon.classList.remove("mui-icon-arrowup");
                   dropdownIcon.classList.add("mui-icon-arrowdown");
+
+                  eThis.classList.remove("show")
+              }else{
+                  dropdownIcon.classList.add("mui-icon-arrowup");
+                  dropdownIcon.classList.remove("mui-icon-arrowdown");
                   eThis.classList.add("show")
               }
               return false;

@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=0.5, maximum-scale=2.0, user-scalable=no">
+    <link href="./static/css/mui.css" rel="stylesheet" type="text/css">
+    <link href="./static/css/mui.picker.min.css" rel="stylesheet" type="text/css">
+    <link href="./static/css/iconfont.css" rel="stylesheet" type="text/css">
+    <link href="./static/css/mui_live.min.css" rel="stylesheet" type="text/css">
+    <script>
+      var defaultFontSize=0;
+      function getDefaultFS(){
+          var d = window.document.createElement('div');
+          d.style.width = '1rem';
+          d.style.display = "none";
+          var head = window.document.getElementsByTagName('head')[0];
+          head.appendChild(d);
+          defaultFontSize = parseFloat(window.getComputedStyle(d, null).getPropertyValue('width'));
+          d.remove();
+      }
+      function adapt(designWidth, rem2px) {
+          var head = window.document.getElementsByTagName('head')[0];
+          document.documentElement.style.fontSize = window.innerWidth / designWidth * rem2px / defaultFontSize * 100 + '%';
+          var st = document.createElement('style');
+           var portrait = "@media screen and (min-width: " + window.innerWidth + "px) {html{font-size:" + ((window.innerWidth / (designWidth / rem2px) / defaultFontSize) * 100) + "%;}}";
+           var landscape = "@media screen and (min-width: " + window.innerHeight + "px) {html{font-size:" + ((window.innerHeight / (designWidth / rem2px) / defaultFontSize) * 100) + "%;}}"
+           st.innerHTML = portrait + landscape;
+           head.appendChild(st);
+      };
+      getDefaultFS();
+      adapt(750, 100);
+      window.addEventListener("resize",function(){
+          adapt(750, 100);
+      })
+    </script>
+  <link href="static/css/mui_base.min.css" rel="stylesheet"></head>
+  <body id="app_live">
+    <header class="mui-bar mui-bar-nav">
+      <div class="mui-bar-header"><a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+        <h1 class="mui-title">上传实况</h1>
+      </div>
+    </header>
+    <div class="mui-content">
+      <div class="panel">
+        <div class="panel-header">标注说明</div>
+        <div class="weak"> (请在下方圈出...)</div>
+        <div class="toolbar-item pt">
+          <div class="flex-row"><span>画笔颜色：</span>
+            <div><span class="canvas-item clr-item clr-black active" color="#3c3c3c"></span><span class="canvas-item clr-item clr-red" color="#D12119"></span><span class="canvas-item clr-item clr-blue" color="#01ffff"></span></div>
+          </div>
+        </div>
+        <div class="toolbar-item">
+          <div class="flex-row"><span>画笔粗细：</span>
+            <div><span class="canvas-item stroke-item active" stroke="2">细</span><span class="canvas-item stroke-item" stroke="6">中</span><span class="canvas-item stroke-item" stroke="10">粗</span></div>
+          </div>
+        </div>
+        <div class="toolbar-item">
+          <div class="flex-row"><span>选用：</span>
+            <div><span class="btn-normal" id="last">返回上一步</span><span class="btn-normal" id="clear">重置</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="panel p0">
+        <canvas width="750" height="1070" id="canvas"></canvas>
+      </div>
+      <div class="panel">
+        <div class="align-item">
+          <p><i class="icon-font icon-camera mr"></i>请拍照上传车辆仪表盘</p>
+        </div>
+        <div>
+          <div class="camera-imgs-box">
+            <div class="img-box"><img class="camera-img" src="./static/img/camera.jpg"></div>
+          </div>
+        </div>
+        <div class="align-item">
+          <div class="input-box">
+            <label for="distance">里程数</label>
+            <input id="distance" placeholder="请输入里程数">
+          </div>
+          <div class="input-box">
+            <label for="oil">油表</label>
+            <input id="oil" placeholder="请输入油表">
+          </div>
+        </div>
+      </div>
+      <div class="panel pt pb"><span class="btn-normal active block">保存上传</span></div>
+    </div>
+    <script src="./static/js/lib/mui.js"></script>
+    <script src="./static/js/lib/mui.picker.min.js"></script>
+    <script>
+      window.onload=function(){
+          var eCanvas=document.getElementById("canvas"),
+              context=eCanvas.getContext("2d")
+              eColorItems=document.querySelectorAll(".clr-item"),
+              eStrokeItems=document.querySelectorAll(".stroke-item");
+          var app={
+              startDraw:false,
+              startX: 0,
+              startY: 0,
+              endX:0,
+              endY:0,
+              color:"#3c3c3c",
+              stroke:2,
+              saveStack:[],
+              init:function(){
+                  this.bindEvent();
+              },
+              bindEvent:function(){
+                  var _self=this;
+                  // canvas 为你的 canvas ctx 变量
+                  _self.box = eCanvas.getBoundingClientRect()
+                  eCanvas.addEventListener("touchstart",function(e){
+                      var touch=e.touches[0]
+                      var box=_self.box;
+                      _self.startDraw = true;
+                      _self.saveStack.push(eCanvas.toDataURL())
+                      _self.startX= (touch.clientX - box.left) * eCanvas.width / box.width
+                      _self.startY =(touch.clientY - box.top) * eCanvas.height / box.height
+                  });
+                  eCanvas.addEventListener("touchmove", function (e) {
+                      var touch=e.touches[0];
+                      var box = _self.box;
+                      e.preventDefault();;
+                      _self.endX = (touch.clientX - box.left) * eCanvas.width / box.width
+                      _self.endY =(touch.clientY - box.top) * eCanvas.height / box.height
+                      _self.draw();
+                      return false;
+                  })
+                  document.addEventListener("scroll",function(){
+                      _self.box = eCanvas.getBoundingClientRect()
+                  })
+                  mui(document).on("tap",".clr-item",function(){
+                      var eThis=this;
+                      for(var index=0,len=eColorItems.length;index<len;index++){
+                          _Util.removeClass(eColorItems[index],"active");
+                      }
+                      _Util.addClass(eThis,"active");
+                      _self.color=eThis.getAttribute("color")
+                  })
+                  mui(document).on("tap", ".stroke-item", function () {
+                      var eThis = this;
+                      for (var index = 0, len = eStrokeItems.length; index < len; index++) {
+                          _Util.removeClass(eStrokeItems[index], "active");
+                      }
+                      _Util.addClass(eThis, "active");
+                      _self.stroke = eThis.getAttribute("stroke")
+                  })
+                  mui(document).on("tap", "#clear", function () {
+                      _self.clear();
+                  })
+                  mui(document).on("tap", "#last", function () {
+                      _self.last();
+                  })
+              },
+              clear:function(){
+                  context.clearRect(0, 0, eCanvas.width, eCanvas.height)
+              },
+              last: function () {
+                  var _self=this,lastDataUrl=_self.saveStack.pop(),img=null;
+                  if(lastDataUrl){
+                      img=new Image();
+                      img.onload = function () {
+                          _self.clear();
+                          context.drawImage(img, 0, 0, eCanvas.width, eCanvas.height)
+                      };
+                      img.setAttribute("src", lastDataUrl);
+                  }
+      
+              },
+              /**
+               *  获取涂鸦数据流
+              **/
+              getImg:function(){
+                  return eCanvas.toDataURL();
+              },
+              draw:function(x1,y1,x2,y2){
+                  var _self=this;
+                  //开启新的路径
+                  if (_self.startDraw){
+                      context.save();
+                      context.beginPath();
+                      context.moveTo(_self.startX, _self.startY);
+                      context.lineWidth =_self.stroke;
+                      context.strokeStyle = _self.color;
+                      _self.startDraw=false;
+                  }
+                  //移动画笔的初始位置
+      
+      
+                  //移动画笔的结束位置
+                  context.lineTo(_self.endX, _self.endY);
+                  //开始绘制
+                  context.stroke();
+      
+                  _self.startX = _self.endX
+                  _self.startY = _self.endY
+              }
+          }
+          mui.init();
+          app.init();
+      
+      }
+    </script>
+  <script type="text/javascript" src="static/js/mui_base.min.js"></script>
+    </body>
+</html>
