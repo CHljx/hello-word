@@ -46,3 +46,7 @@
 .icon-address:before { content: "\e62f"; }
 
 .icon-vip:before { content: "\e68e";}
+
+.icon-close:before { content: "\e7b7"; }
+
+.icon-clock:before { content: "\e627"; }

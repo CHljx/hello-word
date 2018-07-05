@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=0.5, maximum-scale=2.0, user-scalable=no">
+    <link href="./static/css/mui.css" rel="stylesheet" type="text/css">
+    <link href="./static/css/mui.picker.min.css" rel="stylesheet" type="text/css">
+    <link href="./static/css/iconfont.css" rel="stylesheet" type="text/css">
+    <link href="./static/css/mui_home.min.css" rel="stylesheet" type="text/css">
+    <script>
+      var defaultFontSize=0;
+      function getDefaultFS(){
+          var d = window.document.createElement('div');
+          d.style.width = '1rem';
+          d.style.display = "none";
+          var head = window.document.getElementsByTagName('head')[0];
+          head.appendChild(d);
+          defaultFontSize = parseFloat(window.getComputedStyle(d, null).getPropertyValue('width'));
+          d.remove();
+      }
+      function adapt(designWidth, rem2px) {
+          var head = window.document.getElementsByTagName('head')[0];
+          document.documentElement.style.fontSize = window.innerWidth / designWidth * rem2px / defaultFontSize * 100 + '%';
+          var st = document.createElement('style');
+           var portrait = "@media screen and (min-width: " + window.innerWidth + "px) {html{font-size:" + ((window.innerWidth / (designWidth / rem2px) / defaultFontSize) * 100) + "%;}}";
+           var landscape = "@media screen and (min-width: " + window.innerHeight + "px) {html{font-size:" + ((window.innerHeight / (designWidth / rem2px) / defaultFontSize) * 100) + "%;}}"
+           st.innerHTML = portrait + landscape;
+           head.appendChild(st);
+      };
+      getDefaultFS();
+      adapt(750, 100);
+      window.addEventListener("resize",function(){
+          adapt(750, 100);
+      })
+    </script>
+  <link href="static/css/mui_base.min.css" rel="stylesheet"></head>
+  <body id="app_home">
+    <header class="mui-bar mui-bar-transparent" id="app-header">
+      <div class="mui-bar-header mui-text-center"><a class="mui-icon mui-pull-left mui-icon-left-nav search-icon" id="js-hideSearch"></a>
+        <input class="input-search" type="text" placeholder="搜索车型/关键字"><a class="mui-icon mui-icon-chatbubble mui-pull-right normal-icon"></a><a class="search-icon mui-pull-right">搜索</a>
+      </div>
+    </header>
+    <div class="mui-content">
+      <div class="search-wrapper" id="search">
+        <div class="panel pt">
+          <div class="panle-title"> 热门搜索</div>
+          <div class="flex-row" id="search-hot">
+            <div class="search-hot-item active">奥迪</div>
+            <div class="search-hot-item">宝马</div>
+            <div class="search-hot-item">宝马</div>
+            <div class="search-hot-item">宝马</div>
+            <div class="search-hot-item">宝马</div>
+            <div class="search-hot-item">宝马</div>
+            <div class="search-hot-item">宝马</div>
+          </div>
+        </div>
+        <div class="panel" id="panel-history">
+          <div class="align-item">
+            <div>最近搜索</div>
+            <div><i class="icon-font icon-close"></i>清空</div>
+          </div>
+          <div id="search-history">
+            <div class="search-history-item"><i class="icon-font icon-clock"></i> 卡宴</div>
+            <div class="search-history-item"><i class="icon-font icon-clock"></i> 卡宴</div>
+            <div class="search-history-item"><i class="icon-font icon-clock"></i> 卡宴</div>
+            <div class="search-history-item"><i class="icon-font icon-clock"></i> 卡宴</div>
+            <div class="search-history-item"><i class="icon-font icon-clock"></i> 卡宴</div>
+            <div class="search-history-item"><i class="icon-font icon-clock"></i> 卡宴</div>
+            <div class="search-history-item"><i class="icon-font icon-clock"></i> 卡宴</div>
+            <div class="search-history-item"><i class="icon-font icon-clock"></i> 卡宴</div>
+            <div class="search-history-item"><i class="icon-font icon-clock"></i> 卡宴</div>
+            <div class="search-history-item"><i class="icon-font icon-clock"></i> 卡宴</div>
+            <div class="search-history-item"><i class="icon-font icon-clock"></i> 卡宴</div>
+            <div class="search-history-item"><i class="icon-font icon-clock"></i> 卡宴</div>
+            <div class="search-history-item"><i class="icon-font icon-clock"></i> 卡宴</div>
+            <div class="search-history-item"><i class="icon-font icon-clock"></i> 卡宴</div>
+            <div class="search-history-item"><i class="icon-font icon-clock"></i> 卡宴</div>
+            <div class="search-history-item"><i class="icon-font icon-clock"></i> 卡宴</div>
+          </div>
+        </div>
+      </div>
+      <div class="mui-slider" id="slider_imgs">
+        <div class="mui-slider-group mui-slider-loop">
+          <div class="mui-slider-item mui-slider-item-duplicate"><a><img src="./static/img/car.jpg"></a></div>
+          <div class="mui-slider-item"><a><img src="./static/img/car.jpg"></a></div>
+          <div class="mui-slider-item"><a><img src="./static/img/car.jpg"></a></div>
+          <div class="mui-slider-item"><a><img src="./static/img/car.jpg"></a></div>
+          <div class="mui-slider-item"><a><img src="./static/img/car.jpg"></a></div>
+          <div class="mui-slider-item"><a><img src="./static/img/car.jpg"></a></div>
+          <div class="mui-slider-item mui-slider-item-duplicate"><a><img src="./static/img/car.jpg"></a></div>
+        </div>
+        <div class="mui-slider-indicator">
+          <div class="mui-indicator mui-active"></div>
+          <div class="mui-indicator"></div>
+          <div class="mui-indicator"></div>
+          <div class="mui-indicator"></div>
+          <div class="mui-indicator"></div>
+        </div>
+      </div>
+      <div class="panel panle-main pb">
+        <div class="order-times-box">
+          <div class="order-times">
+            <div class="time"><span class="weak">取车时间</span><span>06-01-08：00</span></div>
+            <div class="time-range"><span class="strong">7天</span></div>
+            <div class="time"><span class="weak">还车时间</span><span>06-01-08：00</span></div>
+          </div>
+          <div><span class="btn-normal active block">去选车</span></div>
+        </div>
+        <div><img class="img-home" src="./static/img/home.jpg"></div>
+        <div class="align-item">
+          <div class="panel-header">热门车辆</div>
+          <div class="weak">更多</div>
+        </div>
+        <div class="flex-row flex-cars">
+          <div class="flex-cars-item"><a><img class="flex-cars-item_img" src="./static/img/car.jpg">
+              <div class="flex-cars-item_info">
+                <div><span>奥迪 A6</span><span class="car-shift">自</span></div>
+                <div><span class="clr-active">￥868</span><span class="weak">/天</span></div>
+              </div></a></div>
+          <div class="flex-cars-item"><a><img class="flex-cars-item_img" src="./static/img/car.jpg">
+              <div class="flex-cars-item_info">
+                <div><span>奥迪 A6</span><span class="car-shift">自</span></div>
+                <div><span class="clr-active">￥868</span><span class="weak">/天</span></div>
+              </div></a></div>
+        </div>
+      </div>
+      <div class="panel pt pb">
+        <div class="mui-text-center strong">包子出行保障</div>
+        <div class="mui-row ensure-box">
+          <div class="mui-col-sm-4 ensure-item"><img class="ensure-img" src="./static/img/icon1.jpg">
+            <div class="ensure-tips">
+              <div>高额保险</div>
+              <div class="weak">200万保险</div>
+            </div>
+          </div>
+          <div class="mui-col-sm-4 ensure-item"><img class="ensure-img" src="./static/img/icon1.jpg">
+            <div class="ensure-tips">
+              <div>高额保险</div>
+              <div class="weak">200万保险</div>
+            </div>
+          </div>
+          <div class="mui-col-sm-4 ensure-item"><img class="ensure-img" src="./static/img/icon1.jpg">
+            <div class="ensure-tips">
+              <div>高额保险</div>
+              <div class="weak">200万保险</div>
+            </div>
+          </div>
+        </div>
+        <div class="cooperation-box mui-text-center">
+          <div class="box-header">合作伙伴</div>
+          <div class="box-header-border"></div><img class="img-cooperation" src="./static/img/icon-cpic.jpg">
+        </div>
+      </div>
+    </div>
+    <script src="./static/js/lib/mui.js"></script>
+    <script src="./static/js/lib/mui.picker.min.js"></script>
+    <script>
+      window.onload=function(){
+          var eHeader=document.getElementById("app-header"),eSearch=document.getElementById("search"),
+              eHideSearch=document.getElementById("js-hideSearch");
+          mui.init();
+          mui(document).on("tap",".input-search",function(){
+              _Util.addClass(eHeader,"active");
+              _Util.addClass(eSearch,"active");
+              document.body.style="overflow:hidden";
+          })
+          mui(document).on("tap","#js-hideSearch",function(){
+              _Util.removeClass(eHeader, "active");
+              _Util.removeClass(eSearch, "active");
+              document.body.style = "";
+          })
+      }
+    </script>
+  <script type="text/javascript" src="static/js/mui_base.min.js"></script></body>
+</html>
