@@ -1,0 +1,75 @@
+.tab-types {
+  width: 2.78rem;
+  height: .52rem;
+  background: #f2f2f2;
+  color: #fff;
+  line-height: .52rem;
+  border-radius: .15rem;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  padding: .04rem;
+  box-sizing: border-box;
+  margin-bottom: .52rem;
+}
+.tab-types .type-item {
+  -webkit-box-flex: 1;
+  -webkit-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+  text-align: center;
+}
+.tab-types .type-item.active {
+  background: #fff;
+  color: #3c3c3c;
+}
+.tab-imgs {
+  width: 6.06rem;
+  height: 3.04rem;
+  margin-bottom: .29rem;
+}
+.tab-imgs .img-item img {
+  width: 6.06rem;
+  height: 3.04rem;
+}
+.tab-imgs .slide-tips {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -0.24rem;
+  padding: 0.15rem;
+  color: #fff;
+}
+.tab-imgs .slide-tips .active-tips {
+  color: #e4c207;
+}
+.tab-lines .line-item {
+  width: .53rem;
+  height: .09rem;
+  border-radius: .1rem;
+  background: #cccccc;
+  margin-bottom: .33rem;
+}
+.tab-lines .line-item.active {
+  margin: 0 .06rem;
+  background: #D12119;
+}
+.btn {
+  width: 4.02rem;
+  height: .53rem;
+  background: #f2f2f2;
+  color: #D12119;
+  line-height: .53rem;
+  text-align: center;
+  border-radius: .2rem;
+  margin-bottom: 1.34rem;
+}
+.img-tip {
+  width: .76rem;
+  height: .76rem;
+  border-radius: .76rem;
+}
+.img-tip.img-seat {
+  background: #f2f2f2;
+}

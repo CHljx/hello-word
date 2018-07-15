@@ -187,13 +187,13 @@
           * */
           var calendar=new Calendar({
               el: document.querySelector("#calendar"),
-              minDate:"2018-06-29",
-              maxDate:"2018-07-03",
-              tips:{
-                  "2018-06-29":"￥1000",
-                  "2018-06-30":"￥1222",
-                  "2018-07-08": "￥1722"
-              }
+              dates:
+                  [
+                      {"startTime": "2018-07-13", "endTime": "2018-07-16"},
+                      {"startTime": "2018-07-18", "endTime": "2018-07-27"},
+                      {"startTime": "2018-07-30", "endTime": "2018-08-04"}
+                  ],
+              tips:{"2018-07-13":"￥300.0","2018-07-14":"￥700.0","2018-07-15":"￥300.0","2018-07-18":"￥700.0","2018-07-19":"￥300.0"}
           })
       
           document.getElementById("js-like").addEventListener("tap",function(){
