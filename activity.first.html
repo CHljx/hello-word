@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=0.5, maximum-scale=2.0, user-scalable=no">
+    <link href="./static/css/mui.css" rel="stylesheet" type="text/css">
+    <link href="./static/css/mui.picker.min.css" rel="stylesheet" type="text/css">
+    <link href="./static/css/iconfont.css" rel="stylesheet" type="text/css">
+    <link href="./static/css/mui_activity_first.min.css" rel="stylesheet" type="text/css">
+    <script>
+      var defaultFontSize=0;
+      function getDefaultFS(){
+          var d = window.document.createElement('div');
+          d.style.width = '1rem';
+          d.style.display = "none";
+          var head = window.document.getElementsByTagName('head')[0];
+          head.appendChild(d);
+          defaultFontSize = parseFloat(window.getComputedStyle(d, null).getPropertyValue('width'));
+          d.remove();
+      }
+      function adapt(designWidth, rem2px) {
+          var head = window.document.getElementsByTagName('head')[0];
+          document.documentElement.style.fontSize = window.innerWidth / designWidth * rem2px / defaultFontSize * 100 + '%';
+          var st = document.createElement('style');
+           var portrait = "@media screen and (min-width: " + window.innerWidth + "px) {html{font-size:" + ((window.innerWidth / (designWidth / rem2px) / defaultFontSize) * 100) + "%;}}";
+           var landscape = "@media screen and (min-width: " + window.innerHeight + "px) {html{font-size:" + ((window.innerHeight / (designWidth / rem2px) / defaultFontSize) * 100) + "%;}}"
+           st.innerHTML = portrait + landscape;
+           head.appendChild(st);
+      };
+      getDefaultFS();
+      adapt(750, 100);
+      window.addEventListener("resize",function(){
+          adapt(750, 100);
+      })
+    </script>
+  <link href="static/css/mui_base.min.css" rel="stylesheet"></head>
+  <body id="app_activity_first">
+    <div class="mui-content">
+      <div class="container">
+        <div class="mui-text-center box-rule" id="trigger-rule">详细活动规则<i class="mui-icon mui-icon-arrowright"></i></div>
+        <div class="box-vip"><img src="./static/img/tovip.png"></div>
+        <div class="box-seckill">
+          <div class="item-seckill">
+            <div class="seckill-time"><i class="num-box">1</i> 2018年8月5日12:00开抢</div>
+            <div class="seckill-car"><img>
+              <div class="car-info">
+                <div><span class="car-name">宝马五系</span><span class="car-shift">自动挡</span></div>
+                <div class="car-performances"><span class="item">2017款</span><span class="item">3.0T</span><span class="item">运动版</span></div>
+                <div><span class="btn">马上抢</span></div>
+              </div>
+            </div>
+          </div>
+          <div class="item-seckill">
+            <div class="seckill-time"><i class="num-box">2</i> 2018年8月5日12:00开抢</div>
+            <div class="seckill-car"><img>
+              <div class="car-info">
+                <div><span class="car-name">宝马五系</span><span class="car-shift">自动挡</span></div>
+                <div class="car-performances"><span class="item">2017款</span><span class="item">3.0T</span><span class="item">运动版</span></div>
+                <div><span class="btn">马上抢</span></div>
+              </div>
+            </div>
+          </div>
+          <div class="item-seckill">
+            <div class="seckill-time"><i class="num-box">3</i> 2018年8月5日12:00开抢</div>
+            <div class="seckill-car"><img>
+              <div class="car-info">
+                <div><span class="car-name">宝马五系</span><span class="car-shift">自动挡</span></div>
+                <div class="car-performances"><span class="item">2017款</span><span class="item">3.0T</span><span class="item">运动版</span></div>
+                <div><span class="btn">马上抢</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal" id="modal">
+        <div class="modal-content">
+          <div class="modal-content-header">活动规则</div>
+          <div class="modal-content-body">
+            <div class="tip-item">
+              <p class="strong tip">8月6日-8月10日下单预定享受8折立减优惠</p>
+              <p class="tip">1、订单起始日期限制：8月6日-8月10日</p>
+              <p class="tip">1、订单起始日期限制：8月6日-8月10日</p>
+              <p class="tip">1、订单起始日期限制：8月6日-8月10日</p>
+              <p class="tip">1、订单起始日期限制：8月6日-8月10日</p>
+            </div>
+            <div class="tip-item">
+              <p class="strong tip">8月6日-8月10日下单预定享受8折立减优惠</p>
+              <p class="tip">1、订单起始日期限制：8月6日-8月10日</p>
+              <p class="tip">1、订单起始日期限制：8月6日-8月10日</p>
+              <p class="tip">1、订单起始日期限制：8月6日-8月10日</p>
+              <p class="tip">1、订单起始日期限制：8月6日-8月10日</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="./static/js/lib/mui.js"></script>
+    <script src="./static/js/lib/mui.picker.min.js"></script>
+    <script>
+      (function ($) {
+          var eModal=document.getElementById("modal")
+          $.init();
+          $(document).on("click","#trigger-rule",function(){
+              _Util.addClass(eModal,"show")
+          })
+          eModal.addEventListener("click",function(){
+              _Util.removeClass(eModal, "show")
+          })
+      })(mui);
+    </script>
+  <script type="text/javascript" src="static/js/mui_base.min.js"></script></body>
+</html>
