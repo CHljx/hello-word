@@ -120,7 +120,7 @@
   right: 0;
   top: 0;
   bottom: 0;
-  background: #00000073;
+  background:rgba(0, 0, 0, 0.45098039215686275);
   display: none;
   -webkit-box-pack: center;
   -webkit-justify-content: center;
