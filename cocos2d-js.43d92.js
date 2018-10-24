@@ -25531,7 +25531,9 @@
           this._preOnFullScreenChange = onFullScreenChange;
           document.addEventListener(eventName, onFullScreenChange, false);
         }
-        return element[this._fn.requestFullscreen]();
+        return element[this._fn.requestFullscreen]().catch(function(e){
+            console.log(e)
+        });
       },
       exitFullScreen: function() {
         return !this._supportsFullScreen || document[this._fn.exitFullscreen]();
