@@ -77,7 +77,7 @@ function handleComplete(evt) {
 				else if(scaleType==2) {					
 					sRatio = Math.max(xRatio, yRatio);				
 				}			
-			}			
+			}		
 			canvas.width = w*pRatio*sRatio;			
 			canvas.height = h*pRatio*sRatio;
 			canvas.style.width = w*sRatio+'px';			
@@ -91,7 +91,7 @@ function handleComplete(evt) {
 </script>
 <!-- write your code here -->
 </head>
-<body onload="init();" style="margin:0px;">
-	<canvas id="canvas" width="750" height="1334" style="display: block; background-color:rgba(255, 255, 255, 1.00)"></canvas>
+<body onload="init();" style="margin:0px;background:red;">
+	<canvas id="canvas" width="750" height="1334" style="display: block; background-color:rgba(255, 255, 255, 1.00);background:blue;"></canvas>
 </body>
 </html>
