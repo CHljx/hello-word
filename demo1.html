@@ -25,9 +25,8 @@
 	top:-100%;bottom:-100%;
   }
 </style>
-<!-- <script src="https://code.createjs.com/createjs-2015.11.26.min.js"></script>
-
- --><script src="demo1.js"></script>
+<script src="https://code.createjs.com/createjs-2015.11.26.min.js"></script>
+<script src="demo1.js"></script>
 <script>
 var canvas, stage, exportRoot;
 function init() {
@@ -85,14 +84,15 @@ function handleComplete(evt) {
 			canvas.style.height = h*sRatio+'px';
 			stage.scaleX = pRatio*sRatio;			
 			stage.scaleY = pRatio*sRatio;			
-			lastW = iw; lastH = ih; lastS = sRatio;		
+			lastW = iw; lastH = ih; lastS = sRatio;	
+			alert(body.innerHTML);
 		}
 	})(true,'width',true,2);	
 }
 </script>
 <!-- write your code here -->
 </head>
-<body style="margin:0px;background:red;">
-	<canvas id="canvas" width="750" height="1334" style="display: block; background-color:rgba(255, 255, 255, 1.00);background:blue;"></canvas>
+<body onload="init();" style="margin:0px;background:red;">
+	<canvas id="canvas" width="750" height="1334" style="display: block; background-color:rgba(255, 255, 255, 1.00)"></canvas>
 </body>
 </html>
