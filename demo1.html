@@ -37,6 +37,10 @@ function init() {
 	loader.addEventListener("fileload", handleFileLoad);
 	loader.addEventListener("complete", handleComplete);
 	loader.loadManifest(lib.properties.manifest);
+
+	document.body.addEventListener("click",function(){
+		alert(document.body.offsetHeight);
+	})
 }
 function handleFileLoad(evt) {	
 	if (evt.item.type == "image") { images[evt.item.id] = evt.result; }	
@@ -84,9 +88,7 @@ function handleComplete(evt) {
 			canvas.style.height = h*sRatio+'px';
 			stage.scaleX = pRatio*sRatio;			
 			stage.scaleY = pRatio*sRatio;			
-			lastW = iw; lastH = ih; lastS = sRatio;	
-			alert(document.body.offsetHeight);
-			alert(document.body.innerHTML);
+			lastW = iw; lastH = ih; lastS = sRatio;
 		}
 	})(true,'width',true,2);	
 }
