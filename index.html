@@ -72,12 +72,15 @@
     eMask.addEventListener("click",playVideo);
     document.body.addEventListener("click",playVideo)
     eVideo.addEventListener("timeupdate",function(){
-        console.log("timeupdate");
+        console.log("timeupdate",eVideo.currentTime);
         if(eVideo.currentTime>0.1){
             eVideo.style.display="block";
             eMask.style.display="none";
             eMask.removeEventListener("click",playVideo);
             document.body.removeEventListener("click",playVideo);
+        }
+        if(eVideo.currentTime>1){
+            eVideo.muted=false;
         }
     });
 
