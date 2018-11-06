@@ -110,7 +110,7 @@
     });
     eVideo.addEventListener("play",function(){
         console.log("play");
-        if(!isClick){
+        if(isClick){
             eVideo.muted=false;
             return;
         }
