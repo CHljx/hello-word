@@ -70,12 +70,14 @@
     var desc="ף�������տ��֣�";
     var eVideo=document.getElementById("video"),eMask=document.getElementById("page-mask");
     var isClick=false;
+    var first=false;
+
+    console.log("vConsole");
     eMask.addEventListener("touchstart",playVideo);
     document.body.addEventListener("touchstart",playVideo)
     eVideo.addEventListener("timeupdate",function(){
-        if(eVideo.currentTime>1){
-            eVideo.muted=false;
-        }
+
+        console.log("timeupdate");
         if(!isClick){
             return;
         }
@@ -86,23 +88,32 @@
             document.body.removeEventListener("touchstart",playVideo);
         }
     });
+
+    eVideo.addEventListener("pause",function(){
+
+        console.log("pause");
+    });
     eVideo.addEventListener("canplay",function(){
+
+        console.log("canplay");
         if(isClick){
             eVideo.play();
             return;
         }
     });
     eVideo.addEventListener("canplaythrough",function(){
+        console.log("canplaythrough");
         if(isClick){
             eVideo.play();
             return;
         }
     });
     eVideo.addEventListener("play",function(){
+        console.log("play");
         if(!isClick){
+            eVideo.muted=false;
             return;
         }
-        console.log("play");
         eVideo.style.display="block";
         eMask.style.display="none";
         eMask.removeEventListener("touchstart",playVideo);
