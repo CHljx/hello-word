@@ -83,6 +83,21 @@
             eMask.removeEventListener("touchstart",playVideo);
             document.body.removeEventListener("touchstart",playVideo);
         }
+        if(eVideo.currentTime>1){
+            eVideo.muted=false;
+        }
+    });
+    eVideo.addEventListener("canplay",function(){
+        if(isClick){
+            eVideo.play();
+            return;
+        }
+    });
+    eVideo.addEventListener("canplaythrough",function(){
+        if(isClick){
+            eVideo.play();
+            return;
+        }
     });
     eVideo.addEventListener("play",function(){
         if(!isClick){
@@ -98,7 +113,6 @@
     function playVideo(){
 		console.log("playVideo");
         isClick=true;
-        eVideo.muted=false;
         eVideo.play();
     }
 </script>
