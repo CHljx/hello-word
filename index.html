@@ -79,9 +79,6 @@
             eMask.removeEventListener("click",playVideo);
             document.body.removeEventListener("click",playVideo);
         }
-        if(eVideo.currentTime>1){
-            eVideo.muted=false;
-        }
     });
 
     eVideo.addEventListener("play",function(){
