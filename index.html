@@ -72,29 +72,29 @@
     var isClick=false;
     var first=false;
 
-    console.log("vConsole");
-    eMask.addEventListener("touchstart",playVideo);
-    document.body.addEventListener("touchstart",playVideo)
-    eVideo.addEventListener("timeupdate",function(){
+    console.log("version 20181106");
+    eMask.addEventListener("click",playVideo);
+    document.body.addEventListener("click",playVideo);
 
-        console.log("timeupdate");
+    function startPlay(){
+        eVideo.style.display="block";
+        eMask.style.display="none";
+        eMask.removeEventListener("click",playVideo);
+        document.body.removeEventListener("click",playVideo);
+    }
+    eVideo.addEventListener("timeupdate",function(){
         if(!isClick){
             return;
         }
         if(eVideo.currentTime>0.1){
-            eVideo.style.display="block";
-            eMask.style.display="none";
-            eMask.removeEventListener("touchstart",playVideo);
-            document.body.removeEventListener("touchstart",playVideo);
+            startPlay();
         }
     });
 
     eVideo.addEventListener("pause",function(){
-
         console.log("pause");
     });
     eVideo.addEventListener("canplay",function(){
-
         console.log("canplay");
         if(isClick){
             eVideo.play();
@@ -110,17 +110,13 @@
     });
     eVideo.addEventListener("play",function(){
         console.log("play");
-        if(isClick){
-            eVideo.muted=false;
-            return;
-        }
-        eVideo.style.display="block";
-        eMask.style.display="none";
-        eMask.removeEventListener("touchstart",playVideo);
-        document.body.removeEventListener("touchstart",playVideo);
-    })
-    function playVideo(){
+        eVideo.muted=false;
+        startPlay();
+    });
+    function playVideo(e){
 		console.log("playVideo");
+		e.stopPropagation();
+		e.preventDefault();
         isClick=true;
         eVideo.play();
     }
