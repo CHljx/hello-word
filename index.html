@@ -1,0 +1,97 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset=UTF-8>
+    <meta name=viewport content="width=device-width,initial-scale=1,minimum-scale=1"/>
+    <title>Happy Birthday to Eric Lee</title>
+    <script>
+        (function (doc, win) {
+            var docEl = doc.documentElement,
+                resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize',
+                recalc = function () {
+                    var clientWidth = docEl.clientWidth;
+                    if (!clientWidth) return;
+                    if (clientWidth >= 750) {
+                        docEl.style.fontSize = '100px';
+                    } else {
+                        docEl.style.fontSize = 100 * (clientWidth / 750) + 'px';
+                    }
+                };
+            if (!doc.addEventListener) return;
+            win.addEventListener(resizeEvt, recalc, false);
+            recalc();
+        })(document, window);
+    </script>
+    <style>
+        .icon-arrow{
+            background: url(http://res.zhaopin.37.com/boss/asset/img/arrow.png) no-repeat 50%;
+            background-size: 100%;
+            width: .93rem;
+            height: .93rem;
+            -webkit-animation: tada 1s linear infinite;
+            animation: tada 1s linear infinite;
+        }
+        .icon-landscape{
+            background: url(http://res.zhaopin.37.com/boss/asset/img/landscape.png) no-repeat 50%;
+            background-size: 100%;
+            width: 3.13rem;
+            height: 2.07rem;
+            position: absolute;
+            bottom: 0px;
+            left:50%;
+            margin-left:-1.56rem;
+            margin-bottom: 1rem;
+        }
+        @media screen and (min-aspect-ratio: 1/1){
+            .icon-landscape {
+                display: none;
+            }
+        }
+    </style>
+    <link href="http://res.zhaopin.37.com/boss/asset/css/index.min.css?r=1.1.1" rel="stylesheet">
+</head>
+<body>
+<div class="page-mask" id="page-mask">
+    <span class="icon-arrow"></span>
+    <span class="icon-landscape"></span>
+</div>
+<video  id=video src="http://res.zhaopin.37.com/boss/2018/video/video_li.mp4" autoplay controls preload></video>
+<script src=http://res.wx.qq.com/open/js/jweixin-1.0.0.js></script>
+
+<script type="text/javascript" src="./vconsole.min.js?v=3.2.0"></script>
+<script type="text/javascript">
+
+	window.vConsole = new window.VConsole();
+
+    var logo="http://res.zhaopin.37.com/boss/2018/img/share_li.jpg?r=20181105";
+    var title="Happy Birthday to Eric Lee";
+    var desc="ף�������տ��֣�";
+    var eVideo=document.getElementById("video"),eMask=document.getElementById("page-mask");
+    eMask.addEventListener("touchstart",playVideo);
+    document.body.addEventListener("touchstart",playVideo)
+    eVideo.addEventListener("timeupdate",function(){
+        if(eVideo.currentTime>0.1){
+            eVideo.style.display="block";
+            eMask.style.display="none";
+            eMask.removeEventListener("touchstart",playVideo);
+            document.body.removeEventListener("touchstart",playVideo);
+        }
+    });
+    function playVideo(){
+		console.log("playVideo")
+        eVideo.play();
+        eVideo.addEventListener("play",function(){
+			
+		console.log("play")
+            eVideo.style.display="block";
+            eMask.style.display="none";
+            eMask.removeEventListener("touchstart",playVideo);
+            document.body.removeEventListener("touchstart",playVideo);
+        })
+    }
+</script>
+
+<script type="text/javascript" src="http://res.zhaopin.37.com/boss/asset/js/index.min.js?5b4f94440f5d81dfa3bf"></script>
+</body>
+</html>
