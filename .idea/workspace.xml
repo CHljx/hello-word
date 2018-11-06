@@ -3,6 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="c47c11e8-7f4c-4f47-b312-120bfc0972cf" name="Default" comment="优惠卷滑动">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/index.html" afterPath="$PROJECT_DIR$/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/index.min.js" afterPath="$PROJECT_DIR$/index.min.js" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -20,9 +21,12 @@
       <file leaf-file-name="index.html" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="293">
-              <caret line="74" column="51" lean-forward="false" selection-start-line="74" selection-start-column="51" selection-end-line="74" selection-end-column="51" />
-              <folding />
+            <state relative-caret-position="722">
+              <caret line="98" column="61" lean-forward="false" selection-start-line="98" selection-start-column="61" selection-end-line="98" selection-end-column="61" />
+              <folding>
+                <element signature="e#3021#3257#0" expanded="false" />
+                <element signature="e#3283#3341#0" expanded="false" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -31,7 +35,7 @@
         <entry file="file://$PROJECT_DIR$/index.min.js">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="245">
-              <caret line="0" column="27373" lean-forward="false" selection-start-line="0" selection-start-column="27368" selection-end-line="0" selection-end-column="27373" />
+              <caret line="0" column="27297" lean-forward="true" selection-start-line="0" selection-start-column="27297" selection-end-line="0" selection-end-column="27355" />
               <folding />
             </state>
           </provider>
@@ -228,7 +232,7 @@
       <workItem from="1531620138968" duration="993000" />
       <workItem from="1532860418242" duration="2353000" />
       <workItem from="1534390522951" duration="119000" />
-      <workItem from="1541469761843" duration="5268000" />
+      <workItem from="1541469761843" duration="5893000" />
     </task>
     <task id="LOCAL-00001" summary="日历调整">
       <created>1529414514845</created>
@@ -297,7 +301,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="16832000" />
+    <option name="totallyTimeSpent" value="17457000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-9" y="-9" width="1938" height="1048" extended-state="0" />
@@ -398,16 +402,19 @@
     <entry file="file://$PROJECT_DIR$/index.min.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="245">
-          <caret line="0" column="27373" lean-forward="false" selection-start-line="0" selection-start-column="27368" selection-end-line="0" selection-end-column="27373" />
+          <caret line="0" column="27297" lean-forward="true" selection-start-line="0" selection-start-column="27297" selection-end-line="0" selection-end-column="27355" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="293">
-          <caret line="74" column="51" lean-forward="false" selection-start-line="74" selection-start-column="51" selection-end-line="74" selection-end-column="51" />
-          <folding />
+        <state relative-caret-position="722">
+          <caret line="98" column="61" lean-forward="false" selection-start-line="98" selection-start-column="61" selection-end-line="98" selection-end-column="61" />
+          <folding>
+            <element signature="e#3021#3257#0" expanded="false" />
+            <element signature="e#3283#3341#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
