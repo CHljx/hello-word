@@ -56,7 +56,7 @@
     <span class="icon-arrow"></span>
     <span class="icon-landscape"></span>
 </div>
-<video  id=video  autoplay controls preload muted="muted" src="./video_li.mp4">
+<video  id=video  autoplay controls preload  src="./video_li.mp4">
 </video>
 <script src=https://res.wx.qq.com/open/js/jweixin-1.0.0.js></script>
 
@@ -72,10 +72,8 @@
     eMask.addEventListener("touchstart",playVideo);
     document.body.addEventListener("touchstart",playVideo)
     eVideo.addEventListener("timeupdate",function(){
-
-        console.log("timeupdate");
+        console.log("timeupdate")
         if(eVideo.currentTime>0.1){
-            eVideo.muted=false;
             eVideo.style.display="block";
             eMask.style.display="none";
             eMask.removeEventListener("touchstart",playVideo);
