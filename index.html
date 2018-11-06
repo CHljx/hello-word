@@ -79,20 +79,22 @@
             document.body.removeEventListener("touchstart",playVideo);
         }
     });
+
+    eVideo.addEventListener("play",function(){
+
+        console.log("play");
+        eVideo.muted=false;
+        eVideo.style.display="block";
+        eMask.style.display="none";
+        eMask.removeEventListener("touchstart",playVideo);
+        document.body.removeEventListener("touchstart",playVideo);
+    })
     function playVideo(){
-		console.log("playVideo")
+		console.log("playVideo");
         eVideo.play();
-        eVideo.addEventListener("play",function(){
-			
-		console.log("play")
-            eVideo.style.display="block";
-            eMask.style.display="none";
-            eMask.removeEventListener("touchstart",playVideo);
-            document.body.removeEventListener("touchstart",playVideo);
-        })
     }
 </script>
 
-<script type="text/javascript" src="./index.min.js?5b4f94440f5d81dfa3bf"></script>
+<script type="text/javascript" src="./index.min.js?20181106"></script>
 </body>
 </html>
