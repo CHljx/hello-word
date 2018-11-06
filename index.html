@@ -72,7 +72,10 @@
     eMask.addEventListener("touchstart",playVideo);
     document.body.addEventListener("touchstart",playVideo)
     eVideo.addEventListener("timeupdate",function(){
+
+        console.log("timeupdate");
         if(eVideo.currentTime>0.1){
+            eVideo.muted=false;
             eVideo.style.display="block";
             eMask.style.display="none";
             eMask.removeEventListener("touchstart",playVideo);
