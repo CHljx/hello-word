@@ -25,7 +25,7 @@
     </script>
     <style>
         .icon-arrow{
-            background: url(http://res.zhaopin.37.com/boss/asset/img/arrow.png) no-repeat 50%;
+            background: url(./arrow.png) no-repeat 50%;
             background-size: 100%;
             width: .93rem;
             height: .93rem;
@@ -33,7 +33,7 @@
             animation: tada 1s linear infinite;
         }
         .icon-landscape{
-            background: url(http://res.zhaopin.37.com/boss/asset/img/landscape.png) no-repeat 50%;
+            background: url(./landscape.png) no-repeat 50%;
             background-size: 100%;
             width: 3.13rem;
             height: 2.07rem;
@@ -49,15 +49,19 @@
             }
         }
     </style>
-    <link href="http://res.zhaopin.37.com/boss/asset/css/index.min.css?r=1.1.1" rel="stylesheet">
+    <link href="./index.min.css?r=1.1.1" rel="stylesheet">
 </head>
 <body>
 <div class="page-mask" id="page-mask">
     <span class="icon-arrow"></span>
     <span class="icon-landscape"></span>
 </div>
-<video  id=video src="http://res.zhaopin.37.com/boss/2018/video/video_li.mp4" autoplay controls preload></video>
-<script src=http://res.wx.qq.com/open/js/jweixin-1.0.0.js></script>
+<video  id=video  autoplay controls preload muted="muted"
+        webkit-playsinline="true"
+        playsinline="true">
+    <source src="./mov_bbb.ogg" type="video/ogg">
+</video>
+<script src=https://res.wx.qq.com/open/js/jweixin-1.0.0.js></script>
 
 <script type="text/javascript" src="./vconsole.min.js?v=3.2.0"></script>
 <script type="text/javascript">
@@ -92,6 +96,6 @@
     }
 </script>
 
-<script type="text/javascript" src="http://res.zhaopin.37.com/boss/asset/js/index.min.js?5b4f94440f5d81dfa3bf"></script>
+<script type="text/javascript" src="./index.min.js?5b4f94440f5d81dfa3bf"></script>
 </body>
 </html>
