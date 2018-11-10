@@ -95,26 +95,22 @@
         console.log("pause");
     });
     eVideo.addEventListener("canplay",function(){
-        console.log("canplay");
         if(isClick){
             eVideo.play();
             return;
         }
     });
     eVideo.addEventListener("canplaythrough",function(){
-        console.log("canplaythrough");
         if(isClick){
             eVideo.play();
             return;
         }
     });
     eVideo.addEventListener("play",function(){
-        console.log("play");
         eVideo.muted=false;
         startPlay();
     });
     function playVideo(e){
-		console.log("playVideo");
 		e.stopPropagation();
 		e.preventDefault();
         isClick=true;
