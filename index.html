@@ -63,59 +63,43 @@
 <script type="text/javascript" src="./vconsole.min.js?v=3.2.0"></script>
 <script type="text/javascript">
 
-	window.vConsole = new window.VConsole();
+	 var matchvs={
+        connect:function(){
+            var _self=this;
+            _self.socket= new WebSocket('ws://47.88.231.158:32139/',['37jl']);
+            _self.socket.onopen = function () {
+                alert("连接已打开...");
+            };
+            _self.socket.onmessage = function (evt) {
+                var received_msg = evt.data;
+                alert("数据已接收...");
+            };
+            _self.socket.onclose = function () {
+                alert("连接已关闭...");
+            };
+            _self.socket.onerror = function () {
+                alert("连接发送错误...");
+            };
+            return _self;
+        },
+        createRoom:function(){
 
-    var logo="http://res.zhaopin.37.com/boss/2018/img/share_li.jpg?r=20181105";
-    var title="Happy Birthday to Eric Lee";
-    var desc="ף�������տ��֣�";
-    var eVideo=document.getElementById("video"),eMask=document.getElementById("page-mask");
-    var isClick=false;
-    var first=false;
+        },
+        joinRoom:function(){
 
-    console.log("version 20181106");
-    eMask.addEventListener("click",playVideo);
-    document.body.addEventListener("click",playVideo);
+        },
+        on:function(){
 
-    function startPlay(){
-        eVideo.style.display="block";
-        eMask.style.display="none";
-        eMask.removeEventListener("click",playVideo);
-        document.body.removeEventListener("click",playVideo);
-    }
-    eVideo.addEventListener("timeupdate",function(){
-        if(!isClick){
-            return;
-        }
-        if(eVideo.currentTime>0.1){
-            startPlay();
-        }
-    });
+        },
+        once:function(){
 
-    eVideo.addEventListener("pause",function(){
-        console.log("pause");
-    });
-    eVideo.addEventListener("canplay",function(){
-        if(isClick){
-            eVideo.play();
-            return;
-        }
-    });
-    eVideo.addEventListener("canplaythrough",function(){
-        if(isClick){
-            eVideo.play();
-            return;
-        }
-    });
-    eVideo.addEventListener("play",function(){
-        eVideo.muted=false;
-        startPlay();
-    });
-    function playVideo(e){
-		e.stopPropagation();
-		e.preventDefault();
-        isClick=true;
-        eVideo.play();
-    }
+        },
+        off:function(){
+
+        },
+        emit:function(){}
+    };
+    matchvs.connect();
 </script>
 
 <script type="text/javascript" src="./index.min.js?2018110603"></script>
