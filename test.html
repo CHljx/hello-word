@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=0.5, maximum-scale=2.0, user-scalable=no">
+    <style>
+        @media screen and (min-device-aspect-ratio: 1/1) {
+            .mobile-tip {
+                display: block!important;
+            }
+
+            .pc .mobile-tip {
+                display: none !important;
+            }
+        }
+
+        @media screen and (min-aspect-ratio: 1/1) {
+            .mobile-tip.ios {
+                display: block!important;
+            }
+
+            .mobile-tip.input {
+                display: none!important;
+            }
+
+            .pc .mobile-tip {
+                display: none !important;
+            }
+        }
+    </style>
+    <style>
+        video{
+            width:100%;
+            height:500rem;
+        }
+    </style>
+<body>
+<video style="background:red;z-index:10;object-fit:fill" class="video" webkit-playsinline="true" playsinline="true" x-webkit-airplay="allow" x5-video-player-type="h5"
+       data-src="./static/welcome.mp4" preload="auto" x5-video-player-fullscreen="true" x5-video-orientation="portraint" ></video>
+<video style="background:red;z-index:10;object-fit:fill" class="video" webkit-playsinline="true" playsinline="true" x-webkit-airplay="allow" x5-video-player-type="h5"
+       data-src="./static/welcome.mp4" x5-playsinline  preload="auto"></video>
+<video style="background:red;z-index:10;object-fit:fill" class="video" webkit-playsinline="true" playsinline="true" x5-video-player-type="h5"
+       data-src="./static/welcome.mp4"  preload="auto"></video>
+</body>
+<script src="./vconsole.min.js"></script>
+<script>
+    new VConsole();
+</script>
+</html>
