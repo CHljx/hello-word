@@ -1,111 +1,19 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=0.5, maximum-scale=2.0, user-scalable=no">
-    <style>
-      @media screen and (min-device-aspect-ratio: 1/1) {
-          .mobile-tip {
-              display: block!important;
-          }
-      
-          .pc .mobile-tip {
-              display: none !important;
-          }
-      }
-      
-      @media screen and (min-aspect-ratio: 1/1) {
-          .mobile-tip.ios {
-              display: block!important;
-          }
-      
-          .mobile-tip.input {
-              display: none!important;
-          }
-      
-          .pc .mobile-tip {
-              display: none !important;
-          }
-      }
-    </style>
-  <link href="static/css/entry.min.css" rel="stylesheet"></head>
-  <body>
-    <div class="mobile-tip" id="mobile-tip">
-      <div class="mt-con">
-        <div class="pic"><img src="http://wxshare1.37.com/dist/jzcq/20171018h5/static/images/phone-ui_0bea1a5.png" height="170" width="110"></div>
-        <div class="txt">请竖屏浏览体验更佳</div>
-      </div>
-    </div>
-    <div class="hide" id="app-loader"><span class="flotage star"></span><span class="flotage town"></span>
-      <div class="progress-bar flotage">
-        <div class="progress-bg"></div>
-      </div>
-    </div>
-    <div class="hide" id="app-content">
-      <div class="swiper-container" id="swiper">
-        <div class="swiper-wrapper">
-          <div class="swiper-slide page-start" id="page-1"><span class="light flotage"></span><span class="flotage left-top"></span><span class="flotage left-bottom"></span><span class="flotage right-top"></span><span class="flotage right-center"></span><span class="flotage title"></span><span class="flotage title-sub"></span><span class="flotage point"></span><a class="btn btn-start"></a></div>
-          <div class="swiper-slide page-inner" id="page-2">
-            <div class="title">
-              <div class="line"></div>
-              <div class="box"></div>
-            </div>
-            <div class="rect">
-              <div class="left-center"></div>
-              <div class="box"><span class="flotage text-1" id="text-name"></span><span class="flotage text-2">诚挚邀请您莅临参加</span><span class="flotage text-3 strong">“心起点，拼十力”-2019三七互娱新春盛典,</span><span class="flotage text-4">感谢您一直以来对三七互娱的关心与支持!</span><span class="flotage text-5">期待您的到来!</span><span class="flotage text-6"></span><span class="flotage text-7">2019年1月26日  14：00-21:00</span><span class="flotage text-8">琶洲会展中心保利世贸2F-3号馆</span></div>
-              <div class="right-top"></div>
-              <div class="right-bottom"></div>
-            </div>
-          </div>
-          <div class="swiper-slide page-inner" id="page-3">
-            <div class="title">
-              <div class="line"></div>
-              <div class="box"></div>
-            </div>
-            <div class="rect">
-              <div class="left-center"></div>
-              <div class="box"><span class="flotage text-title"></span><span class="flow"></span>
-                <div class="flotage text-1 text"><span class="time">14：00</span><span class="content">庆典入场</span></div>
-                <div class="flotage text-2 text"><span class="time">14：00 - 18：00</span><span class="content">节目表彰</span></div>
-                <div class="flotage text-3 text"><span class="time">18：00 - 19：00</span><span class="content">晚宴环节</span></div>
-                <div class="flotage text-4 text"><span class="time">19：00 - 21：00</span><span class="content strong">明星汇演</span></div>
-                <div class="flotage text-5">还有激动人心的<span class="strong">抽奖环节</span>贯穿整场年会！</div>
-              </div>
-              <div class="right-top"></div>
-              <div class="right-bottom"></div>
-            </div>
-          </div>
-          <div class="swiper-slide page-inner" id="page-4">
-            <div class="page-bg"></div>
-            <div class="singer"></div>
-            <div class="title">
-              <div class="line"></div>
-              <div class="box"></div>
-            </div>
-          </div>
-          <div class="swiper-slide page-inner" id="page-5">
-            <div class="flotage text-thank"></div>
-            <div class="title">
-              <div class="line"></div>
-              <div class="box"></div>
-            </div>
-            <div class="rect">
-              <div class="left-center"></div>
-              <div class="box"><span class="flotage text-title"></span>
-                <div class="flotage text-address"></div>
-                <div class="flotage address direct-map"></div><a class="btn btn-direct direct-map"></a>
-              </div>
-              <div class="right-top"></div>
-              <div class="right-bottom"></div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="music-box">
-        <div class="music" music="http://res.zhaopin.37.com/h5/invitation/gala/2019/static/bgm.mp3"></div>
-      </div>
-      <div class="arrow-down hide arrow-slide"></div>
-    </div>
-    <script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js" type="text/javascript"></script>
-  <script type="text/javascript" src="static/js/entry.min.js"></script></body>
-</html>
+
+<!DOCTYPE HTML><html><head><meta charset="UTF-8"><meta http-equiv="x-ua-compatible" content="IE=edge"><meta name="viewport" content="width=device-width,height=device-height,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no"><title>H5 Aliplayer Demo</title><link rel="stylesheet" href="//g.alicdn.com/de/prismplayer/2.7.2/skins/default/aliplayer-min.css"><link rel="stylesheet" href="http://player.alicdn.com/demo/h5/lib/css/frozen.css"><script type="text/javascript" src="//player.alicdn.com/resource/player/lib/flexible.min.js"></script><link href="http://player.alicdn.com/demo/h5/css/h5demo.css?9c27fbeb585d3124cfdb" rel="stylesheet"></head><body><div class="player-area"><div class="prism-player" id="J_prismPlayer" style="width:100%; height:252px"></div><div class="ui-tab content-container"><ul class="ui-tab-nav ui-border-b"><li class="current">评论</li><li class="">播放列表</li></ul><ul class="ui-tab-content" style="width:200%"><li class="comment-list"><a class="code-view" href="https://github.com/aliyunvideo/AliyunPlayer_Web/tree/master/h5VodDemo" target="_blank">查看github代码</a><div class="comment-container"></div></li><li class="play-list"><div class="video-list-wrapper"><ul id="videolist" class="video-list"></ul></div></li></ul></div></div><div class="comment-textbox" style="display:none"><div class="send-container"><textarea class="send-txt" placeholder="在这里聊天吧"></textarea><div class="send-btn">发送</div><img class="favoriate-send" src="http://player.alicdn.com/demo/h5/images/674b04bf.xin.png"></div></div><script type="text/javascript" src="http://player.alicdn.com/demo/h5/lib/zepto.min.js?9c27fbeb585d3124cfdb"></script><script type="text/javascript" src="https://g.alicdn.com/de/prismplayer/2.7.2/aliplayer-min.js?9c27fbeb585d3124cfdb"></script><script type="text/javascript" src="http://player.alicdn.com/demo/h5/lib/mqttws31.js?9c27fbeb585d3124cfdb"></script><script type="text/javascript" src="http://player.alicdn.com/demo/h5/lib/frozen.min.js?9c27fbeb585d3124cfdb"></script><script type="text/javascript" src="http://player.alicdn.com/demo/h5/js/h5livedemo.common.min.js?9c27fbeb585d3124cfdb"></script><script type="text/javascript" src="http://player.alicdn.com/demo/h5/js/h5demo.min.js?9c27fbeb585d3124cfdb"></script></body><script>$(function (){
+            var option = {
+                role: 'tab',
+                autoplay: false
+            };
+            var tab = new fz.Scroll('.ui-tab', option);
+            /* 滑动开始前 */
+            tab.on('beforeScrollStart', function(fromIndex, toIndex) {
+                if(toIndex==1)
+                {
+                    $('.comment-textbox').hide();
+                }
+                else
+                {
+                    $('.comment-textbox').show();
+                }
+            });
+       });</script></html>
