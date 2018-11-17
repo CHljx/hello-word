@@ -1,94 +1,67 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>测试微信视频</title>
-    <style>
-        body {
-            margin: 0;
-            height: 100%;
-			font-size:.3rem;
-        }
-		.desc{
-			padding:.1rem;
-		}
-        video,canvas{
-			width:7.5rem;
-			height:4.02rem;
-			background:red;
-		}
-    </style>
-	<script>
-		var defaultFontSize = 0, eStyle = document.createElement('style'),
-			head = window.document.getElementsByTagName('head')[0];
-		head.appendChild(eStyle);
-		function getDefaultFS() {
-			var d = window.document.createElement('div');
-			d.style.width = '1rem';
-			d.style.display = "none";
-			var head = window.document.getElementsByTagName('head')[0];
-			head.appendChild(d);
-			defaultFontSize = parseFloat(window.getComputedStyle(d, null).getPropertyValue('width'));
-			d.remove();
-		}
-		function adapt(designWidth, rem2px) {
-			var portrait = "",
-				landscape = "";
+<!DOCTYPE HTML>
+<html>
+    <head>
+     <meta charset="UTF-8">
+     <meta http-equiv="x-ua-compatible" content="IE=edge" >
+     <meta name="viewport"   content="width=device-width, height=device-height, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no"/>
+     <title>H5 Aliplayer Demo</title>
+    <link rel="stylesheet" href="//g.alicdn.com/de/prismplayer/2.7.2/skins/default/aliplayer-min.css" />
 
+     <link rel="stylesheet" href="lib/css/frozen.css"/>
+     <script type="text/javascript" src="//player.alicdn.com/resource/player/lib/flexible.min.js"></script>
+    </head>
 
-			document.documentElement.style.fontSize = window.innerWidth / designWidth * rem2px / defaultFontSize * 100 + '%';
-
-			portrait = "@media screen and (min-width: " + window.innerWidth + "px) {html{font-size:" + ((window.innerWidth / (designWidth / rem2px) / defaultFontSize) * 100) + "%;}}";
-			landscape = "@media screen and (min-width: " + window.innerHeight + "px) {html{font-size:" + ((window.innerHeight / (designWidth / rem2px) / defaultFontSize) * 100) + "%;}}"
-			eStyle.innerHTML = portrait + landscape;
-			return {
-				defaultFontSize:defaultFontSize,
-				rootSize:  window.innerWidth / designWidth * rem2px / defaultFontSize
-			}
-		};
-		getDefaultFS();
-		adapt(750, 100);
-		window.addEventListener("resize",function(){
-				adapt(750, 100);
-			})
-	</script>
-</head>
-<body>
-    <video
-        src="https://www.seastart.tv/introduce.mp4"
-        playsinline
-		x5-playsinline
-        webkit-playsinline
-        id="video"></video>
-	<canvas id="canvas" width=750 height=400></canvas>
-    <p class='desc'>
-        JavaScript，一种高级编程语言，通过解释执行，是一门动态类型，面向对象（基于原型）的解释型语言[4]。它已经由ECMA（欧洲电脑制造商协会）通过ECMAScript实现语言的标准化[4]。它被世界上的绝大多数网站所使用，也被世界主流浏览器（Chrome、IE、FireFox、Safari、Opera）支持。JavaScript是一门基于原型、函数先行的语言[5]，是一门多范式的语言，它支持面向对象编程，命令式编程，以及函数式编程。它提供语法来操控文本、数组、日期以及正则表达式等，不支持I/O，比如网络、存储和图形等，但这些都可以由它的宿主环境提供支持。
-    </p>
-	<script src="./vconsole.min.js"></script>
+    <body>
+        <div class="player-area">
+            <div  class="prism-player" id="J_prismPlayer" style="width:100%; height:252px">
+</div>
+            <div class="ui-tab content-container">
+                <ul class="ui-tab-nav ui-border-b">
+                    <li class="current">评论</li>
+                    <li class="">播放列表</li>
+                </ul>
+                <ul class="ui-tab-content" style="width:200%">
+                    <li class="comment-list">
+   <a class="code-view" href="https://github.com/aliyunvideo/AliyunPlayer_Web/tree/master/h5VodDemo" target="_blank">查看github代码</a>
+   <div class="comment-container"></div>
+</li>
+                    <li class="play-list"> 
+    <div class="video-list-wrapper">
+       <ul id="videolist" class='video-list'></ul>
+    </div>
+</li>
+                </ul>
+            </div>
+        </div>
+        <div class="comment-textbox" style="display:none">
+    <div class="send-container">
+       <textarea class="send-txt" placeholder='在这里聊天吧'></textarea>
+       <div class="send-btn">发送</div>
+        <img class="favoriate-send" src="images/674b04bf.xin.png"></img>
+    </div>
+</div>
+    <script type="text/javascript" src="lib/zepto.min.js?d380dfbb38281dd5613f"></script><script type="text/javascript" src="https://g.alicdn.com/de/prismplayer/2.7.2/aliplayer-min.js?d380dfbb38281dd5613f"></script><script type="text/javascript" src="lib/mqttws31.js?d380dfbb38281dd5613f"></script><script type="text/javascript" src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js?d380dfbb38281dd5613f"></script><script type="text/javascript" src="lib/frozen.min.js?d380dfbb38281dd5613f"></script><script type="text/javascript" src="./js/h5demo.js?d380dfbb38281dd5613f"></script></body>
     <script>
-       var canvas=document.getElementById("canvas"),video=document.getElementById("video"),ctx=canvas.getContext("2d");
-	   var canvasRect=canvas.getBoundingClientRect();
-	   var t=null;
-	   new VConsole();
-	   canvas.addEventListener("click",canvasClick);
-	   function canvasClick(){
-		   if(t){
-			   
-			t&&(clearInterval(t),t=null)
-			   video.pause();
-			return;
-		   }
-			video.play();
-	   }
-	   startDraw();
-
-	   function startDraw(){
-			ctx.drawImage(video,0,0,canvas.width,canvas.height)
-			requestAnimationFrame(startDraw)
-	   }
-	  
+        $(function (){
+            var option = {
+                role: 'tab',
+                autoplay: false
+            };
+            var tab = new fz.Scroll('.ui-tab', option);
+            /* 滑动开始前 */
+            tab.on('beforeScrollStart', function(fromIndex, toIndex) {
+                if(toIndex==1)
+                {
+                    $('.comment-textbox').hide();
+                }
+                else
+                {
+                    $('.comment-textbox').show();
+                }
+            });
+       });
     </script>
-</body>
 </html>
+
+
+
