@@ -6,31 +6,57 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>测试微信视频</title>
     <style>
-        html, body {
+        body {
             margin: 0;
-            padding: 0;
             height: 100%;
+			font-size:.3rem;
         }
+		.desc{
+			padding:.1rem;
+		}
         video {
-            width: 100%;
-            height: 211px;
+            display:none;
         }
-        video.android-full {
-            position: relative;
-            height: 100%;
-            object-fit: contain;
-            object-position: left 0 top 0;
-        }
-        video.android-full::-webkit-media-controls-enclosure {
-            -webkit-appearance: none;
-            position: absolute;
-            top: 166px;
-        }
-        .desc.android-full {
-            position: absolute;
-            top: 211px;
-        }
+        canvas{
+			width:7.5rem;
+			height:4.02rem;
+			background:red;
+		}
     </style>
+	<script>
+		var defaultFontSize = 0, eStyle = document.createElement('style'),
+			head = window.document.getElementsByTagName('head')[0];
+		head.appendChild(eStyle);
+		function getDefaultFS() {
+			var d = window.document.createElement('div');
+			d.style.width = '1rem';
+			d.style.display = "none";
+			var head = window.document.getElementsByTagName('head')[0];
+			head.appendChild(d);
+			defaultFontSize = parseFloat(window.getComputedStyle(d, null).getPropertyValue('width'));
+			d.remove();
+		}
+		function adapt(designWidth, rem2px) {
+			var portrait = "",
+				landscape = "";
+
+
+			document.documentElement.style.fontSize = window.innerWidth / designWidth * rem2px / defaultFontSize * 100 + '%';
+
+			portrait = "@media screen and (min-width: " + window.innerWidth + "px) {html{font-size:" + ((window.innerWidth / (designWidth / rem2px) / defaultFontSize) * 100) + "%;}}";
+			landscape = "@media screen and (min-width: " + window.innerHeight + "px) {html{font-size:" + ((window.innerHeight / (designWidth / rem2px) / defaultFontSize) * 100) + "%;}}"
+			eStyle.innerHTML = portrait + landscape;
+			return {
+				defaultFontSize:defaultFontSize,
+				rootSize:  window.innerWidth / designWidth * rem2px / defaultFontSize
+			}
+		};
+		getDefaultFS();
+		adapt(750, 100);
+		window.addEventListener("resize",function(){
+				adapt(750, 100);
+			})
+	</script>
 </head>
 <body>
     <video
@@ -38,22 +64,31 @@
         x5-video-player-type="h5"
         playsinline
         webkit-playsinline
-        controls></video>
+        id="video"></video>
+	<canvas id="canvas" width=750 height=400></canvas>
     <p class='desc'>
         JavaScript，一种高级编程语言，通过解释执行，是一门动态类型，面向对象（基于原型）的解释型语言[4]。它已经由ECMA（欧洲电脑制造商协会）通过ECMAScript实现语言的标准化[4]。它被世界上的绝大多数网站所使用，也被世界主流浏览器（Chrome、IE、FireFox、Safari、Opera）支持。JavaScript是一门基于原型、函数先行的语言[5]，是一门多范式的语言，它支持面向对象编程，命令式编程，以及函数式编程。它提供语法来操控文本、数组、日期以及正则表达式等，不支持I/O，比如网络、存储和图形等，但这些都可以由它的宿主环境提供支持。
     </p>
-    <script src='https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js'></script>
     <script>
-        var $video = $('video');
-        var $desc = $('.desc');
-        $video[0].addEventListener('x5videoenterfullscreen', function() {
-            $video.addClass('android-full');
-            $desc.addClass('android-full');
-        });
-        $video[0].addEventListener('x5videoexitfullscreen', function() {
-            $video.removeClass('android-full');
-            $desc.removeClass('android-full');
-        });
+       var canvas=document.getElementById("canvas"),video=document.getElementById("video"),ctx=canvas.getContext("2d");
+	   var canvasRect=canvas.getBoundingClientRect();
+	   var t=null;
+	   canvas.addEventListener("click",canvasClick);
+	   function canvasClick(){
+			video.play();
+			canvas.removeEventListener("click",canvasClick)
+	   }
+	   video.addEventListener("play",function(){
+
+			t=setInterval(function(){ctx.drawImage(video,0,0,canvas.width,canvas.height)},20)
+	   })
+	   video.addEventListener("pause",function(){
+			t&&clearInterva(t)
+	   })
+	   
+	   video.addEventListener("ended",function(){
+			t&&clearInterva(t)
+	   })
     </script>
 </body>
 </html>
