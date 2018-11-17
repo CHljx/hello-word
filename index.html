@@ -14,10 +14,7 @@
 		.desc{
 			padding:.1rem;
 		}
-        video {
-            display:none;
-        }
-        canvas{
+        video,canvas{
 			width:7.5rem;
 			height:4.02rem;
 			background:red;
@@ -79,7 +76,7 @@
 	   function canvasClick(){
 		   if(t){
 			   
-			   t&&(clearInterval(t),t=null)
+			t&&(clearInterval(t),t=null)
 			   video.pause();
 			return;
 		   }
