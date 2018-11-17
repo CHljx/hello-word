@@ -82,28 +82,13 @@
 		   }
 			video.play();
 	   }
-	   
-	   video.addEventListener("timeupdate",function(){
-			console.log("timeupdate")
-			if(t){
-				return;
-			}
-			t=setInterval(function(){ctx.drawImage(video,0,0,canvas.width,canvas.height)},20)
-	   })
-	   video.addEventListener("play",function(){
+	   startDraw();
 
-			console.log("play")
-			t=setInterval(function(){ctx.drawImage(video,0,0,canvas.width,canvas.height)},20)
-	   })
-	   video.addEventListener("pause",function(){
-			console.log("pause")
-			t&&(clearInterval(t),t=null)
-	   })
-	   
-	   video.addEventListener("ended",function(){
-			console.log("ended")
-			t&&(clearInterval(t),t=null)
-	   })
+	   function startDraw(){
+			ctx.drawImage(video,0,0,canvas.width,canvas.height)
+			requestAnimationFrame(startDraw)
+	   }
+	  
     </script>
 </body>
 </html>
