@@ -32,16 +32,16 @@
   <body>
     <div id="page">
       <div class="page start active next">
-        <div class="play"></div>
+        <div class="loading"></div>
+        <div class="play hide"></div>
       </div>
       <div class="page video">
-        <canvas class="hide" id="start-video-canvas" width="750" height="1334"></canvas>
-        <video class="hide" id="start-video" data-src="./static/video.mp4?20181127" data-ts="./static/video.ts?20181127" data-canvas="#start-video-canvas" playsinline x5-playsinline webkit-playsinline preload="auto"></video>
+        <video class="hide" id="start-video" data-src="./static/video.mp4?20181127" playsinline x5-playsinline x-webkit-airplay webkit-playsinline x5-video-player-type="h5" x5-video-player-fullscreen="true" width="750" height="1334" preload="auto"></video>
       </div>
       <div class="page end">
         <div class="btn-box">
-          <div class="btn btn-share"></div>
           <div class="btn btn-again"></div>
+          <div class="btn btn-share"></div>
         </div>
         <div class="bg-share"></div>
       </div>
