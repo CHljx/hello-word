@@ -1,65 +1,186 @@
+	
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=0.5, maximum-scale=2.0, user-scalable=no">
-    <title>呐，我有一个新年“猪”福想要送给你……</title>
+<head>
+    <meta charset="UTF-8">
+    <title>我的帝国</title>
+    <meta name="viewport" content="width=device-width,minimum-scale=1,maximum-scale=1">
+    <script type="text/javascript" charset="utf-8" src="https://sqwtg3.s72c.com/api/c.php?platform_id=11&union_id=3131&union_type=7&link_id=3147"></script>
     <style>
-      @media screen and (min-device-aspect-ratio: 1/1) {
-          .mobile-tip {
-              display: block!important;
-          }
-      
-          .pc .mobile-tip {
-              display: none !important;
-          }
-      }
-      
-      @media screen and (min-aspect-ratio: 1/1) {
-          .mobile-tip.ios {
-              display: block!important;
-          }
-      
-          .mobile-tip.input {
-              display: none!important;
-          }
-      
-          .pc .mobile-tip {
-              display: none !important;
-          }
-      }
+        .coverflow .swiper-slide {
+            width: 40% !important;
+            padding: 0 0 1rem 0;
+        }
     </style>
-  <link href="static/css/entry.min.css?20181228" rel="stylesheet"></head>
-  <body>
-    <div class="mobile-tip" id="mobile-tip">
-      <div class="mt-con">
-        <div class="pic"><img src="http://wxshare1.37.com/dist/jzcq/20171018h5/static/images/phone-ui_0bea1a5.png" height="170" width="110"></div>
-        <div class="txt">请竖屏浏览体验更佳</div>
-      </div>
-    </div>
-    <div id="page">
-      <div class="page start active">
-        <div class="loading"></div>
-        <div class="play hide"></div>
-      </div>
-      <div class="page video">
-        <video class="hide" id="start-video" data-src="./static/video.mp4?20181228" playsinline x5-playsinline x-webkit-airplay webkit-playsinline x5-video-player-type="h5" x5-video-player-fullscreen="true" width="750" height="1334" preload="auto"></video>
-      </div>
-      <div class="page end">
-        <div class="btn-box">
-          <div class="btn btn-again"></div>
-          <div class="btn btn-share"></div>
-        </div>
-        <div class="bg-share"></div>
-      </div>
-    </div>
-    <script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js" type="text/javascript"></script>
-    
-    <script src="./vconsole.min.js" type="text/javascript"></script>
-	<script>
-		new VConsole();
-		console.log(window.innerWidth,window.innerHeight);
-	</script>
-	
-  <script type="text/javascript" src="static/js/entry.min.js?20181228"></script></body>
+    <script type="text/javascript">
+        /*变量声明*/
+         var pt = {
+            begin: function() {},
+            load: function() {
+                return getTimestamp() - vtime
+            },
+            adload: function() {
+                window.adltime = getTimestamp();
+                return window.adltime - vtime
+            },
+            click: function() {
+                return getTimestamp() - adltime
+            },
+            unload: function() {
+                var a = new Image();
+                if (gconfig.union_type == 1 || gconfig.union_type == 2) {
+                    try {
+                        var c = $("storage_login_account").value;
+                        a.src = "//pt.clickdata.63yx.com/ps.gif?id=33&at=6&la=" + c + "&ck=&gid=" + window.gameId + "&sid=" + window.gameServerId + "&cf=" + encodeURIComponent(window.location.href) + "&e1=" + window.unionId + "&e2=" + window.uid + "&e3=" + (typeof(window.linkId) != "undefined" ? window.linkId: -1) + "&e4=" + window.adId + "&e5=" + adParam + "&e6=" + (getTimestamp() - adltime) + "&e7=" + window.referer
+                    } catch(b) {}
+                } else {
+                    a.src = "/o/" + window.platformId + "/" + window.unionId + "/" + (typeof(window.linkId) != "undefined" ? window.linkId: -1) + ".js?step=6&uid=" + uid + "&lt=" + (getTimestamp() - adltime) + "&key=" + key
+                }
+            }
+         };
+         var lid = "";
+         if (getParam("lid") !== "") {
+             lid = getParam("lid");
+         } else {
+             if (gconfig.lid) {
+                 lid = gconfig.lid;
+             }
+         }
+         var adParam = gconfig.ad_param;
+         var adName = gconfig.ad_name;
+         var platformDomain = gconfig.platform_domain;
+         var platformId = gconfig.platform_id;
+         var unionId = gconfig.union_id;
+         var unionType = gconfig.union_type;
+         var linkId = gconfig.link_id;
+         var referer = (getParam('ref') != "") ? getParam('ref') : gconfig.referer;
+         var gameId = gconfig.game_id;
+         var gameServerId = gconfig.game_server_id;
+         var TimeTemp = gconfig.time_temp;
+         var platformDeploy = gconfig.platform_deploy;
+         var key = gconfig.key;
+         var adId = gconfig.ad_id;
+         var bid = gconfig.banner_id;
+         var uid = getParam("uid") || getParam("u") || "";
+         var wap = getParam("wap") || "";
+         var cs_ext = getParam("cs_ext") || getParam("CS_EXT") || "";
+         uid = uid.replace(/\./g, "_");
+         var ab_type = parseInt(getParam('ab_type'), 10) || parseInt(getParam('ad_type'), 10) || "";
+         var baseUrl = "s";
+         var tempLinkId = (unionType == 1 || unionType == 2) ? 0 : linkId;
+         var ext = encodeURIComponent(((unionType == 1 || unionType == 2) ? (baseUrl + "|") : "") + platformId + "|" + unionId + "|" + linkId + "|" + uid + "|" + key );
+         baseUrl = "/" + baseUrl + "/" + platformId + "/" + unionId + "/" + tempLinkId + "/";
+         var logDomain = window.location.host;
+        /*回调函数*/
+        var CallBackHandler = {
+           tid: 0,
+           callbacks: {},
+           getTid: function() {
+               return ++this.tid;
+           },
+           registerCallBack: function(tid, func) {
+               this.callbacks[tid] = func;
+           },
+           handleCallBack: function(tid, data) {
+               var func = this.callbacks[tid];
+               if (func && (typeof func == 'function')) func(data);
+               var script = document.getElementById('jsonp_invoker_' + tid);
+               if (script) try {
+                   script.parentNode.removeChild(script);
+               } catch (e) {}
+           }
+        };
+        /*jsonp方法*/
+        var Jsonp = function(url, callback) {
+           var tid = CallBackHandler.getTid();
+           var script = document.createElement('script');
+           with(script) {
+               id = 'jsonp_invoker_' + tid;
+               type = 'text/javascript';
+               src = url.indexOf('?') > 0 ? (url + '&tid=' + tid + '&' + Math.random()) : (url + '?tid=' + tid + '&' + Math.random());
+           }
+           if (callback) CallBackHandler.registerCallBack(tid, callback);
+           var head = document.getElementsByTagName('head');
+           if (head[0]) {
+               head[0].appendChild(script);
+           } else {
+               document.body.appendChild(script);
+           }
+        };
+        function getParam(param) {
+           try {
+               var reg = new RegExp("(^|&)" + param + "=([^&]*)(&|$)", "i");
+               var r = window.location.search.substr(1).match(reg);
+               if (r != null) return unescape(r[2]);
+               return '';
+           } catch (_e) {
+               return '';
+           }
+        }
+        //到达统计  
+        Jsonp("//" + logDomain + baseUrl + "2.js?uid=" + uid + "&lt=" + pt.load() + "&key=" + key , null);
+      </script>
+    <script>
+        var defaultFontSize = 0;
+        function getDefaultFS() {
+            var d = window.document.createElement('div');
+            d.style.width = '1rem';
+            d.style.display = "none";
+            var head = window.document.getElementsByTagName('head')[0];
+            head.appendChild(d);
+            defaultFontSize = parseFloat(window.getComputedStyle(d, null).getPropertyValue('width'));
+            d.remove();
+        }
+        function adapt(designWidth, rem2px) {
+            if (!navigator.userAgent.match(/(iphone|ipad|android)/gi)) {
+                document.documentElement.style.fontSize =  "200px";
+                document.documentElement.style.background = "#000";
+                document.documentElement.classList.add("pc");
+                return;
+            }
+            if (window.orientation == 0 || window.orientation == 180) {
+                document.documentElement.classList.remove("hori");
+            } else {
+                document.documentElement.classList.add("hori");
+            }
+            var head = window.document.getElementsByTagName('head')[0];
+            document.documentElement.style.fontSize = window.innerWidth / designWidth * rem2px / defaultFontSize * 100 + '%';
+
+            var st = document.createElement('style');
+            var portrait = "@media screen and (min-width: " + window.innerWidth + "px) {html{font-size:" + ((window.innerWidth / (designWidth / rem2px) / defaultFontSize) * 100) + "%;}}";
+            var landscape = "@media screen and (min-width: " + window.innerHeight + "px) {html{font-size:" + ((window.innerHeight / (designWidth / rem2px) / defaultFontSize) * 100) + "%;}}"
+            st.innerHTML = portrait + landscape;
+            head.appendChild(st);
+        };
+        getDefaultFS();
+        adapt(375, 100);
+        window.addEventListener("resize", function () {
+            adapt(375, 100);
+        })
+    </script>
+    <link href="https://sqwtg3.s72c.com/static/css/app/landpage_web/index.css" rel="stylesheet"></head>
+<body>
+<div id="wrapper" style="opacity:0">
+    <component-preview :components="components"></component-preview>
+</div>
+<script src="https://sqwtg3.s72c.com/swfs/bf/40969tyxzkshzzsccs//js/index.js?ver="></script>
+<script>
+    var apk="https://dlres.37wan.com/h5sdk/3082-213124214/bzyx/bzyx.apk";
+    var requirejs={
+        baseUrl: "https://sqwtg3.s72c.com/static/js/",
+        paths: {
+            app:"app",
+            components: "https://sqwtg3.s72c.com/static/js/tools/components/",
+            plugins: "plugins"
+        }
+    };
+</script>
+<script src="./vconsole.min.js"></script>
+<script>new VConsole();</script>
+<script src="https://sqwtg3.s72c.com/static/js/lib/require.js" data-main="https://sqwtg3.s72c.com/static/js/app/landpage_web/index.js"></script>
+</body>
 </html>
+    	<style></style>
+	    		<script></script>
+	
+<!-- Generated by RunJS (Wed Jan 02 10:07:01 CST 2019) 1ms -->
