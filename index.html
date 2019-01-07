@@ -54,8 +54,11 @@ function handleComplete(evt) {
 	stage.addChild(exportRoot);
 	stage.enableMouseOver();	
 	//Registers the "tick" event listener.
-	createjs.Ticker.setFPS(lib.properties.fps);
-	createjs.Ticker.addEventListener("tick", stage);	    
+	createjs.Ticker.setFPS(60);
+	createjs.Ticker.timingMode =createjs.Ticker.RAF_SYNCHED;
+	createjs.Ticker.addEventListener("tick", stage);	
+	
+	createjs.Touch.enable(stage);
 	//Code to support hidpi screens and responsive scaling.
 	(function(isResp, respDim, isScale, scaleType) {		
 		window.addEventListener('resize', resizeCanvas);		
