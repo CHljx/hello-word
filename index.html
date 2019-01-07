@@ -1,186 +1,97 @@
-	
+<!--
+	NOTES:
+	1. All tokens are represented by '$' sign in the template.
+	2. You can write your code only wherever mentioned.
+	3. All occurrences of existing tokens will be replaced by their appropriate values.
+	4. Blank lines will be removed automatically.
+	5. Remove unnecessary comments before creating your template.
+-->
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="UTF-8">
-    <title>我的帝国</title>
-    <meta name="viewport" content="width=device-width,minimum-scale=1,maximum-scale=1">
-    <script type="text/javascript" charset="utf-8" src="https://sqwtg3.s72c.com/api/c.php?platform_id=11&union_id=3131&union_type=7&link_id=3147"></script>
-    <style>
-        .coverflow .swiper-slide {
-            width: 40% !important;
-            padding: 0 0 1rem 0;
-        }
-    </style>
-    <script type="text/javascript">
-        /*变量声明*/
-         var pt = {
-            begin: function() {},
-            load: function() {
-                return getTimestamp() - vtime
-            },
-            adload: function() {
-                window.adltime = getTimestamp();
-                return window.adltime - vtime
-            },
-            click: function() {
-                return getTimestamp() - adltime
-            },
-            unload: function() {
-                var a = new Image();
-                if (gconfig.union_type == 1 || gconfig.union_type == 2) {
-                    try {
-                        var c = $("storage_login_account").value;
-                        a.src = "//pt.clickdata.63yx.com/ps.gif?id=33&at=6&la=" + c + "&ck=&gid=" + window.gameId + "&sid=" + window.gameServerId + "&cf=" + encodeURIComponent(window.location.href) + "&e1=" + window.unionId + "&e2=" + window.uid + "&e3=" + (typeof(window.linkId) != "undefined" ? window.linkId: -1) + "&e4=" + window.adId + "&e5=" + adParam + "&e6=" + (getTimestamp() - adltime) + "&e7=" + window.referer
-                    } catch(b) {}
-                } else {
-                    a.src = "/o/" + window.platformId + "/" + window.unionId + "/" + (typeof(window.linkId) != "undefined" ? window.linkId: -1) + ".js?step=6&uid=" + uid + "&lt=" + (getTimestamp() - adltime) + "&key=" + key
-                }
-            }
-         };
-         var lid = "";
-         if (getParam("lid") !== "") {
-             lid = getParam("lid");
-         } else {
-             if (gconfig.lid) {
-                 lid = gconfig.lid;
-             }
-         }
-         var adParam = gconfig.ad_param;
-         var adName = gconfig.ad_name;
-         var platformDomain = gconfig.platform_domain;
-         var platformId = gconfig.platform_id;
-         var unionId = gconfig.union_id;
-         var unionType = gconfig.union_type;
-         var linkId = gconfig.link_id;
-         var referer = (getParam('ref') != "") ? getParam('ref') : gconfig.referer;
-         var gameId = gconfig.game_id;
-         var gameServerId = gconfig.game_server_id;
-         var TimeTemp = gconfig.time_temp;
-         var platformDeploy = gconfig.platform_deploy;
-         var key = gconfig.key;
-         var adId = gconfig.ad_id;
-         var bid = gconfig.banner_id;
-         var uid = getParam("uid") || getParam("u") || "";
-         var wap = getParam("wap") || "";
-         var cs_ext = getParam("cs_ext") || getParam("CS_EXT") || "";
-         uid = uid.replace(/\./g, "_");
-         var ab_type = parseInt(getParam('ab_type'), 10) || parseInt(getParam('ad_type'), 10) || "";
-         var baseUrl = "s";
-         var tempLinkId = (unionType == 1 || unionType == 2) ? 0 : linkId;
-         var ext = encodeURIComponent(((unionType == 1 || unionType == 2) ? (baseUrl + "|") : "") + platformId + "|" + unionId + "|" + linkId + "|" + uid + "|" + key );
-         baseUrl = "/" + baseUrl + "/" + platformId + "/" + unionId + "/" + tempLinkId + "/";
-         var logDomain = window.location.host;
-        /*回调函数*/
-        var CallBackHandler = {
-           tid: 0,
-           callbacks: {},
-           getTid: function() {
-               return ++this.tid;
-           },
-           registerCallBack: function(tid, func) {
-               this.callbacks[tid] = func;
-           },
-           handleCallBack: function(tid, data) {
-               var func = this.callbacks[tid];
-               if (func && (typeof func == 'function')) func(data);
-               var script = document.getElementById('jsonp_invoker_' + tid);
-               if (script) try {
-                   script.parentNode.removeChild(script);
-               } catch (e) {}
-           }
-        };
-        /*jsonp方法*/
-        var Jsonp = function(url, callback) {
-           var tid = CallBackHandler.getTid();
-           var script = document.createElement('script');
-           with(script) {
-               id = 'jsonp_invoker_' + tid;
-               type = 'text/javascript';
-               src = url.indexOf('?') > 0 ? (url + '&tid=' + tid + '&' + Math.random()) : (url + '?tid=' + tid + '&' + Math.random());
-           }
-           if (callback) CallBackHandler.registerCallBack(tid, callback);
-           var head = document.getElementsByTagName('head');
-           if (head[0]) {
-               head[0].appendChild(script);
-           } else {
-               document.body.appendChild(script);
-           }
-        };
-        function getParam(param) {
-           try {
-               var reg = new RegExp("(^|&)" + param + "=([^&]*)(&|$)", "i");
-               var r = window.location.search.substr(1).match(reg);
-               if (r != null) return unescape(r[2]);
-               return '';
-           } catch (_e) {
-               return '';
-           }
-        }
-        //到达统计  
-        Jsonp("//" + logDomain + baseUrl + "2.js?uid=" + uid + "&lt=" + pt.load() + "&key=" + key , null);
-      </script>
-    <script>
-        var defaultFontSize = 0;
-        function getDefaultFS() {
-            var d = window.document.createElement('div');
-            d.style.width = '1rem';
-            d.style.display = "none";
-            var head = window.document.getElementsByTagName('head')[0];
-            head.appendChild(d);
-            defaultFontSize = parseFloat(window.getComputedStyle(d, null).getPropertyValue('width'));
-            d.remove();
-        }
-        function adapt(designWidth, rem2px) {
-            if (!navigator.userAgent.match(/(iphone|ipad|android)/gi)) {
-                document.documentElement.style.fontSize =  "200px";
-                document.documentElement.style.background = "#000";
-                document.documentElement.classList.add("pc");
-                return;
-            }
-            if (window.orientation == 0 || window.orientation == 180) {
-                document.documentElement.classList.remove("hori");
-            } else {
-                document.documentElement.classList.add("hori");
-            }
-            var head = window.document.getElementsByTagName('head')[0];
-            document.documentElement.style.fontSize = window.innerWidth / designWidth * rem2px / defaultFontSize * 100 + '%';
-
-            var st = document.createElement('style');
-            var portrait = "@media screen and (min-width: " + window.innerWidth + "px) {html{font-size:" + ((window.innerWidth / (designWidth / rem2px) / defaultFontSize) * 100) + "%;}}";
-            var landscape = "@media screen and (min-width: " + window.innerHeight + "px) {html{font-size:" + ((window.innerHeight / (designWidth / rem2px) / defaultFontSize) * 100) + "%;}}"
-            st.innerHTML = portrait + landscape;
-            head.appendChild(st);
-        };
-        getDefaultFS();
-        adapt(375, 100);
-        window.addEventListener("resize", function () {
-            adapt(375, 100);
-        })
-    </script>
-    <link href="https://sqwtg3.s72c.com/static/css/app/landpage_web/index.css" rel="stylesheet"></head>
-<body>
-<div id="wrapper" style="opacity:0">
-    <component-preview :components="components"></component-preview>
-</div>
-<script src="https://sqwtg3.s72c.com/swfs/bf/40969tyxzkshzzsccs//js/index.js?ver="></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,maximum-scale=1,minimum-scale=1,user-scalable=no">
+<meta name="authoring-tool" content="Adobe_Animate_CC">
+<title>index</title>
+<!-- write your code here -->
+<style>
+  #canvas {
+	position:absolute;
+	margin:auto;
+	left:0;right:0;
+  }
+</style>
+<script src="libs/createjs-2015.11.26.min.js"></script>
+<script src="index.js"></script>
 <script>
-    var apk="https://dlres.37wan.com/h5sdk/3082-213124214/bzyx/bzyx.apk";
-    var requirejs={
-        baseUrl: "https://sqwtg3.s72c.com/static/js/",
-        paths: {
-            app:"app",
-            components: "https://sqwtg3.s72c.com/static/js/tools/components/",
-            plugins: "plugins"
-        }
-    };
+var canvas, stage, exportRoot;
+function init() {
+	canvas = document.getElementById("canvas");
+	images = images||{};
+	var loader = new createjs.LoadQueue(false);
+	loader.addEventListener("fileload", handleFileLoad);
+	loader.addEventListener("complete", handleComplete);
+	loader.loadManifest(lib.properties.manifest);
+}
+function handleFileLoad(evt) {	
+	if (evt.item.type == "image") { images[evt.item.id] = evt.result; }	
+}
+function handleComplete(evt) {
+	//This function is always called, irrespective of the content. You can use the variable "stage" after it is created in token create_stage.
+	var queue = evt.target;
+	var ssMetadata = lib.ssMetadata;
+	for(i=0; i<ssMetadata.length; i++) {
+		ss[ssMetadata[i].name] = new createjs.SpriteSheet( {"images": [queue.getResult(ssMetadata[i].name)], "frames": ssMetadata[i].frames} )
+	}
+	exportRoot = new lib.index();
+	stage = new createjs.Stage(canvas);
+	stage.addChild(exportRoot);
+	stage.enableMouseOver();	
+	//Registers the "tick" event listener.
+	createjs.Ticker.setFPS(lib.properties.fps);
+	createjs.Ticker.addEventListener("tick", stage);	    
+	//Code to support hidpi screens and responsive scaling.
+	(function(isResp, respDim, isScale, scaleType) {		
+		var lastW, lastH, lastS=1;		
+		window.addEventListener('resize', resizeCanvas);		
+		resizeCanvas();		
+		function resizeCanvas() {			
+			var w = lib.properties.width, h = lib.properties.height;			
+			var iw = window.innerWidth, ih=window.innerHeight;			
+			var pRatio = window.devicePixelRatio||1, xRatio=iw/w, yRatio=ih/h, sRatio=1;			
+			if(isResp) {                
+				if((respDim=='width'&&lastW==iw) || (respDim=='height'&&lastH==ih)) {                    
+					sRatio = lastS;                
+				}				
+				else if(!isScale) {					
+					if(iw<w || ih<h)						
+						sRatio = Math.min(xRatio, yRatio);				
+				}				
+				else if(scaleType==1) {					
+					sRatio = Math.min(xRatio, yRatio);				
+				}				
+				else if(scaleType==2) {					
+					sRatio = Math.max(xRatio, yRatio);				
+				}			
+			}			
+			canvas.width = w*pRatio*sRatio;			
+			canvas.height = h*pRatio*sRatio;
+			canvas.style.width = w*sRatio+'px';			
+			canvas.style.height = h*sRatio+'px';
+			stage.scaleX = pRatio*sRatio;			
+			stage.scaleY = pRatio*sRatio;			
+			lastW = iw; lastH = ih; lastS = sRatio;		
+		}
+	})(true,'both',true,1);	
+}
 </script>
-<script src="./vconsole.min.js"></script>
-<script>new VConsole();</script>
-<script src="https://sqwtg3.s72c.com/static/js/lib/require.js" data-main="https://sqwtg3.s72c.com/static/js/app/landpage_web/index.js"></script>
+<!-- write your code here -->
+</head>
+<body onload="init();" style="margin:0px;">
+	<canvas id="canvas" width="750" height="1334" style="display: block; background-color:rgba(255, 255, 255, 1.00)"></canvas>
+	<script src="./vconsole.min.js"></script>
+	<script>
+		new VConsole();
+	</script>
 </body>
 </html>
-    	<style></style>
-	    		<script></script>
-	
-<!-- Generated by RunJS (Wed Jan 02 10:07:01 CST 2019) 1ms -->
