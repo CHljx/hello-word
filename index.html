@@ -58,7 +58,6 @@ function handleComplete(evt) {
 	createjs.Ticker.timingMode =createjs.Ticker.RAF_SYNCHED;
 	createjs.Ticker.addEventListener("tick", stage);	
 	
-	createjs.Touch.enable(stage);
 	//Code to support hidpi screens and responsive scaling.
 	(function(isResp, respDim, isScale, scaleType) {		
 		window.addEventListener('resize', resizeCanvas);		
