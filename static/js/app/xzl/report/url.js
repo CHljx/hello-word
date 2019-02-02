@@ -1,8 +1,8 @@
 define(function(){
     return {
-        realTime:"/static/json/realtime.json",
-        realTimeChart:"/static/json/realtimechart.json",
-        detail:"/static/json/detail.json",
+        realTime:"./static/json/realtime.json",
+        realTimeChart:"./static/json/realtimechart.json",
+        detail:"./static/json/detail.json",
         defaultPage:{
             set:"/index.php?c=xzl&a=set_xzl_default_page",
             get:"/index.php?c=xzl&a=get_xzl_default_page"

@@ -368,7 +368,7 @@ define(["url"],function(urlConfig){
             doCheckNewLog:function(){
                 var _self=this;
                 _self.doAjax({
-                    url:"/static/json/log.json"
+                    url:"./static/json/log.json"
                 }).then(function(data){
                     _self.flag.hasNewLog=data.flag==1?true:false;
                 },function(){
