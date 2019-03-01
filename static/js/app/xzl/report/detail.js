@@ -277,7 +277,7 @@ define(["url"],function(urlConfig){
                     _self.table.detail.header.forEach(function(item){
                         item.sort=true;
                     });
-                    _self.resetTableHeight();
+                    // _self.resetTableHeight();
                     _self.flag.checkAll=false;
                 },function(){
 
@@ -348,7 +348,7 @@ define(["url"],function(urlConfig){
                     _self.param.operate.item[_self.param.operate.key+"_update"]=true;
                     _self.flag.showInput=false;
                 },function(){
-
+                    _self.totast("接口(/index.php?c=xzl&a=set_campaign)请求失败");
                 })
             },
             doStatus:function(opt){
@@ -368,14 +368,14 @@ define(["url"],function(urlConfig){
             doCheckNewLog:function(){
                 var _self=this;
                 _self.doAjax({
-                    url:"./static/json/log.json"
+                    url:"/index.php?c=xzl&a=is_error_log"
                 }).then(function(data){
                     _self.flag.hasNewLog=data.flag==1?true:false;
                 },function(){
+
                     _self.flag.hasNewLog=false;
                 })
             }
-        },
-
+        }
     }
 });

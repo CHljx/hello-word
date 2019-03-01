@@ -126,6 +126,31 @@ define(["url"],function(urlConfig){
                     _self.status.log=true;
                 })
             },
+            checkIsStatus:function(){
+                var _self=this;
+                _self.table.detail.rows.slice(1).forEach(function(item){
+                    if(item.checked){
+                        _self.flag.statusCheck=item.status
+                    }
+                });
+            },
+            toggleCheckAll:function(){
+                var _self=this;
+                _self.table.detail.rows.forEach(function(item){
+                    item.checked=_self.flag.checkAll;
+                });
+                _self.checkIsStatus();
+            },
+            checkIsAll:function(){
+                var _self=this,isCheck=true;
+                _self.table.detail.rows.slice(1).forEach(function(item){
+                    if(!item.checked){
+                        isCheck=false;
+                    }
+                });
+                _self.checkIsStatus();
+                _self.flag.checkAll=isCheck;
+            },
             actOperateStatus:function(val){
                 this.param.operate.status=val;
             },
@@ -182,6 +207,70 @@ define(["url"],function(urlConfig){
                 },function(){
 
                 })
+            },
+            doStatusAll:function(item){
+                var _self=this,checkStatus;
+                checkStatus=_self.detailRowsFormat.filter(function(item){
+                    return item.checked?true:false;
+                }).map(function(item){
+                    return item.status
+                });
+                if(new Set(checkStatus).size>1){
+                    _self.totast("批量操作状态需一致");
+
+                    _self.flag.statusCheck=+!_self.flag.statusCheck;
+                    return;
+                }
+                _self.$message.confirm(
+                    "请确认是否修改计划（"+_self.detailRowsFormat.filter(function(item){
+                        return item.checked?true:false;
+                    }).map(function(item){
+                        return item.campaign_name
+                    }).join(",")+"）状态为"+(_self.flag.statusCheck?"开启":"关闭"),
+                    "提示",
+                    {
+                        callback:function(action){
+                            if(action=="confirm"){
+                                _self.doAjax({
+                                    url:"/index.php?c=sqw&a=set_campaign",
+                                    param:{
+                                        classify_id:_self.param.search.channel.map(function(item){
+                                            return item.value
+                                        }).join(","),
+                                        classify:_self.detailRowsFormat.filter(function(item){
+                                            return item.checked?true:false;
+                                        }).map(function(item){
+                                            return item.classify
+                                        }).join(","),
+                                        campaign_id:_self.detailRowsFormat.filter(function(item){
+                                            return item.checked?true:false;
+                                        }).map(function(item){
+                                            return item.campaign_id
+                                        }).join(","),
+                                        campaign_name:_self.detailRowsFormat.filter(function(item){
+                                            return item.checked?true:false;
+                                        }).map(function(item){
+                                            return item.campaign_name
+                                        }).join(","),
+                                        status:_self.flag.statusCheck
+                                    }
+                                }).then(function(){
+                                    _self.detailRowsFormat.filter(function(item){
+                                        return item.checked?true:false;
+                                    }).forEach(function(row){
+                                        row.status=_self.flag.statusCheck
+                                    })
+                                },function(){
+                                    _self.flag.statusCheck=+!_self.flag.statusCheck;
+                                })
+                            }else{
+                                _self.flag.statusCheck=+!_self.flag.statusCheck;
+                            }
+                            return true;
+                        }
+                    }
+                )
+
             },
             doStatus:function(item){
                 var _self=this;

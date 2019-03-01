@@ -343,7 +343,7 @@ define(["report/realtime","report/detail","url"],function(realTimeApp,detailApp,
             doAjax:function(opt){
                 var _self=this;
                 return new Promise(function(resolve,reject){
-                    _self.$store.dispatch(opt.method||"doStatic",{
+                    _self.$store.dispatch(opt.method||"doPost",{
                         url:opt.url,
                         param:opt.param,
                         hideLoadMask:opt.hideLoadMask,
@@ -372,7 +372,7 @@ define(["report/realtime","report/detail","url"],function(realTimeApp,detailApp,
                 setTimeout(function(){
                     adapt(750, 100);
                     _self.resetTableHeight();
-                },100)
+                },500)
             },false);
 
         },

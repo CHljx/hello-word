@@ -68,18 +68,27 @@ define(["url"],function(urlConfig){
                     });
                     return item;
                 }));
-                // _self.list.classfiyChannels.unshift({
-                //     text:"所有",
-                //     value:"-1",
-                //     all:true,
-                //     hideChild:true,
-                //     _checked:false
-                // })
+                _self.param.modal.union_category&&_self.list.classfiyChannels.unshift({
+                    text:"所有",
+                    value:_self.target.channles[_self.param.modal.union_category||0].map(function(item){
+                        return item.value;
+                    }).join(","),
+                    all:true,
+                    hideChild:true,
+                    _checked:false
+                })
+            },
+            resetParam:function(item){
+                var _self=this;
+                _self.param.search.site=item.site;
+                _self.param.search.game=item.game;
+                _self.param.search.channel=item.channel;
+                _self.param.search.union_category=item.union_category;
             },
             validateSearch:function(){
                 var _self=this;
-                if(!_self.searchParam.classify){
-                    _self.totast("请选择具体渠道");
+                if(!_self.param.modal.union_category&&!_self.searchParam.classify){
+                    _self.totast("请选择渠道");
                     return false;
                 }
                 return true;
@@ -300,6 +309,28 @@ define(["url"],function(urlConfig){
                     default:
                         return "所有";
                         break;
+                }
+            },
+            searchParam:function(){
+                var _self=this;
+                return {
+                    referer_param:_self.param.search.site,
+                    start_date:_self.param.search.date[0],
+                    end_date:_self.param.search.date[1],
+                    classify:_self.channels.map(function(item){
+                        return _self.param.modal.union_category&&item.value==""?(_self.target.channles[_self.param.modal.union_category||0].map(function(item){
+                            return item.value;
+                        }).join(",")):item.value
+                    }).join(","),
+                    union_mapping_id:_self.subChannels.map(function(item){
+                        return item.value=="-1"?"":item.value
+                    }).join(","),
+                    game_id:_self.games.map(function(item){
+                        return item.value=="-1"?"":item.value
+                    }).join(","),
+                    c_game_id:_self.subGames.map(function(item){
+                        return item.value=="-1"?"":item.value
+                    }).join(",")
                 }
             }
         }

@@ -1,7 +1,7 @@
 window._LOCAL_PARAM="mobile.63.report";
 require.config({
    paths:{
-       url:"./xzl/report/url"
+       url:"./xzl1/report/url"
    }
 });
 define(["report/index","./report/detail"],function(baseApp,xzlDetailApp){
