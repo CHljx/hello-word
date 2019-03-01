@@ -256,6 +256,12 @@ define(["url"],function(urlConfig){
             },1000*60)
         },
         methods:{
+            emitblur:function(){
+                var _self=this;
+                if(navigator.userAgent.match(/(iphone|ios|ipad)/gi)){
+                    window.scroll(0,0);
+                }
+            },
             doQueryDetail:function(){
                 var _self=this;
                 _self.loadStatus.detail=true;
