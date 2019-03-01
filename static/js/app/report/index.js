@@ -343,7 +343,7 @@ define(["report/realtime","report/detail","url"],function(realTimeApp,detailApp,
             doAjax:function(opt){
                 var _self=this;
                 return new Promise(function(resolve,reject){
-                    _self.$store.dispatch(opt.method||"doPost",{
+                    _self.$store.dispatch(opt.method||"doGet",{
                         url:opt.url,
                         param:opt.param,
                         hideLoadMask:opt.hideLoadMask,
