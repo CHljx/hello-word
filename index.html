@@ -1,250 +1,448 @@
+
 <!DOCTYPE html>
-<!--
-	NOTES:
-	1. All tokens are represented by '$' sign in the template.
-	2. You can write your code only wherever mentioned.
-	3. All occurrences of existing tokens will be replaced by their appropriate values.
-	4. Blank lines will be removed automatically.
-	5. Remove unnecessary comments before creating your template.
--->
-<html>
+<html><!-- 馃挜 -->
 <head>
-<meta charset="UTF-8">
-<meta name="authoring-tool" content="Adobe_Animate_CC">
-<title>index</title>
-<!-- write your code here -->
-<script src="libs/createjs-2015.11.26.min.js"></script>
-<script src="index.js"></script>
-<script>
-// Global Scripts
-	var autoInters=[];
-function play(target,pos){
-	var targetAncc=stage.children[0];
-	if(pos!==undefined){
-		let targetKeys=target.split(".");
-		while(targetKeys.length){
-			targetAncc=targetAncc[targetKeys.shift()]||targetAncc;
-		}
-	}else{
-		pos=target;
-	}
-	if(pos){
-		targetAncc.gotoAndPlay(pos);
-	}else{
-		targetAncc.gotoAndPlay();
-	}
-}
-function autoAdd(opt){
-	var task=setInterval(function(){
-		var target=opt.target;
-		var val=parseInt(target.text,10);
-		target.text=val+(opt.count);
-		if(opt.max&&target.text>=opt.max){
-			clearInterval(task);
-			task=null;
-		}
-	},opt.times*1000);
-	autoInters.push(task);
-}
-function stopAllAuto(){
-	autoInters.forEach(function(t){
-			clearInterval(t);
-			t=null;
-	});
-	autoInters.splice();
-}
-function download(){
-	alert("download")
-}</script>
-<script>
-var canvas, stage, exportRoot, anim_container, dom_overlay_container, fnStartAnimation;
-function init() {
-	canvas = document.getElementById("canvas");
-	anim_container = document.getElementById("animation_container");
-	dom_overlay_container = document.getElementById("dom_overlay_container");
-	var comp=AdobeAn.getComposition("6B0F5B5223810D41B7F6ED92E9D2DD73");
-	var lib=comp.getLibrary();
-	var loader = new createjs.LoadQueue(false);
-	loader.installPlugin(createjs.Sound);
-	loader.addEventListener("fileload", function(evt){handleFileLoad(evt,comp)});
-	loader.addEventListener("complete", function(evt){handleComplete(evt,comp)});
-	var lib=comp.getLibrary();
-	loader.loadManifest(lib.properties.manifest);
-}
-function handleFileLoad(evt, comp) {
-	var images=comp.getImages();	
-	if (evt && (evt.item.type == "image")) { images[evt.item.id] = evt.result; }	
-}
-function handleComplete(evt,comp) {
-	//This function is always called, irrespective of the content. You can use the variable "stage" after it is created in token create_stage.
-	var lib=comp.getLibrary();
-	var ss=comp.getSpriteSheet();
-	var queue = evt.target;
-	var ssMetadata = lib.ssMetadata;
-	for(i=0; i<ssMetadata.length; i++) {
-		ss[ssMetadata[i].name] = new createjs.SpriteSheet( {"images": [queue.getResult(ssMetadata[i].name)], "frames": ssMetadata[i].frames} )
-	}
-	var preloaderDiv = document.getElementById("_preload_div_");
-	preloaderDiv.style.display = 'none';
-	canvas.style.display = 'block';
-	exportRoot = new lib.index();
-	stage = new lib.Stage(canvas);
-	stage.enableMouseOver();	
-	//Registers the "tick" event listener.
-	fnStartAnimation = function() {
-		stage.addChild(exportRoot);
-		createjs.Ticker.setFPS(lib.properties.fps);
-		createjs.Ticker.addEventListener("tick", stage)
-		stage.addEventListener("tick", handleTick)
-		function getProjectionMatrix(container, totalDepth) {
-			var focalLength = 528.25;
-			var projectionCenter = { x : lib.properties.width/2, y : lib.properties.height/2 };
-			var scale = (totalDepth + focalLength)/focalLength;
-			var scaleMat = new createjs.Matrix2D;
-			scaleMat.a = 1/scale;
-			scaleMat.d = 1/scale;
-			var projMat = new createjs.Matrix2D;
-			projMat.tx = -projectionCenter.x;
-			projMat.ty = -projectionCenter.y;
-			projMat = projMat.prependMatrix(scaleMat);
-			projMat.tx += projectionCenter.x;
-			projMat.ty += projectionCenter.y;
-			return projMat;
-		}
-		function handleTick(event) {
-			var cameraInstance = exportRoot.___camera___instance;
-			if(cameraInstance !== undefined && cameraInstance.pinToObject !== undefined)
-			{
-				cameraInstance.x = cameraInstance.pinToObject.x + cameraInstance.pinToObject.pinOffsetX;
-				cameraInstance.y = cameraInstance.pinToObject.y + cameraInstance.pinToObject.pinOffsetY;
-				if(cameraInstance.pinToObject.parent !== undefined && cameraInstance.pinToObject.parent.depth !== undefined)
-				cameraInstance.depth = cameraInstance.pinToObject.parent.depth + cameraInstance.pinToObject.pinOffsetZ;
-			}
-			applyLayerZDepth(exportRoot);
-		}
-		function applyLayerZDepth(parent)
-		{
-			var cameraInstance = parent.___camera___instance;
-			var focalLength = 528.25;
-			var projectionCenter = { 'x' : 0, 'y' : 0};
-			if(parent === exportRoot)
-			{
-				var stageCenter = { 'x' : lib.properties.width/2, 'y' : lib.properties.height/2 };
-				projectionCenter.x = stageCenter.x;
-				projectionCenter.y = stageCenter.y;
-			}
-			for(child in parent.children)
-			{
-				var layerObj = parent.children[child];
-				if(layerObj == cameraInstance)
-					continue;
-				applyLayerZDepth(layerObj, cameraInstance);
-				if(layerObj.layerDepth === undefined)
-					continue;
-				if(layerObj.currentFrame != layerObj.parent.currentFrame)
-				{
-					layerObj.gotoAndPlay(layerObj.parent.currentFrame);
-				}
-				var matToApply = new createjs.Matrix2D;
-				var cameraMat = new createjs.Matrix2D;
-				var totalDepth = layerObj.layerDepth ? layerObj.layerDepth : 0;
-				var cameraDepth = 0;
-				if(cameraInstance && !layerObj.isAttachedToCamera)
-				{
-					var mat = cameraInstance.getMatrix();
-					mat.tx -= projectionCenter.x;
-					mat.ty -= projectionCenter.y;
-					cameraMat = mat.invert();
-					cameraMat.prependTransform(projectionCenter.x, projectionCenter.y, 1, 1, 0, 0, 0, 0, 0);
-					cameraMat.appendTransform(-projectionCenter.x, -projectionCenter.y, 1, 1, 0, 0, 0, 0, 0);
-					if(cameraInstance.depth)
-						cameraDepth = cameraInstance.depth;
-				}
-				if(layerObj.depth)
-				{
-					totalDepth = layerObj.depth;
-				}
-				//Offset by camera depth
-				totalDepth -= cameraDepth;
-				if(totalDepth < -focalLength)
-				{
-					matToApply.a = 0;
-					matToApply.d = 0;
-				}
-				else
-				{
-					if(layerObj.layerDepth)
-					{
-						var sizeLockedMat = getProjectionMatrix(parent, layerObj.layerDepth);
-						if(sizeLockedMat)
-						{
-							sizeLockedMat.invert();
-							matToApply.prependMatrix(sizeLockedMat);
-						}
-					}
-					matToApply.prependMatrix(cameraMat);
-					var projMat = getProjectionMatrix(parent, totalDepth);
-					if(projMat)
-					{
-						matToApply.prependMatrix(projMat);
-					}
-				}
-				layerObj.transformMatrix = matToApply;
-			}
-		}
-	}	    
-	//Code to support hidpi screens and responsive scaling.
-	function makeResponsive(isResp, respDim, isScale, scaleType) {		
-		var lastW, lastH, lastS=1;		
-		window.addEventListener('resize', resizeCanvas);		
-		resizeCanvas();		
-		function resizeCanvas() {			
-			var w = lib.properties.width, h = lib.properties.height;			
-			var iw = window.innerWidth, ih=window.innerHeight;			
-			var pRatio = window.devicePixelRatio || 1, xRatio=iw/w, yRatio=ih/h, sRatio=1;			
-			if(isResp) {                
-				if((respDim=='width'&&lastW==iw) || (respDim=='height'&&lastH==ih)) {                    
-					sRatio = lastS;                
-				}				
-				else if(!isScale) {					
-					if(iw<w || ih<h)						
-						sRatio = Math.min(xRatio, yRatio);				
-				}				
-				else if(scaleType==1) {					
-					sRatio = Math.min(xRatio, yRatio);				
-				}				
-				else if(scaleType==2) {					
-					sRatio = Math.max(xRatio, yRatio);				
-				}			
-			}			
-			canvas.width = w*pRatio*sRatio;			
-			canvas.height = h*pRatio*sRatio;
-			canvas.style.width = anim_container.style.width = dom_overlay_container.style.width = preloaderDiv.style.width = w*sRatio+'px';				
-			canvas.style.height = anim_container.style.height = dom_overlay_container.style.height = preloaderDiv.style.height = h*sRatio+'px';
-			stage.scaleX = pRatio*sRatio;			
-			stage.scaleY = pRatio*sRatio;			
-			lastW = iw; lastH = ih; lastS = sRatio;            
-			stage.tickOnUpdate = false;            
-			stage.update();            
-			stage.tickOnUpdate = true;		
-		}
-	}
-	makeResponsive(false,'both',false,1);	
-	AdobeAn.compositionLoaded(lib.properties.id);
-	fnStartAnimation();
-}
-function playSound(id, loop) {
-	return createjs.Sound.play(id, createjs.Sound.INTERRUPT_EARLY, 0, 0, loop);
-}
-</script>
-<!-- write your code here -->
+    <meta charset="UTF-8">
+    <title>传奇页面</title>
+    <link rel="stylesheet" href="//huodong.37.com/fe-editor/pc/common/style.css">
+    <meta name="keywords" content="" />
+    <meta name="description" content="" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="renderer" content="webkit" />
+    <meta name="author" content="37fe" />
+    <link rel="icon" href="//img1.37wanimg.com/www/images/common/37/favicon.ico" type="image/x-icon" />
+    <link rel="shortcut icon" href="//img1.37wanimg.com/www/images/common/37/favicon.ico" type="image/x-icon" />
+    <style>.OA19S21__root{font-size:12px;line-height:1.5;width:122px;height:20px;background-color:transparent;background-image:none;background-repeat:no-repeat;padding-left:0;padding-right:0;padding-top:0;padding-bottom:0}.O8I5K25__bg-container{background-image:url(//imgtg.37wan.com/u/2019/0404/1554345558292843.png);background-color:transparent;background-repeat:no-repeat;width:1215px;height:206px;border-color:transparent;border-width:0px;border-style:solid;font-size:0px;}.OSHSR27__container-tile{width:613px;height:241px;overflow:auto}.OSHSR27__box-tile{position:relative;width:550px;height:130px;float:left;margin:0 8px 13px 0;border-color:#ddd;border-style:solid;border-width:1px;}.OSHSR27__box-tile .OSHSR27__img{width:100%;height:100%}.OSHSR27__btn{background-color:transparent;display:block;height:0px;margin:3px 0 0 35px;width:0px;position:absolute;bottom:10px;right:35px;text-align:center;line-height:30px;border-radius:5px;background-image:none;color:transparent}.OSHSR27__btn:hover{background-color:#f33b19;background-image:none;color:#fff}.ODA1R12__container-tile{width:601px;height:235px;overflow:auto}.ODA1R12__box-tile{position:relative;width:550px;height:130px;float:left;margin:0 8px 13px 0;border-color:#ddd;border-style:solid;border-width:1px;}.ODA1R12__box-tile .ODA1R12__img{width:100%;height:100%}.ODA1R12__btn{background-color:transparent;display:block;height:0px;margin:3px 0 0 35px;width:0px;position:absolute;bottom:10px;right:35px;text-align:center;line-height:30px;border-radius:5px;background-image:none;color:transparent}.ODA1R12__btn:hover{background-color:#f33b19;background-image:none;color:#fff}.ONMYX9__bg-container{background-image:url(//imgtg.37wan.com/u/2019/0404/1554345436968301.png);background-color:transparent;background-repeat:no-repeat;width:205px;height:339px;border-color:transparent;border-width:0px;border-style:solid;font-size:0px;}.OCPBP7__bg-container{background-image:url(//imgtg.37wan.com/u/2019/0403/1554286943900094.jpg);background-color:#fff;background-repeat:no-repeat;width:152px;height:333px;border-color:#ff7f00;border-width:0px;border-style:solid;font-size:0px;}.OQDWJ5__bg-container{background-image:url(//imgtg.37wan.com/u/2019/0404/1554345470708359.png);background-color:transparent;background-repeat:no-repeat;width:982px;height:340px;border-color:transparent;border-width:0px;border-style:solid;font-size:0px;}.OONUD3__box{list-style:none;margin:0px;padding:18px 15px;width:290px;padding-bottom:0;}.OONUD3__item{float:left;vertical-align:middle;margin-right:20px;margin-bottom:20px;width:290px;}.OONUD3__box_1 .OONUD3__item{width:100%;height:100%;margin:0;}.OONUD3__link:hover{text-decoration:none;}.OONUD3__link:hover .OONUD3__mask{bottom:0%;_display:block;}.OONUD3__link:hover .OONUD3__title{-webkit-transform:translateX(5px);transform:translateX(5px);}.OONUD3__offset-box{position:relative;overflow:hidden;font-size:0;}.OONUD3__img-base{width:100%;}.OONUD3__info{padding:0px 10px;line-height:30px;}.OONUD3__title{-webkit-transform:translateX(0);transform:translateX(0);transition:-webkit-transform .3s;transition:transform .3s;transition:transform .3s, -webkit-transform .3s;font-size:18px;color:#333;font-weight:bold;}.OONUD3__desc{color:rgb(153,153,153);font-size:12px;}.OONUD3__mask{transition:bottom .3s;position:absolute;left:0;right:0;bottom:100%;height:100%;color:#fff;_display:none;}.OONUD3__mask .OONUD3__bg{background-color:rgb(0,153,255);opacity:.8;filter:alpha(opacity=80);width:100%;height:100%;position:absolute;}.OONUD3__mask-info{position:absolute;left:0;right:0;top:0;bottom:0;text-align:center;}.OONUD3__mask img{width:110px;height:110px;margin-top:20px;margin-bottom:8px;}.OONUD3__code-title{font-size:18px;line-height:30px;}.OONUD3__code-tips{font-size:14px;line-height:30px;}.OONUD3__title br,.OONUD3__desc br,.OONUD3__code-title  br,.OONUD3__code-tips br{display:none;}.OJ52P1__box{list-style:none;margin:0px;padding:18px 15px;width:290px;padding-bottom:0;}.OJ52P1__item{float:left;vertical-align:middle;margin-right:20px;margin-bottom:20px;width:290px;}.OJ52P1__box_1 .OJ52P1__item{width:100%;height:100%;margin:0;}.OJ52P1__link:hover{text-decoration:none;}.OJ52P1__link:hover .OJ52P1__mask{bottom:0%;_display:block;}.OJ52P1__link:hover .OJ52P1__title{-webkit-transform:translateX(5px);transform:translateX(5px);}.OJ52P1__offset-box{position:relative;overflow:hidden;font-size:0;}.OJ52P1__img-base{width:100%;}.OJ52P1__info{padding:0px 10px;line-height:30px;}.OJ52P1__title{-webkit-transform:translateX(0);transform:translateX(0);transition:-webkit-transform .3s;transition:transform .3s;transition:transform .3s, -webkit-transform .3s;font-size:18px;color:#333;font-weight:bold;}.OJ52P1__desc{color:rgb(153,153,153);font-size:12px;}.OJ52P1__mask{transition:bottom .3s;position:absolute;left:0;right:0;bottom:100%;height:100%;color:#fff;_display:none;}.OJ52P1__mask .OJ52P1__bg{background-color:rgb(0,153,255);opacity:.8;filter:alpha(opacity=80);width:100%;height:100%;position:absolute;}.OJ52P1__mask-info{position:absolute;left:0;right:0;top:0;bottom:0;text-align:center;}.OJ52P1__mask img{width:110px;height:110px;margin-top:20px;margin-bottom:8px;}.OJ52P1__code-title{font-size:18px;line-height:30px;}.OJ52P1__code-tips{font-size:14px;line-height:30px;}.OJ52P1__title br,.OJ52P1__desc br,.OJ52P1__code-title  br,.OJ52P1__code-tips br{display:none;}.O7C082__box{list-style:none;margin:0px;padding:18px 15px;width:290px;padding-bottom:0;}.O7C082__item{float:left;vertical-align:middle;margin-right:20px;margin-bottom:20px;width:290px;}.O7C082__box_1 .O7C082__item{width:100%;height:100%;margin:0;}.O7C082__link:hover{text-decoration:none;}.O7C082__link:hover .O7C082__mask{bottom:0%;_display:block;}.O7C082__link:hover .O7C082__title{-webkit-transform:translateX(5px);transform:translateX(5px);}.O7C082__offset-box{position:relative;overflow:hidden;font-size:0;}.O7C082__img-base{width:100%;}.O7C082__info{padding:0px 10px;line-height:30px;}.O7C082__title{-webkit-transform:translateX(0);transform:translateX(0);transition:-webkit-transform .3s;transition:transform .3s;transition:transform .3s, -webkit-transform .3s;font-size:18px;color:#333;font-weight:bold;}.O7C082__desc{color:rgb(153,153,153);font-size:12px;}.O7C082__mask{transition:bottom .3s;position:absolute;left:0;right:0;bottom:100%;height:100%;color:#fff;_display:none;}.O7C082__mask .O7C082__bg{background-color:rgb(0,153,255);opacity:.8;filter:alpha(opacity=80);width:100%;height:100%;position:absolute;}.O7C082__mask-info{position:absolute;left:0;right:0;top:0;bottom:0;text-align:center;}.O7C082__mask img{width:110px;height:110px;margin-top:20px;margin-bottom:8px;}.O7C082__code-title{font-size:18px;line-height:30px;}.O7C082__code-tips{font-size:14px;line-height:30px;}.O7C082__title br,.O7C082__desc br,.O7C082__code-title  br,.O7C082__code-tips br{display:none;}.O55NZ20__bg-container{background-image:url(//imgtg.37wan.com/u/2019/0404/1554345538654367.png);background-color:transparent;background-repeat:no-repeat;width:872px;height:399px;border-color:transparent;border-width:0px;border-style:solid;font-size:0px;}.O354224__box{list-style:none;margin:0px;padding:18px 15px;width:261px;padding-bottom:0;}.O354224__item{float:left;vertical-align:middle;margin-right:20px;margin-bottom:20px;width:250px;}.O354224__link:hover{text-decoration:none;}.O354224__img-base{width:90px;height:90px;}.O354224__info{display:inline-block;vertical-align:middle;_display:block;}.O354224__title{font-size:20px;color:#333;}.O354224__desc{color:rgb(153,153,153);font-size:15px;}.O354224__title br,.O354224__desc br,.O354224__btn  br{display:none;}.O354224__offset-box{margin-right:10px;vertical-align:middle;font-size:0;display:inline-block;_float:left;}.O354224__btn{height:22px;display:inline-block;border:1px solid #cecece;background:#fff;color:#333;border-radius:3px;line-height:22px;text-align:center;margin-right:10px;min-width:40px;padding:0 5px;cursor:pointer;font-size:12px;}.O354224__btns{padding-top:5px;position:relative;}.O354224__btn.O354224__link:hover{color:#fff;background:#1ea6ff;border-color:#1ea6ff;}.O354224__code-arrow{background:url(//imgtg.37wan.com/static/page_component/components/ImageList_16/images/h5-arrow.png) no-repeat center;width:11px;position:absolute;z-index:2;left:55px;top:50%;height:14px;margin-top:-7px;display:none;}.O354224__code-box{z-index:2;position:absolute;left:55px;padding-left:10px;top:50%;margin-top:-50%;display:none;z-index:1;}.O354224__code-img{border:1px solid #ddd;padding:3px;background:#fff;font-size:12px;}.O354224__img-code{width:200px;}.O354224__tips-code{color:#333;}.O354224__clr-active{color:#1ea6ff;}.O354224__btn-code{position:relative;float:left;}.O354224__btn-code:hover .O354224__code-arrow,.O354224__btn-code:hover .O354224__code-box{display:block;}.O354224__btn.O354224__link{color:#1ea6ff;border-color:#1ea6ff}.O25O622__box{list-style:none;margin:0px;padding:18px 15px;width:311px;padding-bottom:0;}.O25O622__item{float:left;vertical-align:middle;margin-right:20px;margin-bottom:20px;width:250px;}.O25O622__link:hover{text-decoration:none;}.O25O622__img-base{width:90px;height:90px;}.O25O622__info{display:inline-block;vertical-align:middle;_display:block;}.O25O622__title{font-size:20px;color:#333;}.O25O622__desc{color:rgb(153,153,153);font-size:15px;}.O25O622__title br,.O25O622__desc br,.O25O622__btn  br{display:none;}.O25O622__offset-box{margin-right:10px;vertical-align:middle;font-size:0;display:inline-block;_float:left;}.O25O622__btn{height:22px;display:inline-block;border:1px solid #cecece;background:#fff;color:#333;border-radius:3px;line-height:22px;text-align:center;margin-right:10px;min-width:40px;padding:0 5px;cursor:pointer;font-size:12px;}.O25O622__btns{padding-top:5px;position:relative;}.O25O622__btn.O25O622__link:hover{color:#fff;background:#1ea6ff;border-color:#1ea6ff;}.O25O622__code-arrow{background:url(//imgtg.37wan.com/static/page_component/components/ImageList_16/images/h5-arrow.png) no-repeat center;width:11px;position:absolute;z-index:2;left:55px;top:50%;height:14px;margin-top:-7px;display:none;}.O25O622__code-box{z-index:2;position:absolute;left:55px;padding-left:10px;top:50%;margin-top:-50%;display:none;z-index:1;}.O25O622__code-img{border:1px solid #ddd;padding:3px;background:#fff;font-size:12px;}.O25O622__img-code{width:200px;}.O25O622__tips-code{color:#333;}.O25O622__clr-active{color:#1ea6ff;}.O25O622__btn-code{position:relative;float:left;}.O25O622__btn-code:hover .O25O622__code-arrow,.O25O622__btn-code:hover .O25O622__code-box{display:block;}.O25O622__btn.O25O622__link{color:#1ea6ff;border-color:#1ea6ff}.O1I4423__box{list-style:none;margin:0px;padding:18px 15px;width:261px;padding-bottom:0;}.O1I4423__item{float:left;vertical-align:middle;margin-right:20px;margin-bottom:20px;width:250px;}.O1I4423__link:hover{text-decoration:none;}.O1I4423__img-base{width:90px;height:90px;}.O1I4423__info{display:inline-block;vertical-align:middle;_display:block;}.O1I4423__title{font-size:20px;color:#333;}.O1I4423__desc{color:rgb(153,153,153);font-size:15px;}.O1I4423__title br,.O1I4423__desc br,.O1I4423__btn  br{display:none;}.O1I4423__offset-box{margin-right:10px;vertical-align:middle;font-size:0;display:inline-block;_float:left;}.O1I4423__btn{height:22px;display:inline-block;border:1px solid #cecece;background:#fff;color:#333;border-radius:3px;line-height:22px;text-align:center;margin-right:10px;min-width:40px;padding:0 5px;cursor:pointer;font-size:12px;}.O1I4423__btns{padding-top:5px;position:relative;}.O1I4423__btn.O1I4423__link:hover{color:#fff;background:#1ea6ff;border-color:#1ea6ff;}.O1I4423__code-arrow{background:url(//imgtg.37wan.com/static/page_component/components/ImageList_16/images/h5-arrow.png) no-repeat center;width:11px;position:absolute;z-index:2;left:55px;top:50%;height:14px;margin-top:-7px;display:none;}.O1I4423__code-box{z-index:2;position:absolute;left:55px;padding-left:10px;top:50%;margin-top:-50%;display:none;z-index:1;}.O1I4423__code-img{border:1px solid #ddd;padding:3px;background:#fff;font-size:12px;}.O1I4423__img-code{width:200px;}.O1I4423__tips-code{color:#333;}.O1I4423__clr-active{color:#1ea6ff;}.O1I4423__btn-code{position:relative;float:left;}.O1I4423__btn-code:hover .O1I4423__code-arrow,.O1I4423__btn-code:hover .O1I4423__code-box{display:block;}.O1I4423__btn.O1I4423__link{color:#1ea6ff;border-color:#1ea6ff}.OYM9D21__box{list-style:none;margin:0px;padding:18px 15px;width:310px;padding-bottom:0;}.OYM9D21__item{float:left;vertical-align:middle;margin-right:20px;margin-bottom:20px;width:250px;}.OYM9D21__link:hover{text-decoration:none;}.OYM9D21__img-base{width:90px;height:90px;}.OYM9D21__info{display:inline-block;vertical-align:middle;_display:block;}.OYM9D21__title{font-size:20px;color:#333;}.OYM9D21__desc{color:rgb(153,153,153);font-size:15px;}.OYM9D21__title br,.OYM9D21__desc br,.OYM9D21__btn  br{display:none;}.OYM9D21__offset-box{margin-right:10px;vertical-align:middle;font-size:0;display:inline-block;_float:left;}.OYM9D21__btn{height:22px;display:inline-block;border:1px solid #cecece;background:#fff;color:#333;border-radius:3px;line-height:22px;text-align:center;margin-right:10px;min-width:40px;padding:0 5px;cursor:pointer;font-size:12px;}.OYM9D21__btns{padding-top:5px;position:relative;}.OYM9D21__btn.OYM9D21__link:hover{color:#fff;background:#1ea6ff;border-color:#1ea6ff;}.OYM9D21__code-arrow{background:url(//imgtg.37wan.com/static/page_component/components/ImageList_16/images/h5-arrow.png) no-repeat center;width:11px;position:absolute;z-index:2;left:55px;top:50%;height:14px;margin-top:-7px;display:none;}.OYM9D21__code-box{z-index:2;position:absolute;left:55px;padding-left:10px;top:50%;margin-top:-50%;display:none;z-index:1;}.OYM9D21__code-img{border:1px solid #ddd;padding:3px;background:#fff;font-size:12px;}.OYM9D21__img-code{width:200px;}.OYM9D21__tips-code{color:#333;}.OYM9D21__clr-active{color:#1ea6ff;}.OYM9D21__btn-code{position:relative;float:left;}.OYM9D21__btn-code:hover .OYM9D21__code-arrow,.OYM9D21__btn-code:hover .OYM9D21__code-box{display:block;}.OYM9D21__btn.OYM9D21__link{color:#1ea6ff;border-color:#1ea6ff}.O4GC619__box{list-style:none;margin:0px;padding:18px 15px;width:261px;padding-bottom:0;}.O4GC619__item{float:left;vertical-align:middle;margin-right:20px;margin-bottom:20px;width:250px;}.O4GC619__link:hover{text-decoration:none;}.O4GC619__img-base{width:90px;height:90px;}.O4GC619__info{display:inline-block;vertical-align:middle;_display:block;}.O4GC619__title{font-size:20px;color:#333;}.O4GC619__desc{color:rgb(153,153,153);font-size:15px;}.O4GC619__title br,.O4GC619__desc br,.O4GC619__btn  br{display:none;}.O4GC619__offset-box{margin-right:10px;vertical-align:middle;font-size:0;display:inline-block;_float:left;}.O4GC619__btn{height:22px;display:inline-block;border:1px solid #cecece;background:#fff;color:#333;border-radius:3px;line-height:22px;text-align:center;margin-right:10px;min-width:40px;padding:0 5px;cursor:pointer;font-size:12px;}.O4GC619__btns{padding-top:5px;position:relative;}.O4GC619__btn.O4GC619__link:hover{color:#fff;background:#1ea6ff;border-color:#1ea6ff;}.O4GC619__code-arrow{background:url(//imgtg.37wan.com/static/page_component/components/ImageList_16/images/h5-arrow.png) no-repeat center;width:11px;position:absolute;z-index:2;left:55px;top:50%;height:14px;margin-top:-7px;display:none;}.O4GC619__code-box{z-index:2;position:absolute;left:55px;padding-left:10px;top:50%;margin-top:-50%;display:none;z-index:1;}.O4GC619__code-img{border:1px solid #ddd;padding:3px;background:#fff;font-size:12px;}.O4GC619__img-code{width:200px;}.O4GC619__tips-code{color:#333;}.O4GC619__clr-active{color:#1ea6ff;}.O4GC619__btn-code{position:relative;float:left;}.O4GC619__btn-code:hover .O4GC619__code-arrow,.O4GC619__btn-code:hover .O4GC619__code-box{display:block;}.O4GC619__btn.O4GC619__link{color:#1ea6ff;border-color:#1ea6ff}.OKRHH11__box{list-style:none;margin:0px;padding:18px 15px;width:306px;padding-bottom:0;}.OKRHH11__item{float:left;vertical-align:middle;margin-right:20px;margin-bottom:20px;width:250px;}.OKRHH11__link:hover{text-decoration:none;}.OKRHH11__img-base{width:90px;height:90px;}.OKRHH11__info{display:inline-block;vertical-align:middle;_display:block;}.OKRHH11__title{font-size:20px;color:#333;}.OKRHH11__desc{color:rgb(153,153,153);font-size:15px;}.OKRHH11__title br,.OKRHH11__desc br,.OKRHH11__btn  br{display:none;}.OKRHH11__offset-box{margin-right:10px;vertical-align:middle;font-size:0;display:inline-block;_float:left;}.OKRHH11__btn{height:22px;display:inline-block;border:1px solid #cecece;background:#fff;color:#333;border-radius:3px;line-height:22px;text-align:center;margin-right:10px;min-width:40px;padding:0 5px;cursor:pointer;font-size:12px;}.OKRHH11__btns{padding-top:5px;position:relative;}.OKRHH11__btn.OKRHH11__link:hover{color:#fff;background:#1ea6ff;border-color:#1ea6ff;}.OKRHH11__code-arrow{background:url(//imgtg.37wan.com/static/page_component/components/ImageList_16/images/h5-arrow.png) no-repeat center;width:11px;position:absolute;z-index:2;left:55px;top:50%;height:14px;margin-top:-7px;display:none;}.OKRHH11__code-box{z-index:2;position:absolute;left:55px;padding-left:10px;top:50%;margin-top:-50%;display:none;z-index:1;}.OKRHH11__code-img{border:1px solid #ddd;padding:3px;background:#fff;font-size:12px;}.OKRHH11__img-code{width:200px;}.OKRHH11__tips-code{color:#333;}.OKRHH11__clr-active{color:#1ea6ff;}.OKRHH11__btn-code{position:relative;float:left;}.OKRHH11__btn-code:hover .OKRHH11__code-arrow,.OKRHH11__btn-code:hover .OKRHH11__code-box{display:block;}.OKRHH11__btn.OKRHH11__link{color:#1ea6ff;border-color:#1ea6ff}.O0ZIJ18__bg-container{background-image:url(//imgtg.37wan.com/u/2019/0404/1554345520630896.png);background-color:transparent;background-repeat:no-repeat;width:321px;height:400px;border-color:transparent;border-width:0px;border-style:solid;font-size:0px;}.OHBB610__server-list{margin:0px;padding:0px;list-style:none;width:280px;}.OHBB610__server-list li{border-bottom:1px solid #dcdcdc;padding:9px 0px;}.OHBB610__brief{padding:0px 6px;position:relative;height:25px;}.OHBB610__num{display:inline-block;width:25px;height:25px;line-height:25px;text-align:center;color:#fff;background-color:#bdbdbd;border-radius:0px;}.OHBB610__title{margin-left:10px;color:#000;position:absolute;left:30px;font-size:14px;}.OHBB610__detail{padding:8px 6px 0px;position:relative;display:none;height:91px;}.OHBB610__server-list li.OHBB610__active .OHBB610__detail{display:block;}.OHBB610__server-list li.OHBB610__active .OHBB610__num{background-color:#ffa500;color:#fff;}.OHBB610__img{margin-right:13px;width:126px;height:86px;}.OHBB610__sub-text{font-size:14px;}.OHBB610__text{color:#999;font-size:14px;}.OHBB610__btn{background-color:#ffa500;background-image:none;color:#fff;outline:none;border:0px;border-radius:4px;cursor:pointer;position:absolute;bottom:6px;width:65px;height:25px;text-align:center;line-height:25px;}.OHBB610__brief .OHBB610__btn{right:0px;}.OHBB610__btn:hover{text-decoration:underline;background-color:#f19e07;color:#f9f9f9;background-image:none;}.OHBB610__icon{background-image:url(//imgtg.37wan.com/static/page_component/components/Server_List/images/i.png);background-position-x:0px;background-position-y:0px;width:11px;height:15px;display:block;position:absolute;top:5px;right:0px;}.OHBB610__link-img{float:left;}.O4HTI6__bg-container{background-image:url(about:blank);background-color:#37a4c0;background-repeat:no-repeat;width:6px;height:30px;border-color:transparent;border-width:0px;border-style:solid;font-size:0px;}.O30ZD7__root{font-size:23px;line-height:1.5;width:184px;height:35px;background-color:transparent;background-image:none;background-repeat:no-repeat;padding-left:0;padding-right:0;padding-top:0;padding-bottom:0}.O2DEH8__bg-container{background-image:url(about:blank);background-color:#37a4c0;background-repeat:no-repeat;width:6px;height:30px;border-color:transparent;border-width:0px;border-style:solid;font-size:0px;}.O93IY9__root{font-size:22px;line-height:1.5;width:184px;height:35px;background-color:transparent;background-image:none;background-repeat:no-repeat;padding-left:0;padding-right:0;padding-top:0;padding-bottom:0}.OBE4810__bg-container{background-image:url(about:blank);background-color:#37a4c0;background-repeat:no-repeat;width:6px;height:30px;border-color:transparent;border-width:0px;border-style:solid;font-size:0px;}.O1PUS11__bg-container{background-image:url(about:blank);background-color:#37a4c0;background-repeat:no-repeat;width:6px;height:30px;border-color:transparent;border-width:0px;border-style:solid;font-size:0px;}.OMLMS12__root{font-size:22px;line-height:1.5;width:184px;height:35px;background-color:transparent;background-image:none;background-repeat:no-repeat;padding-left:0;padding-right:0;padding-top:0;padding-bottom:0}.OB4G013__root{font-size:22px;line-height:1.5;width:184px;height:35px;background-color:transparent;background-image:none;background-repeat:no-repeat;padding-left:0;padding-right:0;padding-top:0;padding-bottom:0}.ONDG615__bg-container{background-image:url(//imgtg.37wan.com/u/2019/0404/1554352034488254.png);background-color:transparent;background-repeat:no-repeat;width:100px;height:100px;border-color:transparent;border-width:0px;border-style:solid;font-size:0px;}.O9C9D18__root{font-size:14px;line-height:1.5;width:91px;height:19px;background-color:transparent;background-image:none;background-repeat:no-repeat;padding-left:0;padding-right:0;padding-top:0;padding-bottom:0}.O7ACO19__root{font-size:14px;line-height:1.5;width:98px;height:19px;background-color:transparent;background-image:none;background-repeat:no-repeat;padding-left:0;padding-right:0;padding-top:0;padding-bottom:0}.O8ERE20__root{font-size:12px;line-height:1.5;width:79px;height:19px;background-color:transparent;background-image:none;background-repeat:no-repeat;padding-left:0;padding-right:0;padding-top:0;padding-bottom:0}.au-dialog{position:fixed;display:none;top:0;left:0;width:100%;margin:0;padding:0;z-index:100}.au-dialog .au-dialog-mask{position:absolute;top:0;left:0;width:100%;height:100%;background:#000;opacity:.2;filter:alpha(opacity=20)}.au-dialog .au-dialog-body{position:fixed;top:50%;left:50%;width:450px;height:auto;margin-top:-200px;margin-left:-225px;overflow:hidden;background-image:url(about:black);background-position:top center;background-repeat:no-repeat}.au-dialog .au-dialog-title{width:100%;height:42px;line-height:42px;text-align:left;font-size:18px;font-weight:700;text-indent:10px}.au-dialog .au-dialog-title-close{position:absolute;top:5px;right:10px;display:block;text-align:center;width:30px;height:30px;line-height:30px;font-size:30px;overflow:hidden;text-indent:0}.au-dialog .au-dialog-content{height:auto;min-height:100px;overflow-x:hidden}.au-dialog .au-dialog-no-btn{display:none}.au-dialog .au-dialog-btn-box{width:100%;text-align:center;margin:20px auto;overflow:hidden}.au-dialog .au-dialog-btn{margin:0 10px;display:inline-block;min-width:60px;padding:0 20px;height:32px;line-height:32px;font-size:18px;font-weight:700}.au-dialog-content p{line-height:22px}.au-dialog-content .au-dialog-display-min-content{width:80%;margin:0 auto}.au-dialog-content .au-dialog-display-medium-content{width:95%;margin:0 auto}.au-dialog-content .au-dialog-display-center{text-align:center}.au-dialog-content .au-dialog-display-margin-10{margin-top:10px;margin-bottom:10px}.au-dialog-content .au-dialog-display-margin-20{margin-top:20px;margin-bottom:20px}.au-dialog-display-fixed-height{max-height:260px;overflow-y:auto}.au-dialog-tips-1{font-weight:700;color:#2f97f7}.au-dialog-tips-2{font-weight:700;color:#de5c5c}.au-dialog-tips-3{font-weight:700;color:#999}.au-dialog-error-tips{font-size:12px}.au-dialog-input-1{padding:0 5px;outline:0}.au-dialog-content table,.au-dialog-content td,.au-dialog-content tr{border:0}.au-dialog-content .au-dialog-content-table{border-top-width:1px;border-left-width:1px;border-style:solid;border-spacing:0}.au-dialog-content .au-dialog-content-table td{border-bottom-width:1px;border-right-width:1px;border-style:solid;border-color:#555}.au-dialog-content .au-dialog-content-table .au-dialog-table-th{font-size:16px;font-weight:700}.au-dialog-content-btn{display:inline-block;text-align:center}.au-dialog-intro-box{width:90%;margin:0 auto}.au-dialog-intro-box p{margin-bottom:10px}.au-dialog-address-box{width:70%;margin:10px auto}.au-dialog-address-box .au-dialog-address-p{width:100%;height:auto;margin-top:5px}.au-dialog-address-box label{display:inline-block;width:20%;margin-right:10px;text-align:right}.au-dialog-address-box input{width:70%}.au-dialog-address-box .field-error-message{display:block;padding-left:25%;font-size:12px;margin:2px 0 0;color:#e66666}.au-dialog-address-tips{width:95%;margin:10px auto}.au-dialog-captcha-box{width:280px;margin:20px auto}.au-dialog-captcha-box p{margin-top:10px;overflow:hidden}.au-dialog-captcha-box input{width:150px;margin-right:10px;float:left;outline:0}.au-dialog-captcha-box img{width:80px;height:30px;cursor:pointer}.au-dialog-captcha-box .au-dialog-captcha-tips{margin-top:0}.au-dialog-code-box{text-align:center;margin:10px auto}.au-dialog-code-box p{width:100%;text-align:center;line-height:30px;overflow:hidden}.au-dialog-code-box input{width:60%}.au-dialog-gifts-box{margin-top:10px}.au-dialog-gifts-box h3,.au-dialog-gifts-box table{width:90%;margin:0 auto}.au-dialog-gifts-box h3{height:30px;line-height:30px}.au-dialog-gifts-box td{height:36px;padding:0 5px}.au-dialog-gifts-box input{width:70%;height:26px;line-height:26px}.au-dialog-hide{display:none}.au-dialog .au-dialog-body{border:1px solid #3e3e3e;color:#4f1919;background-color:#fff}.au-dialog .au-dialog-title{background-color:#3e3e3e;color:#fff}.au-dialog .au-dialog-title-close{color:#eee}.au-dialog .au-dialog-title-close:hover{text-decoration:none;color:#fff}.au-dialog .au-dialog-content{background:#fff}.au-dialog .au-dialog-btn{color:#fff;background:#4f565b}.au-dialog .au-dialog-btn:hover{text-decoration:none;background:#3f4549}.au-dialog-error-tips{color:#e66666}.au-dialog-input-1{height:30px;line-height:30px;color:#555;border:1px solid #a9a6a6}.au-dialog-border-1{border:1px solid #3e3e3e}.au-dialog-content .au-dialog-content-table,.au-dialog-content .au-dialog-content-table td{border-color:#555}.au-dialog-content .au-dialog-content-table .au-dialog-table-th{background:#3e3e3e;color:#d4d3d3}.au-dialog-content-btn{color:#fff;background:#64737e;width:50px;height:30px;line-height:30px}.au-dialog-content-btn:hover{background:#545f67}</style>
+    <!-- <script src=".index.js"></script> -->
 </head>
-<body onload="init();" style="margin:0px;">
-	<div id="animation_container" style="background-color:rgba(255, 255, 255, 1.00); width:750px; height:1334px">
-		<canvas id="canvas" width="750" height="1334" style="position: absolute; display: none; background-color:rgba(255, 255, 255, 1.00);"></canvas>
-		<div id="dom_overlay_container" style="pointer-events:none; overflow:hidden; width:750px; height:1334px; position: absolute; left: 0px; top: 0px; display: none;">
-		</div>
-	</div>
-    <div id='_preload_div_' style='position:absolute; top:0; left:0; display: inline-block; height:1334px; width: 750px; text-align: center;'>	<span style='display: inline-block; height: 100%; vertical-align: middle;'></span>	<img src=images/_preloader.gif style='vertical-align: middle; max-height: 100%'/></div>
+<body class="wrap" id="wrap">
+<div id="__rawRoot__" data-config="{&quot;scriptDep&quot;:{&quot;tracker&quot;:[&quot;Image_List_Tile&quot;,&quot;Server_List&quot;],&quot;entities&quot;:{&quot;Image_List_Tile&quot;:[&quot;OSHSR27__&quot;,&quot;ODA1R12__&quot;],&quot;Server_List&quot;:[&quot;OHBB610__&quot;]}},&quot;apiDep&quot;:[],&quot;urls&quot;:{}}"><div data-role="section" id="OMM080__" style="height: 1300px; background-color: rgb(255, 255, 255); background-image: url(&quot;//imgtg.37wan.com/u/2019/0404/1554350744816190.jpg&quot;); background-repeat: no-repeat; background-position: center top;"><div style="width: 1000px; height: 100%; margin: 0px auto; position: relative; background-color: transparent; background-image: none; background-repeat: no-repeat; background-position: center top;"><div id="OA19S21__" data-role="component-wrapper" data-name="Text" style="position: absolute; left: 451.556px; top: 1208px; z-index: 1; transform: translate3d(0px, 0px, 0px);"><div data-plan=""><div class="OA19S21__root" data-fn="none"><p>扫码关注公众号</p></div></div></div><div id="O8I5K25__" data-role="component-wrapper" data-name="Bg_container" style="position: absolute; left: -95px; top: 866.556px; z-index: 1; transform: translate3d(0px, 0px, 0px);"><div class="O8I5K25__bg-container"></div></div><div id="OSHSR27__" data-role="component-wrapper" data-name="Image_List_Tile" style="position: absolute; left: 535px; top: 922.556px; z-index: 1; transform: translate3d(0px, 0px, 0px);"><div class="OSHSR27__container-tile"><div class="OSHSR27__box-tile"><a class="OSHSR27__link" id="OSHSR27__box-plan-" target="_blank" href="//www.37.com/" data-type="1" data-track="" data-plan=""><img class="OSHSR27__img" src="//imgtg.37wan.com/u/2019/0403/1554284860891199.png"> <span class="OSHSR27__btn">进入游戏</span></a></div></div></div><div id="ODA1R12__" data-role="component-wrapper" data-name="Image_List_Tile" style="position: absolute; left: -82.5px; top: 922px; z-index: 1; transform: translate3d(0px, 0px, 0px);"><div class="ODA1R12__container-tile"><div class="ODA1R12__box-tile"><a class="ODA1R12__link" id="ODA1R12__box-plan-" target="_blank" href="//www.37.com/" data-type="1" data-track="" data-plan=""><img class="ODA1R12__img" src="//imgtg.37wan.com/u/2019/0403/1554284860891199.png"> <span class="ODA1R12__btn">进入游戏</span></a></div></div></div><div id="ONMYX9__" data-role="component-wrapper" data-name="Bg_container" style="position: absolute; left: -91.4583px; top: 86.0139px; z-index: 1; transform: translate3d(0px, 0px, 0px);"><div class="ONMYX9__bg-container"></div></div><div id="OCPBP7__" data-role="component-wrapper" data-name="Bg_container" style="position: absolute; left: -61px; top: 92px; z-index: 1; transform: translate3d(0px, 0px, 0px);"><div class="OCPBP7__bg-container"></div></div><div id="OQDWJ5__" data-role="component-wrapper" data-name="Bg_container" style="position: absolute; left: 141.556px; top: 87.9687px; z-index: 1; transform: translate3d(0px, 0px, 0px);"><div class="OQDWJ5__bg-container"></div></div><div id="OONUD3__" data-role="component-wrapper" data-name="ImageList_15" style="position: absolute; left: 771px; top: 135px; z-index: 1; transform: translate3d(0px, 0px, 0px);"><ul class="OONUD3__box OONUD3__box_1"><li class="OONUD3__item"><a class="OONUD3__link" target="_blank" href="" data-type="" data-plan=""><div class="OONUD3__offset-box"><img src="//img2.37wanimg.com/2019/02/21100948h079h.jpg" class="OONUD3__img-base OONUD3__img"><div class="OONUD3__mask"><div class="OONUD3__bg"></div><div class="OONUD3__mask-info"><img src="//img2.37wanimg.com/2019/02/21100958WZyeP.png"><div class="OONUD3__code-title">扫描下载</div><div class="OONUD3__code-tips">类型：角色扮演　大小：2.9M</div></div></div></div><div class="OONUD3__info"><div class="OONUD3__title">斩月屠龙</div><div class="OONUD3__desc">兄弟再聚 战火重燃</div></div></a></li></ul></div><div id="OJ52P1__" data-role="component-wrapper" data-name="ImageList_15" style="position: absolute; left: 162px; top: 135px; z-index: 1; transform: translate3d(0px, 0px, 0px);"><ul class="OJ52P1__box OJ52P1__box_1"><li class="OJ52P1__item"><a class="OJ52P1__link" target="_blank" href="" data-type="" data-plan=""><div class="OJ52P1__offset-box"><img src="//img2.37wanimg.com/2019/02/21100948h079h.jpg" class="OJ52P1__img-base OJ52P1__img"><div class="OJ52P1__mask"><div class="OJ52P1__bg"></div><div class="OJ52P1__mask-info"><img src="//img2.37wanimg.com/2019/02/21100958WZyeP.png"><div class="OJ52P1__code-title">扫描下载</div><div class="OJ52P1__code-tips">类型：角色扮演　大小：2.9M</div></div></div></div><div class="OJ52P1__info"><div class="OJ52P1__title">斩月屠龙</div><div class="OJ52P1__desc">兄弟再聚 战火重燃</div></div></a></li></ul></div><div id="O7C082__" data-role="component-wrapper" data-name="ImageList_15" style="position: absolute; left: 468px; top: 135px; z-index: 1; transform: translate3d(0px, 0px, 0px);"><ul class="O7C082__box O7C082__box_1"><li class="O7C082__item"><a class="O7C082__link" target="_blank" href="" data-type="" data-plan=""><div class="O7C082__offset-box"><img src="//img2.37wanimg.com/2019/02/21100948h079h.jpg" class="O7C082__img-base O7C082__img"><div class="O7C082__mask"><div class="O7C082__bg"></div><div class="O7C082__mask-info"><img src="//img2.37wanimg.com/2019/02/21100958WZyeP.png"><div class="O7C082__code-title">扫描下载</div><div class="O7C082__code-tips">类型：角色扮演　大小：2.9M</div></div></div></div><div class="O7C082__info"><div class="O7C082__title">斩月屠龙</div><div class="O7C082__desc">兄弟再聚 战火重燃</div></div></a></li></ul></div><div id="O55NZ20__" data-role="component-wrapper" data-name="Bg_container" style="position: absolute; left: 247.556px; top: 446px; z-index: 1; transform: translate3d(0px, 0px, 0px);"><div class="O55NZ20__bg-container"></div></div><div id="O354224__" data-role="component-wrapper" data-name="ImageList_16" style="position: absolute; left: 675.556px; top: 710.333px; z-index: 1; transform: translate3d(0px, 0px, 0px);"><ul class="O354224__box"><li class="O354224__item"><div class="O354224__offset-box"><a class="O354224__link" target="_blank" href="https://sqw.6711.com/s/11/3295/4cef.html" data-type="" data-plan=""><img src="//img2.37wanimg.com/2019/03/20145905XVAAZ.png" class="O354224__img-base O354224__img"></a></div><div class="O354224__info"><div class="O354224__title"><a class="O354224__link" target="_blank" href="https://sqw.6711.com/s/11/3295/4cef.html" data-type="" data-plan=""><p>经典传奇</p></a></div><div class="O354224__desc">兄弟再聚 战火重燃</div><div class="O354224__btns"><div class="O354224__btn O354224__btn-code"><span>下载</span><div class="O354224__code-arrow"></div><div class="O354224__code-box"><div class="O354224__code-img"><img src="//imgtg.37wan.com/u/2019/0404/1554349360789219.png" class="O354224__img-code"><p class="O354224__tips-code">手机<span class="O354224__clr-active">扫描二维码</span>，立即下载试玩吧！</p></div></div></div><a class="O354224__btn O354224__link" target="_blank" href="https://sqw.6711.com/s/11/3295/4cef.html" data-type="" data-plan="">进游戏</a></div></div></li></ul></div><div id="O25O622__" data-role="component-wrapper" data-name="ImageList_16" style="position: absolute; left: 277.556px; top: 707.333px; z-index: 1; transform: translate3d(0px, 0px, 0px);"><ul class="O25O622__box"><li class="O25O622__item"><div class="O25O622__offset-box"><a class="O25O622__link" target="_blank" href="https://sqw.6711.com/s/11/3295/50da.html" data-type="" data-plan=""><img src="//imgtg.37wan.com/u/2019/0404/1554348439457820.png" class="O25O622__img-base O25O622__img"></a></div><div class="O25O622__info"><div class="O25O622__title"><a class="O25O622__link" target="_blank" href="https://sqw.6711.com/s/11/3295/50da.html" data-type="" data-plan=""><p>我的帝国</p></a></div><div class="O25O622__desc">兄弟再聚 战火重燃</div><div class="O25O622__btns"><div class="O25O622__btn O25O622__btn-code"><span>下载</span><div class="O25O622__code-arrow"></div><div class="O25O622__code-box"><div class="O25O622__code-img"><img src="//imgtg.37wan.com/u/2019/0404/1554349378943389.png" class="O25O622__img-code"><p class="O25O622__tips-code">手机<span class="O25O622__clr-active">扫描二维码</span>，立即下载试玩吧！</p></div></div></div><a class="O25O622__btn O25O622__link" target="_blank" href="https://sqw.6711.com/s/11/3295/50da.html" data-type="" data-plan="">进游戏</a></div></div></li></ul></div><div id="O1I4423__" data-role="component-wrapper" data-name="ImageList_16" style="position: absolute; left: 675.556px; top: 598.333px; z-index: 1; transform: translate3d(0px, 0px, 0px);"><ul class="O1I4423__box"><li class="O1I4423__item"><div class="O1I4423__offset-box"><a class="O1I4423__link" target="_blank" href="https://sqw.6711.com/s/11/3295/4cef.html" data-type="" data-plan=""><img src="//imgtg.37wan.com/u/2019/0404/1554348217332697.png" class="O1I4423__img-base O1I4423__img"></a></div><div class="O1I4423__info"><div class="O1I4423__title"><a class="O1I4423__link" target="_blank" href="https://sqw.6711.com/s/11/3295/4cef.html" data-type="" data-plan=""><p>斩月屠龙</p></a></div><div class="O1I4423__desc">兄弟再聚 战火重燃</div><div class="O1I4423__btns"><div class="O1I4423__btn O1I4423__btn-code"><span>下载</span><div class="O1I4423__code-arrow"></div><div class="O1I4423__code-box"><div class="O1I4423__code-img"><img src="//imgtg.37wan.com/u/2019/0404/1554349360789219.png" class="O1I4423__img-code"><p class="O1I4423__tips-code">手机<span class="O1I4423__clr-active">扫描二维码</span>，立即下载试玩吧！</p></div></div></div><a class="O1I4423__btn O1I4423__link" target="_blank" href="https://sqw.6711.com/s/11/3295/4cef.html" data-type="" data-plan="">进游戏</a></div></div></li></ul></div><div id="OYM9D21__" data-role="component-wrapper" data-name="ImageList_16" style="position: absolute; left: 279.556px; top: 599.333px; z-index: 1; transform: translate3d(0px, 0px, 0px);"><ul class="OYM9D21__box"><li class="OYM9D21__item"><div class="OYM9D21__offset-box"><a class="OYM9D21__link" target="_blank" href="https://sqw.6711.com/s/11/3295/50da.html" data-type="" data-plan=""><img src="//imgtg.37wan.com/u/2019/0404/1554348186112149.png" class="OYM9D21__img-base OYM9D21__img"></a></div><div class="OYM9D21__info"><div class="OYM9D21__title"><a class="OYM9D21__link" target="_blank" href="https://sqw.6711.com/s/11/3295/50da.html" data-type="" data-plan=""><p>官渡之战</p></a></div><div class="OYM9D21__desc"><p>2M 趣味三国</p></div><div class="OYM9D21__btns"><div class="OYM9D21__btn OYM9D21__btn-code"><span>下载</span><div class="OYM9D21__code-arrow"></div><div class="OYM9D21__code-box"><div class="OYM9D21__code-img"><img src="//imgtg.37wan.com/u/2019/0404/1554349378943389.png" class="OYM9D21__img-code"><p class="OYM9D21__tips-code">手机<span class="OYM9D21__clr-active">扫描二维码</span>，立即下载试玩吧！</p></div></div></div><a class="OYM9D21__btn OYM9D21__link" target="_blank" href="https://sqw.6711.com/s/11/3295/50da.html" data-type="" data-plan="">进游戏</a></div></div></li></ul></div><div id="O4GC619__" data-role="component-wrapper" data-name="ImageList_16" style="position: absolute; left: 676.556px; top: 487.333px; z-index: 1; transform: translate3d(0px, 0px, 0px);"><ul class="O4GC619__box"><li class="O4GC619__item"><div class="O4GC619__offset-box"><a class="O4GC619__link" target="_blank" href="https://sqw.6711.com/s/11/3295/5006.html" data-type="" data-plan=""><img src="//imgtg.37wan.com/u/2019/0404/1554348120764239.png" class="O4GC619__img-base O4GC619__img"></a></div><div class="O4GC619__info"><div class="O4GC619__title"><a class="O4GC619__link" target="_blank" href="https://sqw.6711.com/s/11/3295/5006.html" data-type="" data-plan=""><p>热血合击</p></a></div><div class="O4GC619__desc"><p>2.5M &nbsp;急速下载</p></div><div class="O4GC619__btns"><div class="O4GC619__btn O4GC619__btn-code"><span>下载</span><div class="O4GC619__code-arrow"></div><div class="O4GC619__code-box"><div class="O4GC619__code-img"><img src="//imgtg.37wan.com/u/2019/0404/1554349335716167.png" class="O4GC619__img-code"><p class="O4GC619__tips-code">手机<span class="O4GC619__clr-active">扫描二维码</span>，立即下载试玩吧！</p></div></div></div><a class="O4GC619__btn O4GC619__link" target="_blank" href="https://sqw.6711.com/s/11/3295/5006.html" data-type="" data-plan="">进游戏</a></div></div></li></ul></div><div id="OKRHH11__" data-role="component-wrapper" data-name="ImageList_16" style="position: absolute; left: 277.556px; top: 489.222px; z-index: 1; transform: translate3d(0px, 0px, 0px);"><ul class="OKRHH11__box"><li class="OKRHH11__item"><div class="OKRHH11__offset-box"><a class="OKRHH11__link" target="_blank" href="https://sqw.6711.com/s/11/3295/4cef.html" data-type="" data-plan=""><img src="//img2.37wanimg.com/2019/03/20145905XVAAZ.png" class="OKRHH11__img-base OKRHH11__img"></a></div><div class="OKRHH11__info"><div class="OKRHH11__title"><a class="OKRHH11__link" target="_blank" href="https://sqw.6711.com/s/11/3295/4cef.html" data-type="" data-plan="">斩月屠龙</a></div><div class="OKRHH11__desc">兄弟再聚 战火重燃</div><div class="OKRHH11__btns"><div class="OKRHH11__btn OKRHH11__btn-code"><span>下载</span><div class="OKRHH11__code-arrow"></div><div class="OKRHH11__code-box"><div class="OKRHH11__code-img"><img src="//imgtg.37wan.com/u/2019/0404/1554349301721311.png" class="OKRHH11__img-code"><p class="OKRHH11__tips-code">手机<span class="OKRHH11__clr-active">扫描二维码</span>，立即下载试玩吧！</p></div></div></div><a class="OKRHH11__btn OKRHH11__link" target="_blank" href="https://sqw.6711.com/s/11/3295/4cef.html" data-type="" data-plan="">进游戏</a></div></div></li></ul></div><div id="O0ZIJ18__" data-role="component-wrapper" data-name="Bg_container" style="position: absolute; left: -95px; top: 447.021px; z-index: 1; transform: translate3d(0px, 0px, 0px);"><div class="O0ZIJ18__bg-container"></div></div><div id="OHBB610__" data-role="component-wrapper" data-name="Server_List" style="position: absolute; left: -77.4445px; top: 501px; z-index: 1; transform: translate3d(0px, 0px, 0px);"><div class="OHBB610__box"><ul class="OHBB610__server-list"> <li class="OHBB610__active" data-plan=""><div class="OHBB610__brief"><span class="OHBB610__num">1</span> <a data-type="102" href="//bdtg.37.com/s/1/1140/44315.html?ad_type=102&amp;uid=&amp;wd=" class="OHBB610__title" target="_blank">木瓜奇迹</a>  <span class="OHBB610__icon"></span> </div><div class="OHBB610__detail"><a data-type="102" class="OHBB610__link-img" href="//bdtg.37.com/s/1/1140/44315.html?ad_type=102&amp;uid=&amp;wd=" target="_blank"><img class="OHBB610__img" src="//imgtg.37wan.com/u/2017/0525/25142305rAJNN.jpg"></a><h4 class="OHBB610__sub-text">木瓜奇迹</h4><div class="OHBB610__text">奇迹MU</div><a data-type="102" href="//bdtg.37.com/s/1/1140/44315.html?ad_type=102&amp;uid=&amp;wd=" target="_blank" class="OHBB610__btn">开始游戏</a></div></li> <li data-plan=""><div class="OHBB610__brief"><span class="OHBB610__num">2</span> <a data-type="102" href="//bdtg.37.com/s/1/1140/44315.html?ad_type=102&amp;uid=&amp;wd=" class="OHBB610__title" target="_blank">木瓜奇迹</a>  <span class="OHBB610__icon"></span> </div><div class="OHBB610__detail"><a data-type="102" class="OHBB610__link-img" href="//bdtg.37.com/s/1/1140/44315.html?ad_type=102&amp;uid=&amp;wd=" target="_blank"><img class="OHBB610__img" src="//imgtg.37wan.com/u/2017/0525/25142305rAJNN.jpg"></a><h4 class="OHBB610__sub-text">木瓜奇迹</h4><div class="OHBB610__text">奇迹MU</div><a data-type="102" href="//bdtg.37.com/s/1/1140/44315.html?ad_type=102&amp;uid=&amp;wd=" target="_blank" class="OHBB610__btn">开始游戏</a></div></li> <li data-plan=""><div class="OHBB610__brief"><span class="OHBB610__num">3</span> <a data-type="102" href="//bdtg.37.com/s/1/1140/44315.html?ad_type=102&amp;uid=&amp;wd=" class="OHBB610__title" target="_blank">木瓜奇迹</a>  <span class="OHBB610__icon"></span> </div><div class="OHBB610__detail"><a data-type="102" class="OHBB610__link-img" href="//bdtg.37.com/s/1/1140/44315.html?ad_type=102&amp;uid=&amp;wd=" target="_blank"><img class="OHBB610__img" src="//imgtg.37wan.com/u/2017/0525/25142305rAJNN.jpg"></a><h4 class="OHBB610__sub-text">木瓜奇迹</h4><div class="OHBB610__text">奇迹MU</div><a data-type="102" href="//bdtg.37.com/s/1/1140/44315.html?ad_type=102&amp;uid=&amp;wd=" target="_blank" class="OHBB610__btn">开始游戏</a></div></li> <li data-plan=""><div class="OHBB610__brief"><span class="OHBB610__num">4</span> <a data-type="102" href="//bdtg.37.com/s/1/1140/44315.html?ad_type=102&amp;uid=&amp;wd=" class="OHBB610__title" target="_blank">木瓜奇迹</a>  <span class="OHBB610__icon"></span> </div><div class="OHBB610__detail"><a data-type="102" class="OHBB610__link-img" href="//bdtg.37.com/s/1/1140/44315.html?ad_type=102&amp;uid=&amp;wd=" target="_blank"><img class="OHBB610__img" src="//imgtg.37wan.com/u/2017/0525/25142305rAJNN.jpg"></a><h4 class="OHBB610__sub-text">木瓜奇迹</h4><div class="OHBB610__text">奇迹MU</div><a data-type="102" href="//bdtg.37.com/s/1/1140/44315.html?ad_type=102&amp;uid=&amp;wd=" target="_blank" class="OHBB610__btn">开始游戏</a></div></li> <li data-plan=""><div class="OHBB610__brief"><span class="OHBB610__num">5</span> <a data-type="102" href="//bdtg.37.com/s/1/1140/44315.html?ad_type=102&amp;uid=&amp;wd=" class="OHBB610__title" target="_blank">木瓜奇迹</a>  <span class="OHBB610__icon"></span> </div><div class="OHBB610__detail"><a data-type="102" class="OHBB610__link-img" href="//bdtg.37.com/s/1/1140/44315.html?ad_type=102&amp;uid=&amp;wd=" target="_blank"><img class="OHBB610__img" src="//imgtg.37wan.com/u/2017/0525/25142305rAJNN.jpg"></a><h4 class="OHBB610__sub-text">木瓜奇迹</h4><div class="OHBB610__text">奇迹MU</div><a data-type="102" href="//bdtg.37.com/s/1/1140/44315.html?ad_type=102&amp;uid=&amp;wd=" target="_blank" class="OHBB610__btn">开始游戏</a></div></li></ul></div></div><div id="O4HTI6__" data-role="component-wrapper" data-name="Bg_container" style="position: absolute; left: 183.556px; top: 108px; z-index: 1; transform: translate3d(0px, 0px, 0px);"><div class="O4HTI6__bg-container"></div></div><div id="O30ZD7__" data-role="component-wrapper" data-name="Text" style="position: absolute; left: 199.556px; top: 105px; z-index: 1; transform: translate3d(0px, 0px, 0px);"><div data-plan=""><div class="O30ZD7__root" data-fn="none"><p><strong>热门双端游戏</strong></p></div></div></div><div id="O2DEH8__" data-role="component-wrapper" data-name="Bg_container" style="position: absolute; left: -69px; top: 462px; z-index: 1; transform: translate3d(0px, 0px, 0px);"><div class="O2DEH8__bg-container"></div></div><div id="O93IY9__" data-role="component-wrapper" data-name="Text" style="position: absolute; left: -58px; top: 461px; z-index: 1; transform: translate3d(0px, 0px, 0px);"><div data-plan=""><div class="O93IY9__root" data-fn="none"><p><strong>2019游戏排行榜</strong></p></div></div></div><div id="OBE4810__" data-role="component-wrapper" data-name="Bg_container" style="position: absolute; left: 289.556px; top: 463px; z-index: 1; transform: translate3d(0px, 0px, 0px);"><div class="OBE4810__bg-container"></div></div><div id="O1PUS11__" data-role="component-wrapper" data-name="Bg_container" style="position: absolute; left: -66px; top: 882.778px; z-index: 1; transform: translate3d(0px, 0px, 0px);"><div class="O1PUS11__bg-container"></div></div><div id="OMLMS12__" data-role="component-wrapper" data-name="Text" style="position: absolute; left: 303px; top: 461.222px; z-index: 1; transform: translate3d(0px, 0px, 0px);"><div data-plan=""><div class="OMLMS12__root" data-fn="none"><p><strong>精品H5推荐</strong></p></div></div></div><div id="OB4G013__" data-role="component-wrapper" data-name="Text" style="position: absolute; left: -48px; top: 882.556px; z-index: 1; transform: translate3d(0px, 0px, 0px);"><div data-plan=""><div class="OB4G013__root" data-fn="none"><p><strong>活动中心</strong></p></div></div></div><div id="ONDG615__" data-role="component-wrapper" data-name="Bg_container" style="position: absolute; left: 447.556px; top: 1090px; z-index: 1; transform: translate3d(0px, 0px, 0px);"><div class="ONDG615__bg-container"></div></div><div id="O9C9D18__" data-role="component-wrapper" data-name="Text" style="position: absolute; left: 353.056px; top: 1128px; z-index: 1; transform: translate3d(0px, 0px, 0px);"><div data-plan=""><div class="O9C9D18__root" data-fn="none"><p><strong>更多精品游戏</strong></p></div></div></div><div id="O7ACO19__" data-role="component-wrapper" data-name="Text" style="position: absolute; left: 551.556px; top: 1127px; z-index: 1; transform: translate3d(0px, 0px, 0px);"><div data-plan=""><div class="O7ACO19__root" data-fn="none"><p><strong>海量豪礼福利</strong></p></div></div></div><div id="O8ERE20__" data-role="component-wrapper" data-name="Text" style="position: absolute; left: 464.556px; top: 1190px; z-index: 1; transform: translate3d(0px, 0px, 0px);"><div data-plan=""><div class="O8ERE20__root" data-fn="none"><p>游戏推荐榜</p></div></div></div></div></div></div>
+<!--<script src="http://huodong.37.com/fe-editor/pc/common/config/paths.js"></script>-->
+<script src="//ptres.37.com/js/sq/lib/sq.core.js"></script>
+<!--<script src="http://ptres.37.com/js/sq/plugin/ZeroClipboard.min.js"></script>-->
+<script src="//ptres.37.com/js/sq/lib/require.js"></script>
+<script type="text/javascript" src="//ptres.37.com/js/sq/lib/base64.js"></script>
+<script>
+    var __FEATURE = {"title":"\u4f20\u5947\u9875\u9762","keywords":"","description":"","url":"","testUrl":"\/preview\/24html","id":"24","alias_info":"test_tg_37_com","site_id":"82"};
+    var __SITE_ID = __FEATURE.site_id;
+    var __SITE_URL = __FEATURE.url;
+    var __POPUP_PARAM = {"url":"\/\/bdtg.37.com\/s\/1\/447\/85605.html","text":"\u65e2\u7136\u6765\u4e86\uff0c\u62bd\u4e2a\u5956\u5427\uff01998\u5143\u6e38\u620f\u793c\u5305\u3001\u7edd\u7248\u795e\u88c5\u3001\u73b0\u91d1\u5927\u5956\u7b49\u4e30\u5bcc\u5956\u52b1\uff0c100%\u4e2d\u5956\u7387\uff01","height":"800px"};
+    if (__SITE_ID == 143) {
+        var base_site = document.location.protocol + "//test.admin.tg.37wan.com";
+    } else {
+        var base_site = document.location.protocol + "//imgtg.37wan.com";
+    }
+    var __UID = getParam("uid").replace(/\./g,'_');
+    var __CAMPAIGN_IDS = '499,500,501,502,503,504,505,506,507,508,509,510,511,512,513';
+    var adsystem_data = "";
+    if (__CAMPAIGN_IDS != '') {
+        if (__SITE_ID == 247 || __SITE_ID == 80 ) {
+            //直投tg接口 __CAMPAIGN_IDS 为广告位
+            document.write('<script type="text/javascript" charset="utf-8" src="//zt2.wa5as4.com/tg1f26?callback=get_adsystem&cids='+ __CAMPAIGN_IDS +'&'+Math.random()+'"><\/script>');
+        } else {
+            document.write('<script type="text/javascript" charset="utf-8" src="//ss2.he2d.com/mm9y86?callback=get_adsystem&uid='+ __UID + '&cids='+ __CAMPAIGN_IDS +'&'+Math.random()+'"><\/script>');
+        }
+    }
+
+    function getParam(param) {
+        try{
+            var uri = window.location.search;
+            var re = new RegExp("" + param + "=([^&?]*)", "ig");
+            return ((uri.match(re)) ? (decodeURIComponent(uri.match(re)[0].substr(param.length + 1))) : '');
+        }catch(_e){return '';}
+    }
+
+    function get_adsystem(data) {
+        if (typeof(data) != undefined && data.code == 1) {
+            adsystem_data = data.data;
+        }
+    }
+    //获取来源
+    function getReferer(){
+        if(document.referrer){
+            return document.referrer;
+        }else{
+            return '';
+        }
+    }
+</script>
+<script type="text/javascript" src="//imgtg.37wan.com/template/static/js/auto_tg_view.js?v=2"></script>
+
+<!--退弹start-->
+<script type="text/javascript">
+    //是否有退弹
+    var isPopWin = {
+        flag: true,
+        url: __POPUP_PARAM.url || "",    //退弹地址
+        type: 2,                       //有2种退弹方式，1:旧的的退弹方式；2：有conform框的退弹方式。
+        text: __POPUP_PARAM.text || "",
+        height: __POPUP_PARAM.height || "1000px"
+    };
+</script>
+<script type="text/javascript" src="//imgtg.37wan.com/template/static/js/common.js"></script>
+<!--退弹end-->
+
+<script>
+    $(function(){
+        require.config({
+            waitSeconds:14,
+            baseUrl: base_site + "/static/page_component/components/",
+            urlArgs: "v=" + Math.random(),
+            paths: {
+                SQ: "//ptres.37.com/js/sq/lib/sq.core",
+                lazyload: "//huodong.37.com/fe-editor/pc/common/lazyload"
+            },
+            shim: {
+                "SQ": {
+                    exports: "$"
+                },
+                "lazyload": {
+                    deps: ["SQ"]
+                }
+            }
+        });
+
+        doPromotion();
+        function doPromotion(){
+            var aPlanId=[];
+            var $plans=[];
+            $.each($("[data-plan]"),function(){
+                var $this=$(this),iPlanId=$this.data("plan");
+                if(iPlanId){
+                    aPlanId.push(iPlanId);
+                    $plans.push($this);
+                }
+            })
+            for(var index=0,len=aPlanId.length;index<len;index++){
+                $this=$plans[index];
+                if (adsystem_data[$this.data("plan")] != '' || typeof(adsystem_data[$this.data("plan")]) != 'undefined') {
+                    renderPlan($this,adsystem_data[$this.data("plan")])
+                }
+            }
+            loadComponent();
+        }
+
+        function renderPlan($el,oPlanObj){
+
+            var $parent=null,
+                componentType="",
+                sParam="",
+                click_url="";
+            parentId="";
+
+            if($el&&$el.length==0){
+                return;
+            }
+            if(!oPlanObj){
+                return;
+            }
+
+            $parent=$el.parents('[data-role="component-wrapper"]');
+            //组件类型
+            componentType=$parent.data("name");
+            //唯一
+            parentId=$parent.attr("id");
+
+            click_url=oPlanObj.click_url;
+            //https自适应替换
+            reg = /^\/\/360tg.37wan.com/
+            click_url = click_url.replace(reg, '//360tg.37.com');
+            reg = /^\/\/bdtg.37wan.com/
+            click_url = click_url.replace(reg, '//bdtg.37.com');
+            reg = /^\/\/bdtg.37wanyy.cn/
+            click_url = click_url.replace(reg, 'http://bdtg.37wanyy.cn');
+            if(param){
+                sParam=$.param($.extend(param,{
+                    site_id: __SITE_ID,
+                    ad_type:$el.data("type")||$el.find("[data-type]").data("type")
+                }));
+                click_url = click_url.indexOf( "?" ) > -1 ?(click_url + "&" + sParam ):(click_url + "?" + sParam);
+            }
+
+
+            if(componentType=="ImageList_3"){
+                $el.attr("href",click_url);
+                $el.find("."+parentId+"item-img").attr("src",oPlanObj.banner.img);
+                $el.find("."+parentId+"item-img").removeAttr("data-src");
+                $el.find("."+parentId+"box-img-bg img").attr("src",oPlanObj.banner.img_bg);
+                $el.find("."+parentId+"box-img-bg img").removeAttr("data-src");
+                $el.find("."+parentId+"box-img-ren img").attr("src",oPlanObj.banner.img_ren);
+                $el.find("."+parentId+"box-img-ren img").removeAttr("data-src");
+                $el.find("."+parentId+"box-img-info img").attr("src",oPlanObj.banner.img_text);
+                $el.find("."+parentId+"box-img-info img").removeAttr("data-src");
+                if (oPlanObj.banner.doc_content != undefined) {
+                    $el.find("."+parentId+"txt-info").html(oPlanObj.banner.doc_content);
+                }
+            }else if(componentType=="Video"){
+                $el.find("a").attr("href",click_url);
+                $el.find("."+parentId+"img").attr("src",oPlanObj.banner.video_loading);
+                $el.find("."+parentId+"img").removeAttr("data-src");
+                $el.find("."+parentId+"video").attr("data-src",oPlanObj.banner.video);
+            }else if(componentType=="Video_Banner"){
+                $el.find("a").attr("href",click_url);
+                $el.find("."+parentId+"item-box-img img").attr("src",oPlanObj.banner.img);
+                $el.find("."+parentId+"item-box-img img").removeAttr("data-src");
+                $el.find("."+parentId+"item-box-video img").attr("src",oPlanObj.banner.video_loading);
+                $el.find("."+parentId+"item-box-video img").removeAttr("data-src");
+                $el.find("."+parentId+"video").attr("data-src",oPlanObj.banner.video);
+            }else if(componentType=="Image_List_Tile"){
+                $el.attr("href",click_url);
+                $el.find("."+parentId+"img").attr("src",oPlanObj.banner.img);
+                $el.find("."+parentId+"img").removeAttr("data-src");
+            } else if (componentType=="ImageList_5") {
+                $el.find("a").attr("href",click_url);
+                $el.find("dt img").attr("src",oPlanObj.banner.img);
+                $el.find("."+parentId+"btn-bg").attr("src",oPlanObj.banner.img_bg);
+                $el.find("."+parentId+"btn-bgHover").attr("src",oPlanObj.banner.img_text);
+                $el.find("p").html(oPlanObj.banner.doc_content);
+                $el.find("dt img").removeAttr("data-src");
+                $el.find("."+parentId+"btn-bg").removeAttr("data-src");
+                $el.find("."+parentId+"btn-bgHover").removeAttr("data-src");
+            } else if (componentType=="ImageList_4") {
+                $el.find("a").attr("href",click_url);
+                $el.find("img").attr("src",oPlanObj.banner.img);
+                $el.find("img").removeAttr("data-src");
+                $el.find("."+parentId+"p-game strong").html(oPlanObj.banner.doc_game_name);
+                $el.find("."+parentId+"p-enter span").html(oPlanObj.banner.doc_type);
+                $el.find("."+parentId+"g-h4").html(oPlanObj.banner.doc_game_name);
+                $el.find("."+parentId+"g-desc").html(oPlanObj.banner.doc_content);
+            } else if (componentType=="Rankgame") {
+                $el.find("a").attr("href",click_url);
+                $el.find("a").html(oPlanObj.banner.doc_game_name);
+                if ($el.attr("href") != 'undefined') {
+                    $el.attr("href",click_url);
+                }
+                $el.find("img").attr("src",oPlanObj.banner.img);
+                $el.find("img").removeAttr("data-src");
+
+            } else if (componentType=="Server_List") {
+                $el.find("a").attr("href",click_url);
+                if (oPlanObj.banner.doc_game_name != undefined) {
+                    //标题
+                    var $title=$el.find("."+parentId+"title");
+                    var sHtml=$title.html();
+                    var sReplace=sHtml.replace($title.text().trim(),oPlanObj.banner.doc_game_name);
+                    $title.html(sReplace);
+                    //子标题
+                    var $sub_text=$el.find("."+parentId+"sub-text");
+                    var sHtml=$sub_text.html();
+                    var sReplace=sHtml.replace($sub_text.text().trim(),oPlanObj.banner.doc_game_name);
+                    $sub_text.html(sReplace);
+                }
+                if (oPlanObj.banner.doc_type != undefined) {
+                    //文案
+                    var $text=$el.find("."+parentId+"text");
+                    var sHtml=$text.html();
+                    var sReplace=sHtml.replace($text.text().trim(),oPlanObj.banner.doc_type);
+                    $text.html(sReplace);
+                }
+                //图片
+                $el.find("."+parentId+"detail img").attr("src", oPlanObj.banner.img);
+                $el.find("."+parentId+"detail img").removeAttr("data-src");
+            } else if (componentType=="Image_simple") {
+                $el.attr("href",click_url);
+                $el.find("img").attr("src",oPlanObj.banner.img);
+                $el.find("img").removeAttr("data-src");
+            } else if (componentType=="Image_video") {
+                $el.find("a").attr("href",click_url);
+                $el.find("img").attr("src",oPlanObj.banner.img);
+                $el.find("img").removeAttr("data-src");
+                $el.find("video").attr("data-src",oPlanObj.banner.video);
+            } else if (componentType=="ImageList_1") {
+                $el.find("a").attr("href",click_url);
+                $el.find("."+parentId+"item-wrapper-img img").attr("src",oPlanObj.banner.img);
+                $el.find("."+parentId+"item-wrapper-img img").removeAttr("data-src");
+                $el.find("."+parentId+"item-name").html(oPlanObj.banner.doc_game_name);
+                $el.find("."+parentId+"item-wrapper-content").html(oPlanObj.banner.doc_content);
+
+            } else if (componentType=="Text") {
+                var $a = $el.find("."+parentId+"root");
+                var text_type = $a.attr('data-fn');
+                var sHtml = $a.html();
+                if (text_type == "game") {
+                    var sReplace=sHtml.replace($a.text(),oPlanObj.banner.doc_game_name);
+                    $a.html(sReplace);
+                }
+                if (text_type == "type") {
+                    var sReplace=sHtml.replace($a.text(),oPlanObj.banner.doc_type);
+                    $a.html(sReplace);
+                }
+                if (text_type == "theme") {
+                    var sReplace=sHtml.replace($a.text(),oPlanObj.banner.doc_theme);
+                    $a.html(sReplace);
+                }
+                if (text_type == "content") {
+                    var sReplace=sHtml.replace($a.text(),oPlanObj.banner.doc_content);
+                    $a.html(sReplace);
+                }
+            } else if (componentType=="Button_normal") {
+                $el.attr("href",click_url);
+                if (oPlanObj.banner.img_bg != undefined) {
+                    $("."+parentId+"link").css("backgroundImage","url("+oPlanObj.banner.img_bg+")");
+                }
+                if (oPlanObj.banner.img_bg != undefined && oPlanObj.banner.img_text != undefined) {
+                    $("."+parentId+"link").mouseenter(function(){
+                        $(this).css("backgroundImage","url("+oPlanObj.banner.img_text+")")
+                    }).mouseleave(function(){
+                        $(this).css("backgroundImage","url("+oPlanObj.banner.img_bg+")")
+                    });
+                }
+            } else if (componentType=="Image_Mask") {
+                $el.find("a").attr("href",click_url);
+                $el.find("."+parentId+"wrapper-img img").attr("src",oPlanObj.banner.img);
+                $el.find("."+parentId+"wrapper-img img").removeAttr("data-src");
+                $el.find("."+parentId+"wrapper-text").html(oPlanObj.banner.doc_content);
+                $el.find("."+parentId+"wrapper-title a").html(oPlanObj.banner.doc_game_name);
+            } else if (componentType=="Link_text") {
+                $el.find("a").attr("href",click_url);
+                var $a=$el.find("."+parentId+"link-text");
+                var link_text_type = $a.attr('data-doctype');
+                var sHtml=$a.html();
+                if (oPlanObj.banner.doc_game_name != undefined && (link_text_type == "none"||link_text_type == "game")) {
+                    var sReplace=sHtml.replace($a.text(),oPlanObj.banner.doc_game_name);
+                    $a.html(sReplace);
+                }
+                if (oPlanObj.banner.doc_type != undefined && link_text_type == "type") {
+                    var sReplace=sHtml.replace($a.text(),oPlanObj.banner.doc_type);
+                    $a.html(sReplace);
+                }
+                if (oPlanObj.banner.doc_theme != undefined && link_text_type == "theme") {
+                    var sReplace=sHtml.replace($a.text(),oPlanObj.banner.doc_theme);
+                    $a.html(sReplace);
+                }
+                if (oPlanObj.banner.doc_content != undefined && link_text_type == "content") {
+                    var sReplace=sHtml.replace($a.text(),oPlanObj.banner.doc_content);
+                    $a.html(sReplace);
+                }
+            } else if (componentType=="ServerList_1") {
+                $el.find("a").attr("href",click_url);
+                $el.find("img").attr("src",oPlanObj.banner.img);
+                $el.find("img").removeAttr("data-src");
+                $el.find("."+parentId+"text-bold").html(oPlanObj.banner.doc_game_name);
+                $el.find("."+parentId+"text-normal").html(oPlanObj.banner.doc_content);
+            } else if (componentType=="ImageList_6") {
+                $el.find("a").attr("href",click_url);
+                $el.find("."+parentId+"prime-top img").attr("src",oPlanObj.banner.img);
+                $el.find("."+parentId+"prime-top img").removeAttr("data-src");
+                $el.find("."+parentId+"prime-bottom-name").html(oPlanObj.banner.doc_game_name);
+                $el.find("."+parentId+"prime-star-point").html(oPlanObj.banner.doc_play);
+                $el.find("."+parentId+"prime-star-type").html(oPlanObj.banner.doc_type);
+                $el.find("."+parentId+"prime-intro").html(oPlanObj.banner.doc_content);
+            } else if (componentType=="ImageList_7") {
+                $el.find("a").attr("href",click_url);
+                $el.find("[data-fn=game]").html(oPlanObj.banner.doc_game_name);
+                $el.find("img").attr("src",oPlanObj.banner.img);
+                $el.find("img").removeAttr("data-src");
+            } else if (componentType=="ImageList_8") {
+                $el.find("a").attr("href",click_url);
+                $el.find("img").attr("src",oPlanObj.banner.img);
+                $el.find("img").removeAttr("data-src");
+                $el.find("."+parentId+"name").html(oPlanObj.banner.doc_game_name);
+                $el.find("."+parentId+"int").html(oPlanObj.banner.doc_content);
+            } else if (componentType=="ImageList_9") {
+                $el.find("a").attr("href",click_url);
+                $el.find("img").attr("src",oPlanObj.banner.img);
+                $el.find("img").removeAttr("data-src");
+                $el.find("."+parentId+"title").html(oPlanObj.banner.doc_game_name);
+                $el.find("."+parentId+"description").html(oPlanObj.banner.doc_content);
+            } else if (componentType=="ImageList_10") {
+                $el.find("a").attr("href",click_url);
+                $el.find("img").attr("src",oPlanObj.banner.img);
+                $el.find("img").removeAttr("data-src");
+                $el.find("."+parentId+"title").html(oPlanObj.banner.doc_game_name);
+                $el.find("."+parentId+"description").html(oPlanObj.banner.doc_content);
+            }
+        }
+
+        function loadComponent(){
+            require(["SQ", "lazyload"], function($) {
+                new SQ.Lazyload({
+                    el: "body",
+                    imgs: "img",
+                    srcName: "data-src",
+                    threshold: 100, //延迟加载不可见区域高度
+//                    failurelimit : 10,  //加载10张可见区域外图片，避免容器混乱时出现可见区域内图片并没加载出来的情况
+                    loaded: "J_lazyloaded"
+                });
+
+                var config = $.parseJSON($("#__rawRoot__").attr("data-config").replace(/(^'|'$)/g,""));
+
+                var scriptDep = config.scriptDep;
+                var depCount = scriptDep.tracker.length;
+                var dep = [];
+
+                if (depCount) {
+                    for (var i = 0; i < depCount; i ++) {
+                        dep.push(scriptDep.tracker[i] + "/js/index");
+                    }
+                    require(dep, function() {
+                        var args = arguments;
+
+                        for (var i = 0; i < depCount; i ++) {
+                            var idCollection = scriptDep.entities[scriptDep.tracker[i]];
+                            $.each(idCollection, function(index, id) {
+                                args[i](id);
+                            });
+                        }
+                    });
+                }
+                //a标签点击事件，http自适应支持
+                $(document).on("click", "a", function(e) {
+                    if (!/^http/.test(this.getAttribute("href")) && !/^#/.test(this.getAttribute("href")) && !/^\/\//.test(this.getAttribute("href"))) {
+                        e.preventDefault();
+                    }
+                });
+            });
+
+        }
+    });
+</script>
+<script src="//ptres.37.com/js/h5game/sqmUaParser.js"></script>
+
+<!--统计弹窗数-->
+<script type="text/javascript">
+    $(function(){
+        var referer_url = window.location.href;
+        var site_id = typeof (__SITE_ID) == 'undefined' ? "" : __SITE_ID;
+        var website = __SITE_URL || "";
+        var referer = getReferer();
+        var uaparser = new UAParser();
+        var OS = uaparser.getOS(); //操作系统
+        var browser = uaparser.getBrowser(); //浏览器版本
+        var os_platform = OS.name;
+        var os_version = OS.version;
+        var browser_name = browser.name;
+        var browser_version = browser.version;
+        var img = new Image();
+        img.src = document.location.protocol + '//pt.clickdata.37wan.com/ps.gif?id=34&at=1&cf=' + website + '&ext=' + site_id + '&rf=' + encodeURIComponent(referer_url)
+            + '&b='+ encodeURIComponent(browser_name) + '&e3=' + encodeURIComponent(os_platform)
+            + '&e4=' + encodeURIComponent(os_version)+ '&e5=' + encodeURIComponent(browser_version)
+            + '&e6=' + encodeURIComponent(__UID) + '&e7=' + encodeURIComponent(referer);
+    });
+</script>
+<!--统计弹窗数-->
+<!--页面加载-->
+<script type="text/javascript">
+    window.onload = function () {
+        var referer_url = window.location.href;
+        var site_id = typeof (__SITE_ID) == 'undefined' ? "" : __SITE_ID;
+        var website = __SITE_URL || "";
+        var referer = getReferer();
+        var uaparser = new UAParser();
+        var OS = uaparser.getOS(); //操作系统
+        var browser = uaparser.getBrowser(); //浏览器版本
+        var os_platform = OS.name;
+        var os_version = OS.version;
+        var browser_name = browser.name;
+        var browser_version = browser.version;
+        var img = new Image();
+        img.src = document.location.protocol +'//pt.clickdata.37wan.com/ps.gif?id=34&at=2&cf=' + website + '&ext=' + site_id
+            + '&rf=' + encodeURIComponent(referer_url)
+            + '&b='+ encodeURIComponent(browser_name) + '&e3=' + encodeURIComponent(os_platform)
+            + '&e4=' + encodeURIComponent(os_version)+ '&e5=' + encodeURIComponent(browser_version)
+            + '&e6=' + encodeURIComponent(__UID)+ '&e7=' + encodeURIComponent(referer);
+    }
+</script>
+<!--页面加载-->
 </body>
 </html>

@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Button - dev</title>
+    <link rel="stylesheet" href="http://huodong.37.com/fe-editor/pc/common/style.css">
+    <link rel="stylesheet" href="http://huodong.37.com/fe-editor/pc/dawn/build/bundle.css?v=0531">
+    <link rel="stylesheet" href="http://huodong.37.com/fe-editor/pc/dawn/css/perfect-scrollar.css">
+    <link rel="stylesheet" href="./index.css">
+</head>
+<body>
+<div id="app">
+    <ul class="box">
+        {{#each list.value}}
+        <li class="item">
+            <div class="offset-box">
+                <a class="link" target="_blank" href="{{this.url.value}}" data-type="{{this.typeId.value}}"
+                   data-plan="{{this.plan.value}}">
+                    <img src="{{this.img.value}}" class="img-base img"/>
+                </a>
+            </div>
+            <div class="info">
+                <div class="title">
+                    <a class="link" target="_blank" href="{{this.url.value}}" data-type="{{this.typeId.value}}"
+                       data-plan="{{this.plan.value}}">{{{this.title.value}}}</a>
+                </div>
+                <div class="desc">{{{this.desc.value}}}</div>
+                <div class="btns">
+                    <div class="btn btn-code">
+                        <span>下载</span>
+                        <div class="code-arrow"></div>
+                        <div class="code-box">
+                            <div class="code-img">
+                                <img src="{{this.codeImg.value}}" class="img-code"/>
+                                <p class="tips-code">手机<span class="clr-active">扫描二维码</span>，立即下载试玩吧！</p>
+                            </div>
+                        </div>
+                    </div>
+                    <a class="btn link" target="_blank" href="{{this.url.value}}" data-type="{{this.typeId.value}}"
+                       data-plan="{{this.plan.value}}">{{this.btn.value}}</a>
+
+                </div>
+            </div>
+        </li>
+        {{/each}}
+    </ul>
+</div>
+
+<script src="http://huodong.37.com/fe-editor/pc/dawn/lib/handlebars.min.js"></script>
+<script src="http://ptres.37.com/js/sq/lib/require.js"></script>
+<script>
+    require.config({
+        paths: {
+            SQ: "http://ptres.37.com/js/sq/lib/sq.core"
+        },
+        shim: {
+            "SQ": {
+                exports: "$"
+            }
+        }
+    });
+    require(["./js/index"], function (fn) {
+
+        var source = $("#app").html();
+        var template = Handlebars.compile(source);
+        var context = {
+            "list": {
+                "label": "图片列表",
+                "value": [
+                    {
+                        "url": {
+                            "label": "广告链接",
+                            "value": ""
+                        },
+                        "plan": {
+                            "label": "计划Id",
+                            "value": ""
+                        },
+                        "typeId": {
+                            "label": "typeId",
+                            "value": ""
+                        },
+                        "img": {
+                            "label": "图片",
+                            "value": "//img2.37wanimg.com/2019/03/20145905XVAAZ.png"
+                        },
+                        "title": {
+                            "label": "游戏名",
+                            "value": "斩月屠龙",
+                            "rich": true
+                        },
+                        "desc": {
+                            "label": "描述",
+                            "value": "兄弟再聚 战火重燃",
+                            "rich": true
+                        },
+                        "btn": {
+                            "label": "按钮文字",
+                            "value": "进游戏",
+                        },
+                        "codeImg":{
+                            "label":"二维码",
+                            "value":"//img2.37wanimg.com/2019/02/21090643FbFl4.png"
+                        }
+                    }
+                ]
+            }
+        };
+        $("#app").html(template(context));
+        fn();
+    });
+</script>
+</body>
+</html>

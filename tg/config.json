@@ -1,0 +1,83 @@
+{
+  "name": "tg图片展示",
+  "ownerType": "IMAGE",
+  "description": "",
+  "options": {
+    "script": false,
+    "draggable": true,
+    "resizableSelector": ".box"
+  },
+  "html": {
+    "list": {
+      "label": "图片列表",
+      "value": [
+        {
+          "url": {
+            "label": "广告链接",
+            "value": ""
+          },
+          "plan": {
+            "label": "计划Id",
+            "value": ""
+          },
+          "typeId": {
+            "label": "typeId",
+            "value": ""
+          },
+          "img": {
+            "label": "图片",
+            "value": "//img2.37wanimg.com/2019/03/20145905XVAAZ.png"
+          },
+          "title": {
+            "label": "游戏名",
+            "value": "斩月屠龙",
+            "rich": true
+          },
+          "desc": {
+            "label": "描述",
+            "value": "兄弟再聚 战火重燃",
+            "rich": true
+          },
+          "btn": {
+            "label": "按钮文字",
+            "value": "进游戏",
+          },
+          "codeImg":{
+            "label":"二维码",
+            "value":"//img2.37wanimg.com/2019/02/21090643FbFl4.png"
+          }
+        }
+      ]
+    }
+  },
+  "css": {
+    ".box":{
+      "label":"容器",
+      "editable":["width","height"]
+    },
+    ".item":{
+      "label":"图片块",
+      "editable":["margin-right","margin-bottom","width"]
+    },
+    ".img-base":{
+      "label":"图片",
+      "editable":["width","height"]
+    },
+    ".img-code":{
+      "label":"二维码",
+      "editable":["width"]
+    },
+    ".title":{
+      "label":"标题",
+      "editable":["font-size"]
+    },
+    ".desc":{
+      "label":"描述",
+      "editable":["font-size"]
+    },
+    ".btn.link":{
+      "label":"按钮",
+      "editable":["color","border-color"]
+    }
+  }
+}
