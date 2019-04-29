@@ -51,7 +51,6 @@
         window.addEventListener("resize", function () {
             adapt(375, 100);
         })
-		alert("d14")
     </script>
     <link href="https://quantum.63yx.com/static/public/landpage_web/index.css?ver=1556159399" rel="stylesheet">
 	<style>
@@ -87,5 +86,12 @@
 </div>
 <script src="https://cdn.bootcss.com/vConsole/3.3.0/vconsole.min.js"></script>
 <script>new VConsole()</script>
+<script>
+	window.onload=function(){
+		setTimeout(function(){
+			document.querySelector(".pos-t").style.visible="visible";
+		},500)
+	}
+</script>
 </body>
 </html>
