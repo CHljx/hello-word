@@ -1,87 +1,190 @@
 
 <!DOCTYPE html>
-<html><!-- 馃挜 -->
+<html>
 <head>
     <meta charset="UTF-8">
-    <title>传奇页面</title>
-	<meta name="viewport" content="width=device-width,minimum-scale=1,maximum-scale=1">
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1"/>
+    <title>超变单职业</title>
     <style>
-        .coverflow .swiper-slide {
-            width: 40% !important;
-            padding: 0 0 1rem 0;
+        body{
+            margin:0;
+            background:#000;
         }
-        .img-dl-tips{ display: none;  width: 100%; }
+        canvas{
+            -webkit-transform: translate3d(0, 0, 0);
+            -moz-transform: translate3d(0, 0, 0);
+            -ms-transform: translate3d(0, 0, 0);
+            transform: translate3d(0, 0, 0);
+            -webkit-tap-highlight-color:rgba(200,200,200,0);
+        }
+        #animation_container {
+            position:absolute;
+            margin:auto;
+            left:0;right:0;
+            top:0;bottom:0;
+            z-index:2;
+        }
+        #mask{
+            position:absolute;
+            margin:auto;
+            left:0;right:0;
+            top:0;bottom:0;
+            z-index:1;
+        }
     </style>
-    <script>
-        var defaultFontSize = 0;
-        function getDefaultFS() {
-            var d = window.document.createElement('div');
-            d.style.width = '1rem';
-            d.style.display = "none";
-            var head = window.document.getElementsByTagName('head')[0];
-            head.appendChild(d);
-            defaultFontSize = parseFloat(window.getComputedStyle(d, null).getPropertyValue('width'));
-            d.parentNode.removeChild(d);
-        }
-        function adapt(designWidth, rem2px) {
-            if (!navigator.userAgent.match(/(iphone|ipad|android)/gi)) {
-                document.documentElement.style.fontSize =  "200px";
-                document.documentElement.style.background = "#000";
-                document.documentElement.classList.add("pc");
-                return;
-            }
-
-            document.documentElement.classList.remove("pc");
-            if (window.orientation == 0 || window.orientation == 180) {
-                document.documentElement.classList.remove("hori");
-            } else {
-                document.documentElement.classList.add("hori");
-            }
-            var head = window.document.getElementsByTagName('head')[0];
-            document.documentElement.style.fontSize = window.innerWidth / designWidth * rem2px / defaultFontSize * 100 + '%';
-
-            var st = document.createElement('style');
-            var portrait = "@media screen and (min-width: " + window.innerWidth + "px) {html{font-size:" + ((window.innerWidth / (designWidth / rem2px) / defaultFontSize) * 100) + "%;}}";
-            var landscape = "@media screen and (min-width: " + window.innerHeight + "px) {html{font-size:" + ((window.innerHeight / (designWidth / rem2px) / defaultFontSize) * 100) + "%;}}"
-            st.innerHTML = portrait + landscape;
-            head.appendChild(st);
-        };
-        getDefaultFS();
-        adapt(375, 100);
-        window.addEventListener("resize", function () {
-            adapt(375, 100);
-        })
-		alert("20")
-    </script>
-    <link href="https://quantum.63yx.com/static/public/landpage_web/index.css?ver=1556159399" rel="stylesheet">
-	<style>
-	img{
-		width:100%;
-	}
-	</style>
 </head>
-<body class="wrap" id="wrap" style="background:red;">
-<div id="app">
-
-    <div id="wrapper" style="opacity: 1;">
-        <div class="component-body">
-            <div class="componet-body bg-header main-container pos-t"
-                 style="margin-top: 0rem; margin-bottom: 0rem; top: 0rem; z-index: 6;background:blue;height:1rem;">
-				<header></header>
-            </div>
-            <div class="componet-body pos-normal" style="margin: 0.65rem 0rem 0rem; top: 0rem; z-index: 1;">
-                <div><img src="https://sqw.39h83s.com/swfs/45/100498/images/p-362.gif"></div>
-            </div>
-            <div class="componet-body pos-normal" style="margin: 0rem; top: 0rem; z-index: 1;">
-                <div><img src="https://sqw.39h83s.com/swfs/45/100498/images/p-367.gif"></div>
-            </div>
-            <div class="componet-body pos-absolute" style="margin: 0rem 0.91rem; top: 8.55rem; z-index: 1;"><a
-                    target="_self" href="https://dlres.37wan.com/h5sdk/6445-ltby7/ltbyptzy/ltby.apk">
-                <div style="height: 0.84rem; background: rgba(255, 255, 255, 0); border-radius: 0rem;"></div>
-            </a></div>
-        </div>
+<body style="margin:0px;">
+<div id="mask"></div>
+<div id="animation_container" style="background-color:rgba(0, 0, 0, 1.00); ">
+    <canvas id="canvas"  style="position: absolute; display: none; background-color:rgba(255, 255, 255, 1.00);"></canvas>
+    <div id="dom_overlay_container" style="pointer-events:none; overflow:hidden;  position: absolute; left: 0px; top: 0px; display: none;">
     </div>
 </div>
+<script>
+    var appUrl="https://ydsccdn.94he38.com/swfs/09/100495/";
+    var requirejs={
+        urlArgs:"1556269023",
+        paths:{
+            "app":"https://ydsccdn.94he38.com/swfs/09/100495/",
+            "entry":"https://sqw.39h83s.com/static/public/ancc/js/entry"
+        }
+    }
+</script>
+<script type="text/javascript" charset="utf-8" src="https://sqw.39h83s.com/api/c.php?platform_id=11&union_id=3251&union_type=7&link_id=23054"></script>
+<script src="https://sqw.39h83s.com/js/module/h5/zepto.min.js"></script>
+<script src="https://sqw.39h83s.com/static/public/ancc/js/createjs-2015.11.26.min.js?r20190326"></script>
+<script src="https://sqw.39h83s.com/static/public/ancc/js/common.js"></script>
+<script type="text/javascript" src="https://sqw.39h83s.com/js/g_sy.js"></script>
+<script type="text/javascript">
+    var click_tj_flag = 1;
+    var clickLeaveStatus = false;
+    var _ua = navigator.userAgent;
+    var isAndroid = _ua.indexOf('Android') > -1 || _ua.indexOf('Linux') > -1;
+    var isIOS = !!_ua.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/);
+    //是否微信
+    function isWeiXin(){
+        var ua = window.navigator.userAgent.toLowerCase();
+        if(ua.match(/MicroMessenger/i) == 'micromessenger'){
+            return true;
+        }else{
+            return false;
+        }
+    }
+</script>
+<script type="text/javascript">
+    var lid = "";
+    if (getParam("lid") !== "") {
+        lid = getParam("lid");
+    } else {
+        if (gconfig.lid) {
+            lid = gconfig.lid;
+        }
+    }
+    var adParam = gconfig.ad_param;
+    var adName = gconfig.ad_name;
+    var platformDomain = gconfig.platform_domain;
+    var platformId = gconfig.platform_id;
+    var unionId = gconfig.union_id;
+    var unionType = gconfig.union_type;
+    var linkId = gconfig.link_id;
+    var referer = (getParam('ref') != "") ? getParam('ref') : gconfig.referer;
+    var gameId = gconfig.game_id;
+    var gameServerId = gconfig.game_server_id;
+    var TimeTemp = gconfig.time_temp;
+    var platformDeploy = gconfig.platform_deploy;
+    var key = gconfig.key;
+    var adId = gconfig.ad_id;
+    var bid = gconfig.banner_id;
+    var uid = getParam("uid") || getParam("u") || "";
+    var wap = getParam("wap") || "";
+    var cs_ext = getParam("cs_ext") || getParam("CS_EXT") || "";
+    uid = uid.replace(/\./g, "_");
+    var ab_type = parseInt(getParam('ab_type'), 10) || parseInt(getParam('ad_type'), 10) || "";
+    var baseUrl = "";
+    if (unionType == 1 || unionType == 2) {
+        baseUrl = "p";
+    } else {
+        baseUrl = "s";
+    }
+    var tempLinkId = (unionType == 1 || unionType == 2) ? 0 : linkId;
+    //adsys_param参数
+    var t = getParam("t") || "";
+    var v = getParam("v") || "";
+    var c = getParam("c") || "";
+    var cg = getParam("cg") || "";
+    var b = getParam("b") || "";
+    var adsys_ext = adsys_param = "";
+    if (t > 0) {
+        adsys_ext = "|t=" + t + "!cg=" + cg + "!c=" + c + "!v=" + v + "!b=" + b + '!p=' + platformId + '!un=' + unionId + '!l=' + linkId + '!uid=' + uid + '!a=' + adId + '!pd=' + platformDeploy + '!g=' + gameId + '!gs=' + gameServerId;
+    }
+    if (b != "") { bid = b; }
+    adsys_param = "&t=" + t + "&v=" + v + "&c=" + c + "&cg=" + cg + "&b=" + b;
+    var ext = encodeURIComponent(((unionType == 1 || unionType == 2) ? (baseUrl + "|") : "") + platformId + "|" + unionId + "|" + linkId + "|" + uid + "|" + key + adsys_ext);
+    baseUrl = "/" + baseUrl + "/" + platformId + "/" + unionId + "/" + tempLinkId + "/";
+    var logDomain = window.location.host;
+
+    /*回调函数*/
+    var CallBackHandler = {
+        tid: 0,
+        callbacks: {},
+        getTid: function() {
+            return ++this.tid;
+        },
+        registerCallBack: function(tid, func) {
+            this.callbacks[tid] = func;
+        },
+        handleCallBack: function(tid, data) {
+            var func = this.callbacks[tid];
+            if (func && (typeof func == 'function')) func(data);
+            var script = document.getElementById('jsonp_invoker_' + tid);
+            if (script) try {
+                script.parentNode.removeChild(script);
+            } catch (e) {}
+        }
+    };
+    /*jsonp方法*/
+    var Jsonp = function(url, callback) {
+        var tid = CallBackHandler.getTid();
+        var script = document.createElement('script');
+        with(script) {
+            id = 'jsonp_invoker_' + tid;
+            type = 'text/javascript';
+            src = url.indexOf('?') > 0 ? (url + '&tid=' + tid + '&' + Math.random()) : (url + '?tid=' + tid + '&' + Math.random());
+        }
+        if (callback) CallBackHandler.registerCallBack(tid, callback);
+        var head = document.getElementsByTagName('head');
+        if (head[0]) {
+            head[0].appendChild(script);
+        } else {
+            document.body.appendChild(script);
+        }
+    };
+    //获取参数
+    function getParam(param) {
+        try {
+            var reg = new RegExp("(^|&)" + param + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) return unescape(r[2]);
+            return '';
+        } catch (_e) {
+            return '';
+        }
+    }
+    //点击统计
+    window.linkApk = function () {
+        if(click_tj_flag){
+            Jsonp("//" + logDomain + baseUrl + "3.js?uid=" + uid + "&wap=" + wap + "&lt=" + pt.click() + "&key=" + key + adsys_param, null);
+            click_tj_flag=0;
+        }
+        clickLeaveStatus = true;
+        window.location.href='https://dlres.37wan.com/h5sdk/6443-ltby6/ltbyptzy/ltby.apk';
+    }
+</script>
+<!-- 统计热点埋点 -->
+<script type="text/javascript" src="https://sqw.39h83s.com/js/tj/hot.js"></script>
+<script src="https://sqw.39h83s.com/static/public/ancc/js/require.js" data-main="entry"></script>
+<!-- 统计热点埋点 -->
+
 <script src="https://cdn.bootcss.com/vConsole/3.3.0/vconsole.min.js"></script>
 <script>new VConsole()</script>
 </body>
