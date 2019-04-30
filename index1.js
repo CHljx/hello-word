@@ -3,4 +3,4 @@
 })(createjs = createjs||{}, AdobeAn = AdobeAn||{});
 var createjs, AdobeAn;
 
-console.log("index1")
+alert("index1")
