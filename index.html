@@ -100,8 +100,11 @@
 <script>
 	window.onload=function(){
 		setTimeout(function(){
-			document.querySelector(".pos-t").style.visibility="visible";
-			document.querySelector(".pos-t").style.overflow="visible";
+			var ePosFixed=document.querySelectorAll(".pos-t")
+			for(var index=0,len=ePosFixed.length;index<len;index++){
+			ePosFixed[index].style.visibility="visible";
+			ePosFixed[index].style.overflow="visible";
+			}
 		},0)
 		console.log(createjs)
 	}
