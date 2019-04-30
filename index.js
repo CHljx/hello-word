@@ -9254,4 +9254,3 @@ AdobeAn.Layer = new function() {
 })(createjs = createjs||{}, AdobeAn = AdobeAn||{});
 var createjs, AdobeAn;
 
-alert("index")
