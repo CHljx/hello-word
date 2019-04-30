@@ -1,5 +1,6 @@
 var canvas, stage, exportRoot, anim_container, dom_overlay_container;
 console.log("entry111")
+console.log(createjs)
 require(["app/main"],function(){
 	
 console.log("main")
