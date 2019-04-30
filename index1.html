@@ -187,14 +187,12 @@
 
 <script src="https://cdn.bootcss.com/vConsole/3.3.0/vconsole.min.js"></script>
 
-<script src="./index.js?as122"></script>
 <script>
 requirejs(["VConsole"],function(vc){
-	alert("b1")
+	alert("d2")
 	new vc()
 	
-	console.log(createjs);
-	console.log(AdobeAn);
+	requirejs(["entry"])
 })
 </script>
 </body>
