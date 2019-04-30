@@ -1,9 +1,10 @@
 var canvas, stage, exportRoot, anim_container, dom_overlay_container;
 console.log("entry111")
 console.log(createjs)
-require(["app/test"],function(){
+console.log("requiremain")
+require(["app/main"],function(){
 	
-console.log("test")
+console.log("main")
     var loadIndex=0,loaderFrames=0,loadView;
     var loadComp=Object.keys(AdobeAn.compositions).pop();
     var viewComp="";
@@ -137,3 +138,6 @@ console.log("test")
     };
     app.init();
 })
+
+
+console.log("--requiremain--")
