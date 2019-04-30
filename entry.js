@@ -1,8 +1,8 @@
 var canvas, stage, exportRoot, anim_container, dom_overlay_container;
 console.log("entry111")
-require(["app/wait"],function(){
+require(["app/main"],function(){
 	
-console.log("wait")
+console.log("main")
     var loadIndex=0,loaderFrames=0,loadView;
     var loadComp=Object.keys(AdobeAn.compositions).pop();
     var viewComp="";
