@@ -1,10 +1,10 @@
 var canvas, stage, exportRoot, anim_container, dom_overlay_container;
 console.log("entry111")
 console.log(createjs)
-console.log("require","index")
-require(["app/index"],function(){
-	
-console.log("index")
+console.log("require","wait")
+require(["app/wait"],function(){
+	alert("b11")
+console.log("wait")
     var loadIndex=0,loaderFrames=0,loadView;
     var loadComp=Object.keys(AdobeAn.compositions).pop();
     var viewComp="";
@@ -140,4 +140,4 @@ console.log("index")
 })
 
 
-console.log("require","index","end")
+console.log("require","wait","end")
