@@ -2,9 +2,7 @@
 
 var p; // shortcut to reference prototypes
 var lib={};var ss={};var img={};
-lib.ssMetadata = [
-		{name:"端午动画_atlas_", frames: [[952,2408,904,552],[1251,1036,128,177],[2530,2591,469,388],[4048,1171,46,166],[0,3337,950,318],[2330,3611,950,318],[1858,2591,670,671],[1385,4583,248,310],[1843,4640,195,168],[3158,2984,562,557],[952,2962,638,621],[450,4015,551,329],[3945,2590,145,82],[3120,4864,289,103],[2440,4894,314,84],[1843,4810,210,153],[441,4593,942,93],[952,3585,438,89],[3262,3976,641,312],[3471,4659,295,240],[3768,4821,290,103],[2420,4193,243,77],[1592,2962,232,176],[917,4438,721,143],[2055,4894,383,80],[1904,1792,390,290],[1592,3140,259,118],[2977,4553,950,104],[1435,4015,273,170],[298,4811,430,85],[3768,4659,328,160],[0,4688,479,118],[952,1500,950,906],[2852,4659,266,271],[0,3975,448,464],[1720,4193,698,248],[1858,2408,452,176],[1592,3264,736,416],[3385,0,649,1064],[4036,630,56,208],[1385,0,950,1498],[2337,1212,757,1377],[3096,1212,950,1093],[3877,1066,209,103],[3001,2591,56,208],[3722,3254,367,259],[2977,4443,264,75],[952,1451,206,45],[2055,4831,303,58],[2211,2084,93,138],[2337,0,1046,1210],[0,0,1383,1034],[0,4808,296,137],[3722,2984,362,268],[2330,3490,156,89],[1714,3682,479,246],[1904,2084,305,320],[1640,4443,467,195],[4036,0,56,208],[4048,1339,41,152],[4048,1493,41,152],[1714,3931,950,260],[3877,1171,93,32],[3096,2307,847,675],[0,2892,950,443],[952,1036,297,413],[1635,4640,206,369],[3120,4659,349,203],[2330,3264,166,224],[481,4688,456,121],[0,4441,439,217],[3945,2307,147,281],[2530,2984,626,625],[0,2261,950,629],[3826,4446,241,52],[730,4820,412,85],[2432,4765,326,127],[1330,1215,46,166],[2420,4316,555,252],[952,3682,760,331],[2211,2224,76,90],[3826,4290,233,154],[939,4688,392,130],[2432,4570,418,193],[1251,1215,77,193],[450,4346,465,245],[1003,4015,430,144],[2977,4316,279,125],[3385,1066,490,138],[0,3657,950,316],[2109,4443,291,103],[4036,420,56,208],[4036,210,56,208],[1003,4193,715,243],[3282,3543,670,431],[2666,3931,594,383],[0,1036,950,1223],[2109,4570,321,259],[4036,840,56,208],[1904,1500,400,290],[3262,4290,562,261]]}
-];
+lib.ssMetadata = [];
 
 
 // symbols:
@@ -12,619 +10,531 @@ lib.ssMetadata = [
 
 
 (lib.封的符咒 = function() {
-	this.initialize(ss["端午动画_atlas_"]);
-	this.gotoAndStop(0);
-}).prototype = p = new cjs.Sprite();
-
+	this.initialize(img.封的符咒);
+}).prototype = p = new cjs.Bitmap();
+p.nominalBounds = new cjs.Rectangle(0,0,904,552);
 
 
 (lib.球 = function() {
-	this.initialize(ss["端午动画_atlas_"]);
-	this.gotoAndStop(1);
-}).prototype = p = new cjs.Sprite();
-
+	this.initialize(img.球);
+}).prototype = p = new cjs.Bitmap();
+p.nominalBounds = new cjs.Rectangle(0,0,128,177);
 
 
 (lib.球的底色 = function() {
-	this.initialize(ss["端午动画_atlas_"]);
-	this.gotoAndStop(2);
-}).prototype = p = new cjs.Sprite();
-
+	this.initialize(img.球的底色);
+}).prototype = p = new cjs.Bitmap();
+p.nominalBounds = new cjs.Rectangle(0,0,469,388);
 
 
 (lib.清淤泥文案 = function() {
-	this.initialize(ss["端午动画_atlas_"]);
-	this.gotoAndStop(3);
-}).prototype = p = new cjs.Sprite();
-
+	this.initialize(img.清淤泥文案);
+}).prototype = p = new cjs.Bitmap();
+p.nominalBounds = new cjs.Rectangle(0,0,46,166);
 
 
 (lib.标题 = function() {
-	this.initialize(ss["端午动画_atlas_"]);
-	this.gotoAndStop(4);
-}).prototype = p = new cjs.Sprite();
-
+	this.initialize(img.标题);
+}).prototype = p = new cjs.Bitmap();
+p.nominalBounds = new cjs.Rectangle(0,0,950,318);
 
 
 (lib.标题_1 = function() {
-	this.initialize(ss["端午动画_atlas_"]);
-	this.gotoAndStop(5);
-}).prototype = p = new cjs.Sprite();
-
+	this.initialize(img.标题_1);
+}).prototype = p = new cjs.Bitmap();
+p.nominalBounds = new cjs.Rectangle(0,0,950,318);
 
 
 (lib.圈圈 = function() {
-	this.initialize(ss["端午动画_atlas_"]);
-	this.gotoAndStop(6);
-}).prototype = p = new cjs.Sprite();
-
+	this.initialize(img.圈圈);
+}).prototype = p = new cjs.Bitmap();
+p.nominalBounds = new cjs.Rectangle(0,0,670,671);
 
 
 (lib.鼓1 = function() {
-	this.initialize(ss["端午动画_atlas_"]);
-	this.gotoAndStop(7);
-}).prototype = p = new cjs.Sprite();
-
+	this.initialize(img.鼓1);
+}).prototype = p = new cjs.Bitmap();
+p.nominalBounds = new cjs.Rectangle(0,0,248,310);
 
 
 (lib.鼓 = function() {
-	this.initialize(ss["端午动画_atlas_"]);
-	this.gotoAndStop(8);
-}).prototype = p = new cjs.Sprite();
-
+	this.initialize(img.鼓);
+}).prototype = p = new cjs.Bitmap();
+p.nominalBounds = new cjs.Rectangle(0,0,195,168);
 
 
 (lib.外圈线 = function() {
-	this.initialize(ss["端午动画_atlas_"]);
-	this.gotoAndStop(9);
-}).prototype = p = new cjs.Sprite();
-
+	this.initialize(img.外圈线);
+}).prototype = p = new cjs.Bitmap();
+p.nominalBounds = new cjs.Rectangle(0,0,562,557);
 
 
 (lib.星星月亮 = function() {
-	this.initialize(ss["端午动画_atlas_"]);
-	this.gotoAndStop(10);
-}).prototype = p = new cjs.Sprite();
-
+	this.initialize(img.星星月亮);
+}).prototype = p = new cjs.Bitmap();
+p.nominalBounds = new cjs.Rectangle(0,0,638,621);
 
 
 (lib.星星点点 = function() {
-	this.initialize(ss["端午动画_atlas_"]);
-	this.gotoAndStop(11);
-}).prototype = p = new cjs.Sprite();
-
+	this.initialize(img.星星点点);
+}).prototype = p = new cjs.Bitmap();
+p.nominalBounds = new cjs.Rectangle(0,0,551,329);
 
 
 (lib._1 = function() {
-	this.initialize(ss["端午动画_atlas_"]);
-	this.gotoAndStop(12);
-}).prototype = p = new cjs.Sprite();
-
+	this.initialize(img._1);
+}).prototype = p = new cjs.Bitmap();
+p.nominalBounds = new cjs.Rectangle(0,0,145,82);
 
 
 (lib._1_1 = function() {
-	this.initialize(ss["端午动画_atlas_"]);
-	this.gotoAndStop(13);
-}).prototype = p = new cjs.Sprite();
-
+	this.initialize(img._1_1);
+}).prototype = p = new cjs.Bitmap();
+p.nominalBounds = new cjs.Rectangle(0,0,289,103);
 
 
 (lib._1云 = function() {
-	this.initialize(ss["端午动画_atlas_"]);
-	this.gotoAndStop(14);
-}).prototype = p = new cjs.Sprite();
-
+	this.initialize(img._1云);
+}).prototype = p = new cjs.Bitmap();
+p.nominalBounds = new cjs.Rectangle(0,0,314,84);
 
 
 (lib._1云_1 = function() {
-	this.initialize(ss["端午动画_atlas_"]);
-	this.gotoAndStop(15);
-}).prototype = p = new cjs.Sprite();
-
+	this.initialize(img._1云_1);
+}).prototype = p = new cjs.Bitmap();
+p.nominalBounds = new cjs.Rectangle(0,0,210,153);
 
 
 (lib._1云层 = function() {
-	this.initialize(ss["端午动画_atlas_"]);
-	this.gotoAndStop(16);
-}).prototype = p = new cjs.Sprite();
-
+	this.initialize(img._1云层);
+}).prototype = p = new cjs.Bitmap();
+p.nominalBounds = new cjs.Rectangle(0,0,942,93);
 
 
 (lib._1波浪 = function() {
-	this.initialize(ss["端午动画_atlas_"]);
-	this.gotoAndStop(17);
-}).prototype = p = new cjs.Sprite();
-
+	this.initialize(img._1波浪);
+}).prototype = p = new cjs.Bitmap();
+p.nominalBounds = new cjs.Rectangle(0,0,438,89);
 
 
 (lib._1龙 = function() {
-	this.initialize(ss["端午动画_atlas_"]);
-	this.gotoAndStop(18);
-}).prototype = p = new cjs.Sprite();
-
+	this.initialize(img._1龙);
+}).prototype = p = new cjs.Bitmap();
+p.nominalBounds = new cjs.Rectangle(0,0,641,312);
 
 
 (lib._2 = function() {
-	this.initialize(ss["端午动画_atlas_"]);
-	this.gotoAndStop(19);
-}).prototype = p = new cjs.Sprite();
-
+	this.initialize(img._2);
+}).prototype = p = new cjs.Bitmap();
+p.nominalBounds = new cjs.Rectangle(0,0,295,240);
 
 
 (lib._2_1 = function() {
-	this.initialize(ss["端午动画_atlas_"]);
-	this.gotoAndStop(20);
-}).prototype = p = new cjs.Sprite();
-
+	this.initialize(img._2_1);
+}).prototype = p = new cjs.Bitmap();
+p.nominalBounds = new cjs.Rectangle(0,0,290,103);
 
 
 (lib._2屋檐云 = function() {
-	this.initialize(ss["端午动画_atlas_"]);
-	this.gotoAndStop(21);
-}).prototype = p = new cjs.Sprite();
-
+	this.initialize(img._2屋檐云);
+}).prototype = p = new cjs.Bitmap();
+p.nominalBounds = new cjs.Rectangle(0,0,243,77);
 
 
 (lib._2云 = function() {
-	this.initialize(ss["端午动画_atlas_"]);
-	this.gotoAndStop(22);
-}).prototype = p = new cjs.Sprite();
-
+	this.initialize(img._2云);
+}).prototype = p = new cjs.Bitmap();
+p.nominalBounds = new cjs.Rectangle(0,0,232,176);
 
 
 (lib._2云层 = function() {
-	this.initialize(ss["端午动画_atlas_"]);
-	this.gotoAndStop(23);
-}).prototype = p = new cjs.Sprite();
-
+	this.initialize(img._2云层);
+}).prototype = p = new cjs.Bitmap();
+p.nominalBounds = new cjs.Rectangle(0,0,721,143);
 
 
 (lib._2波浪 = function() {
-	this.initialize(ss["端午动画_atlas_"]);
-	this.gotoAndStop(24);
-}).prototype = p = new cjs.Sprite();
-
+	this.initialize(img._2波浪);
+}).prototype = p = new cjs.Bitmap();
+p.nominalBounds = new cjs.Rectangle(0,0,383,80);
 
 
 (lib._2龙 = function() {
-	this.initialize(ss["端午动画_atlas_"]);
-	this.gotoAndStop(25);
-}).prototype = p = new cjs.Sprite();
-
+	this.initialize(img._2龙);
+}).prototype = p = new cjs.Bitmap();
+p.nominalBounds = new cjs.Rectangle(0,0,390,290);
 
 
 (lib._3 = function() {
-	this.initialize(ss["端午动画_atlas_"]);
-	this.gotoAndStop(26);
-}).prototype = p = new cjs.Sprite();
-
+	this.initialize(img._3);
+}).prototype = p = new cjs.Bitmap();
+p.nominalBounds = new cjs.Rectangle(0,0,259,118);
 
 
 (lib._3房子底部云 = function() {
-	this.initialize(ss["端午动画_atlas_"]);
-	this.gotoAndStop(27);
-}).prototype = p = new cjs.Sprite();
-
+	this.initialize(img._3房子底部云);
+}).prototype = p = new cjs.Bitmap();
+p.nominalBounds = new cjs.Rectangle(0,0,950,104);
 
 
 (lib._3long = function() {
-	this.initialize(ss["端午动画_atlas_"]);
-	this.gotoAndStop(28);
-}).prototype = p = new cjs.Sprite();
-
+	this.initialize(img._3long);
+}).prototype = p = new cjs.Bitmap();
+p.nominalBounds = new cjs.Rectangle(0,0,273,170);
 
 
 (lib._3云 = function() {
-	this.initialize(ss["端午动画_atlas_"]);
-	this.gotoAndStop(29);
-}).prototype = p = new cjs.Sprite();
-
+	this.initialize(img._3云);
+}).prototype = p = new cjs.Bitmap();
+p.nominalBounds = new cjs.Rectangle(0,0,430,85);
 
 
 (lib._4 = function() {
-	this.initialize(ss["端午动画_atlas_"]);
-	this.gotoAndStop(30);
-}).prototype = p = new cjs.Sprite();
-
+	this.initialize(img._4);
+}).prototype = p = new cjs.Bitmap();
+p.nominalBounds = new cjs.Rectangle(0,0,328,160);
 
 
 (lib._4云 = function() {
-	this.initialize(ss["端午动画_atlas_"]);
-	this.gotoAndStop(31);
-}).prototype = p = new cjs.Sprite();
-
+	this.initialize(img._4云);
+}).prototype = p = new cjs.Bitmap();
+p.nominalBounds = new cjs.Rectangle(0,0,479,118);
 
 
 (lib.水纹路 = function() {
-	this.initialize(ss["端午动画_atlas_"]);
-	this.gotoAndStop(32);
-}).prototype = p = new cjs.Sprite();
-
+	this.initialize(img.水纹路);
+}).prototype = p = new cjs.Bitmap();
+p.nominalBounds = new cjs.Rectangle(0,0,950,906);
 
 
 (lib._5 = function() {
-	this.initialize(ss["端午动画_atlas_"]);
-	this.gotoAndStop(33);
-}).prototype = p = new cjs.Sprite();
-
+	this.initialize(img._5);
+}).prototype = p = new cjs.Bitmap();
+p.nominalBounds = new cjs.Rectangle(0,0,266,271);
 
 
 (lib.船只 = function() {
-	this.initialize(ss["端午动画_atlas_"]);
-	this.gotoAndStop(34);
-}).prototype = p = new cjs.Sprite();
-
+	this.initialize(img.船只);
+}).prototype = p = new cjs.Bitmap();
+p.nominalBounds = new cjs.Rectangle(0,0,448,464);
 
 
 (lib.戽水 = function() {
-	this.initialize(ss["端午动画_atlas_"]);
-	this.gotoAndStop(35);
-}).prototype = p = new cjs.Sprite();
-
+	this.initialize(img.戽水);
+}).prototype = p = new cjs.Bitmap();
+p.nominalBounds = new cjs.Rectangle(0,0,698,248);
 
 
 (lib.放牛 = function() {
-	this.initialize(ss["端午动画_atlas_"]);
-	this.gotoAndStop(36);
-}).prototype = p = new cjs.Sprite();
-
+	this.initialize(img.放牛);
+}).prototype = p = new cjs.Bitmap();
+p.nominalBounds = new cjs.Rectangle(0,0,452,176);
 
 
 (lib.房子 = function() {
-	this.initialize(ss["端午动画_atlas_"]);
-	this.gotoAndStop(37);
-}).prototype = p = new cjs.Sprite();
-
+	this.initialize(img.房子);
+}).prototype = p = new cjs.Bitmap();
+p.nominalBounds = new cjs.Rectangle(0,0,736,416);
 
 
 (lib.赛龙3 = function() {
-	this.initialize(ss["端午动画_atlas_"]);
-	this.gotoAndStop(38);
-}).prototype = p = new cjs.Sprite();
-
+	this.initialize(img.赛龙3);
+}).prototype = p = new cjs.Bitmap();
+p.nominalBounds = new cjs.Rectangle(0,0,649,1064);
 
 
 (lib.赛龙介绍 = function() {
-	this.initialize(ss["端午动画_atlas_"]);
-	this.gotoAndStop(39);
-}).prototype = p = new cjs.Sprite();
-
+	this.initialize(img.赛龙介绍);
+}).prototype = p = new cjs.Bitmap();
+p.nominalBounds = new cjs.Rectangle(0,0,56,208);
 
 
 (lib.bg = function() {
-	this.initialize(ss["端午动画_atlas_"]);
-	this.gotoAndStop(40);
-}).prototype = p = new cjs.Sprite();
-
+	this.initialize(img.bg);
+}).prototype = p = new cjs.Bitmap();
+p.nominalBounds = new cjs.Rectangle(0,0,950,1498);
 
 
 (lib.bg_1 = function() {
-	this.initialize(ss["端午动画_atlas_"]);
-	this.gotoAndStop(41);
-}).prototype = p = new cjs.Sprite();
-
+	this.initialize(img.bg_1);
+}).prototype = p = new cjs.Bitmap();
+p.nominalBounds = new cjs.Rectangle(0,0,757,1377);
 
 
 (lib.bg船底色 = function() {
-	this.initialize(ss["端午动画_atlas_"]);
-	this.gotoAndStop(42);
-}).prototype = p = new cjs.Sprite();
-
+	this.initialize(img.bg船底色);
+}).prototype = p = new cjs.Bitmap();
+p.nominalBounds = new cjs.Rectangle(0,0,950,1093);
 
 
 (lib.散龙 = function() {
-	this.initialize(ss["端午动画_atlas_"]);
-	this.gotoAndStop(43);
-}).prototype = p = new cjs.Sprite();
-
+	this.initialize(img.散龙);
+}).prototype = p = new cjs.Bitmap();
+p.nominalBounds = new cjs.Rectangle(0,0,209,103);
 
 
 (lib.散龙介绍 = function() {
-	this.initialize(ss["端午动画_atlas_"]);
-	this.gotoAndStop(44);
-}).prototype = p = new cjs.Sprite();
-
+	this.initialize(img.散龙介绍);
+}).prototype = p = new cjs.Bitmap();
+p.nominalBounds = new cjs.Rectangle(0,0,56,208);
 
 
 (lib.光线 = function() {
-	this.initialize(ss["端午动画_atlas_"]);
-	this.gotoAndStop(45);
-}).prototype = p = new cjs.Sprite();
-
+	this.initialize(img.光线);
+}).prototype = p = new cjs.Bitmap();
+p.nominalBounds = new cjs.Rectangle(0,0,367,259);
 
 
 (lib.logo = function() {
-	this.initialize(ss["端午动画_atlas_"]);
-	this.gotoAndStop(46);
-}).prototype = p = new cjs.Sprite();
-
+	this.initialize(img.logo);
+}).prototype = p = new cjs.Bitmap();
+p.nominalBounds = new cjs.Rectangle(0,0,264,75);
 
 
 (lib.普通云 = function() {
-	this.initialize(ss["端午动画_atlas_"]);
-	this.gotoAndStop(47);
-}).prototype = p = new cjs.Sprite();
-
+	this.initialize(img.普通云);
+}).prototype = p = new cjs.Bitmap();
+p.nominalBounds = new cjs.Rectangle(0,0,206,45);
 
 
 (lib.浮云 = function() {
-	this.initialize(ss["端午动画_atlas_"]);
-	this.gotoAndStop(48);
-}).prototype = p = new cjs.Sprite();
-
+	this.initialize(img.浮云);
+}).prototype = p = new cjs.Bitmap();
+p.nominalBounds = new cjs.Rectangle(0,0,303,58);
 
 
 (lib.灯 = function() {
-	this.initialize(ss["端午动画_atlas_"]);
-	this.gotoAndStop(49);
-}).prototype = p = new cjs.Sprite();
-
+	this.initialize(img.灯);
+}).prototype = p = new cjs.Bitmap();
+p.nominalBounds = new cjs.Rectangle(0,0,93,138);
 
 
 (lib.山峰右 = function() {
-	this.initialize(ss["端午动画_atlas_"]);
-	this.gotoAndStop(50);
-}).prototype = p = new cjs.Sprite();
-
+	this.initialize(img.山峰右);
+}).prototype = p = new cjs.Bitmap();
+p.nominalBounds = new cjs.Rectangle(0,0,1046,1210);
 
 
 (lib.山峰左 = function() {
-	this.initialize(ss["端午动画_atlas_"]);
-	this.gotoAndStop(51);
-}).prototype = p = new cjs.Sprite();
-
+	this.initialize(img.山峰左);
+}).prototype = p = new cjs.Bitmap();
+p.nominalBounds = new cjs.Rectangle(0,0,1383,1034);
 
 
 (lib.色相_饱和度3拷贝2 = function() {
-	this.initialize(ss["端午动画_atlas_"]);
-	this.gotoAndStop(52);
-}).prototype = p = new cjs.Sprite();
-
+	this.initialize(img.色相_饱和度3拷贝2);
+}).prototype = p = new cjs.Bitmap();
+p.nominalBounds = new cjs.Rectangle(0,0,296,137);
 
 
 (lib.色相_饱和度3拷贝3 = function() {
-	this.initialize(ss["端午动画_atlas_"]);
-	this.gotoAndStop(53);
-}).prototype = p = new cjs.Sprite();
-
+	this.initialize(img.色相_饱和度3拷贝3);
+}).prototype = p = new cjs.Bitmap();
+p.nominalBounds = new cjs.Rectangle(0,0,362,268);
 
 
 (lib.色相_饱和度3拷贝4 = function() {
-	this.initialize(ss["端午动画_atlas_"]);
-	this.gotoAndStop(54);
-}).prototype = p = new cjs.Sprite();
-
+	this.initialize(img.色相_饱和度3拷贝4);
+}).prototype = p = new cjs.Bitmap();
+p.nominalBounds = new cjs.Rectangle(0,0,156,89);
 
 
 (lib.色相_饱和度3拷贝 = function() {
-	this.initialize(ss["端午动画_atlas_"]);
-	this.gotoAndStop(55);
-}).prototype = p = new cjs.Sprite();
-
+	this.initialize(img.色相_饱和度3拷贝);
+}).prototype = p = new cjs.Bitmap();
+p.nominalBounds = new cjs.Rectangle(0,0,479,246);
 
 
 (lib.色相_饱和度3 = function() {
-	this.initialize(ss["端午动画_atlas_"]);
-	this.gotoAndStop(56);
-}).prototype = p = new cjs.Sprite();
-
+	this.initialize(img.色相_饱和度3);
+}).prototype = p = new cjs.Bitmap();
+p.nominalBounds = new cjs.Rectangle(0,0,305,320);
 
 
 (lib.女生 = function() {
-	this.initialize(ss["端午动画_atlas_"]);
-	this.gotoAndStop(57);
-}).prototype = p = new cjs.Sprite();
-
+	this.initialize(img.女生);
+}).prototype = p = new cjs.Bitmap();
+p.nominalBounds = new cjs.Rectangle(0,0,467,195);
 
 
 (lib.起龙介绍 = function() {
-	this.initialize(ss["端午动画_atlas_"]);
-	this.gotoAndStop(58);
-}).prototype = p = new cjs.Sprite();
-
+	this.initialize(img.起龙介绍);
+}).prototype = p = new cjs.Bitmap();
+p.nominalBounds = new cjs.Rectangle(0,0,56,208);
 
 
 (lib.卸龙头 = function() {
-	this.initialize(ss["端午动画_atlas_"]);
-	this.gotoAndStop(59);
-}).prototype = p = new cjs.Sprite();
-
+	this.initialize(img.卸龙头);
+}).prototype = p = new cjs.Bitmap();
+p.nominalBounds = new cjs.Rectangle(0,0,41,152);
 
 
 (lib.卸龙尾 = function() {
-	this.initialize(ss["端午动画_atlas_"]);
-	this.gotoAndStop(60);
-}).prototype = p = new cjs.Sprite();
-
+	this.initialize(img.卸龙尾);
+}).prototype = p = new cjs.Bitmap();
+p.nominalBounds = new cjs.Rectangle(0,0,41,152);
 
 
 (lib.云龙下方对称 = function() {
-	this.initialize(ss["端午动画_atlas_"]);
-	this.gotoAndStop(61);
-}).prototype = p = new cjs.Sprite();
-
+	this.initialize(img.云龙下方对称);
+}).prototype = p = new cjs.Bitmap();
+p.nominalBounds = new cjs.Rectangle(0,0,950,260);
 
 
 (lib.云龙脊处 = function() {
-	this.initialize(ss["端午动画_atlas_"]);
-	this.gotoAndStop(62);
-}).prototype = p = new cjs.Sprite();
-
+	this.initialize(img.云龙脊处);
+}).prototype = p = new cjs.Bitmap();
+p.nominalBounds = new cjs.Rectangle(0,0,93,32);
 
 
 (lib.云 = function() {
-	this.initialize(ss["端午动画_atlas_"]);
-	this.gotoAndStop(63);
-}).prototype = p = new cjs.Sprite();
-
+	this.initialize(img.云);
+}).prototype = p = new cjs.Bitmap();
+p.nominalBounds = new cjs.Rectangle(0,0,847,675);
 
 
 (lib.云_1 = function() {
-	this.initialize(ss["端午动画_atlas_"]);
-	this.gotoAndStop(64);
-}).prototype = p = new cjs.Sprite();
-
+	this.initialize(img.云_1);
+}).prototype = p = new cjs.Bitmap();
+p.nominalBounds = new cjs.Rectangle(0,0,950,443);
 
 
 (lib.人 = function() {
-	this.initialize(ss["端午动画_atlas_"]);
-	this.gotoAndStop(65);
-}).prototype = p = new cjs.Sprite();
-
+	this.initialize(img.人);
+}).prototype = p = new cjs.Bitmap();
+p.nominalBounds = new cjs.Rectangle(0,0,297,413);
 
 
 (lib.击鼓 = function() {
-	this.initialize(ss["端午动画_atlas_"]);
-	this.gotoAndStop(66);
-}).prototype = p = new cjs.Sprite();
-
+	this.initialize(img.击鼓);
+}).prototype = p = new cjs.Bitmap();
+p.nominalBounds = new cjs.Rectangle(0,0,206,369);
 
 
 (lib.右手 = function() {
-	this.initialize(ss["端午动画_atlas_"]);
-	this.gotoAndStop(67);
-}).prototype = p = new cjs.Sprite();
-
+	this.initialize(img.右手);
+}).prototype = p = new cjs.Bitmap();
+p.nominalBounds = new cjs.Rectangle(0,0,349,203);
 
 
 (lib.右山 = function() {
-	this.initialize(ss["端午动画_atlas_"]);
-	this.gotoAndStop(68);
-}).prototype = p = new cjs.Sprite();
-
+	this.initialize(img.右山);
+}).prototype = p = new cjs.Bitmap();
+p.nominalBounds = new cjs.Rectangle(0,0,166,224);
 
 
 (lib.妇人 = function() {
-	this.initialize(ss["端午动画_atlas_"]);
-	this.gotoAndStop(69);
-}).prototype = p = new cjs.Sprite();
-
+	this.initialize(img.妇人);
+}).prototype = p = new cjs.Bitmap();
+p.nominalBounds = new cjs.Rectangle(0,0,456,121);
 
 
 (lib.左手 = function() {
-	this.initialize(ss["端午动画_atlas_"]);
-	this.gotoAndStop(70);
-}).prototype = p = new cjs.Sprite();
-
+	this.initialize(img.左手);
+}).prototype = p = new cjs.Bitmap();
+p.nominalBounds = new cjs.Rectangle(0,0,439,217);
 
 
 (lib.左边山峰 = function() {
-	this.initialize(ss["端午动画_atlas_"]);
-	this.gotoAndStop(71);
-}).prototype = p = new cjs.Sprite();
-
+	this.initialize(img.左边山峰);
+}).prototype = p = new cjs.Bitmap();
+p.nominalBounds = new cjs.Rectangle(0,0,147,281);
 
 
 (lib.底色 = function() {
-	this.initialize(ss["端午动画_atlas_"]);
-	this.gotoAndStop(72);
-}).prototype = p = new cjs.Sprite();
-
+	this.initialize(img.底色);
+}).prototype = p = new cjs.Bitmap();
+p.nominalBounds = new cjs.Rectangle(0,0,626,625);
 
 
 (lib.底部圈 = function() {
-	this.initialize(ss["端午动画_atlas_"]);
-	this.gotoAndStop(73);
-}).prototype = p = new cjs.Sprite();
-
+	this.initialize(img.底部圈);
+}).prototype = p = new cjs.Bitmap();
+p.nominalBounds = new cjs.Rectangle(0,0,950,629);
 
 
 (lib.底部云 = function() {
-	this.initialize(ss["端午动画_atlas_"]);
-	this.gotoAndStop(74);
-}).prototype = p = new cjs.Sprite();
-
+	this.initialize(img.底部云);
+}).prototype = p = new cjs.Bitmap();
+p.nominalBounds = new cjs.Rectangle(0,0,241,52);
 
 
 (lib.底部云_1 = function() {
-	this.initialize(ss["端午动画_atlas_"]);
-	this.gotoAndStop(75);
-}).prototype = p = new cjs.Sprite();
-
+	this.initialize(img.底部云_1);
+}).prototype = p = new cjs.Bitmap();
+p.nominalBounds = new cjs.Rectangle(0,0,412,85);
 
 
 (lib.底部云_2 = function() {
-	this.initialize(ss["端午动画_atlas_"]);
-	this.gotoAndStop(76);
-}).prototype = p = new cjs.Sprite();
-
+	this.initialize(img.底部云_2);
+}).prototype = p = new cjs.Bitmap();
+p.nominalBounds = new cjs.Rectangle(0,0,326,127);
 
 
 (lib.排污水文案 = function() {
-	this.initialize(ss["端午动画_atlas_"]);
-	this.gotoAndStop(77);
-}).prototype = p = new cjs.Sprite();
-
+	this.initialize(img.排污水文案);
+}).prototype = p = new cjs.Bitmap();
+p.nominalBounds = new cjs.Rectangle(0,0,46,166);
 
 
 (lib.文案 = function() {
-	this.initialize(ss["端午动画_atlas_"]);
-	this.gotoAndStop(78);
-}).prototype = p = new cjs.Sprite();
-
+	this.initialize(img.文案);
+}).prototype = p = new cjs.Bitmap();
+p.nominalBounds = new cjs.Rectangle(0,0,555,252);
 
 
 (lib.文案_1 = function() {
-	this.initialize(ss["端午动画_atlas_"]);
-	this.gotoAndStop(79);
-}).prototype = p = new cjs.Sprite();
-
+	this.initialize(img.文案_1);
+}).prototype = p = new cjs.Bitmap();
+p.nominalBounds = new cjs.Rectangle(0,0,760,331);
 
 
 (lib.棍棒 = function() {
-	this.initialize(ss["端午动画_atlas_"]);
-	this.gotoAndStop(80);
-}).prototype = p = new cjs.Sprite();
-
+	this.initialize(img.棍棒);
+}).prototype = p = new cjs.Bitmap();
+p.nominalBounds = new cjs.Rectangle(0,0,76,90);
 
 
 (lib.波浪1 = function() {
-	this.initialize(ss["端午动画_atlas_"]);
-	this.gotoAndStop(81);
-}).prototype = p = new cjs.Sprite();
-
+	this.initialize(img.波浪1);
+}).prototype = p = new cjs.Bitmap();
+p.nominalBounds = new cjs.Rectangle(0,0,233,154);
 
 
 (lib.波浪2 = function() {
-	this.initialize(ss["端午动画_atlas_"]);
-	this.gotoAndStop(82);
-}).prototype = p = new cjs.Sprite();
-
+	this.initialize(img.波浪2);
+}).prototype = p = new cjs.Bitmap();
+p.nominalBounds = new cjs.Rectangle(0,0,392,130);
 
 
 (lib.波浪3 = function() {
-	this.initialize(ss["端午动画_atlas_"]);
-	this.gotoAndStop(83);
-}).prototype = p = new cjs.Sprite();
-
+	this.initialize(img.波浪3);
+}).prototype = p = new cjs.Bitmap();
+p.nominalBounds = new cjs.Rectangle(0,0,418,193);
 
 
 (lib.炮竹 = function() {
-	this.initialize(ss["端午动画_atlas_"]);
-	this.gotoAndStop(84);
-}).prototype = p = new cjs.Sprite();
-
+	this.initialize(img.炮竹);
+}).prototype = p = new cjs.Bitmap();
+p.nominalBounds = new cjs.Rectangle(0,0,77,193);
 
 
 (lib.点点 = function() {
-	this.initialize(ss["端午动画_atlas_"]);
-	this.gotoAndStop(85);
-}).prototype = p = new cjs.Sprite();
-
+	this.initialize(img.点点);
+}).prototype = p = new cjs.Bitmap();
+p.nominalBounds = new cjs.Rectangle(0,0,465,245);
 
 
 (lib.点点_1 = function() {
-	this.initialize(ss["端午动画_atlas_"]);
-	this.gotoAndStop(86);
-}).prototype = p = new cjs.Sprite();
-
+	this.initialize(img.点点_1);
+}).prototype = p = new cjs.Bitmap();
+p.nominalBounds = new cjs.Rectangle(0,0,430,144);
 
 
 (lib.禾秧 = function() {
-	this.initialize(ss["端午动画_atlas_"]);
-	this.gotoAndStop(87);
-}).prototype = p = new cjs.Sprite();
-
+	this.initialize(img.禾秧);
+}).prototype = p = new cjs.Bitmap();
+p.nominalBounds = new cjs.Rectangle(0,0,279,125);
 
 
 (lib.端午h595002临时 = function() {
@@ -634,94 +544,81 @@ p.nominalBounds = new cjs.Rectangle(0,0,950,9193);
 
 
 (lib.组1468 = function() {
-	this.initialize(ss["端午动画_atlas_"]);
-	this.gotoAndStop(88);
-}).prototype = p = new cjs.Sprite();
-
+	this.initialize(img.组1468);
+}).prototype = p = new cjs.Bitmap();
+p.nominalBounds = new cjs.Rectangle(0,0,490,138);
 
 
 (lib.藏龙标题 = function() {
-	this.initialize(ss["端午动画_atlas_"]);
-	this.gotoAndStop(89);
-}).prototype = p = new cjs.Sprite();
-
+	this.initialize(img.藏龙标题);
+}).prototype = p = new cjs.Bitmap();
+p.nominalBounds = new cjs.Rectangle(0,0,950,316);
 
 
 (lib.藏龙 = function() {
-	this.initialize(ss["端午动画_atlas_"]);
-	this.gotoAndStop(90);
-}).prototype = p = new cjs.Sprite();
-
+	this.initialize(img.藏龙);
+}).prototype = p = new cjs.Bitmap();
+p.nominalBounds = new cjs.Rectangle(0,0,291,103);
 
 
 (lib.藏龙介绍 = function() {
-	this.initialize(ss["端午动画_atlas_"]);
-	this.gotoAndStop(91);
-}).prototype = p = new cjs.Sprite();
-
+	this.initialize(img.藏龙介绍);
+}).prototype = p = new cjs.Bitmap();
+p.nominalBounds = new cjs.Rectangle(0,0,56,208);
 
 
 (lib.采青介绍 = function() {
-	this.initialize(ss["端午动画_atlas_"]);
-	this.gotoAndStop(92);
-}).prototype = p = new cjs.Sprite();
-
+	this.initialize(img.采青介绍);
+}).prototype = p = new cjs.Bitmap();
+p.nominalBounds = new cjs.Rectangle(0,0,56,208);
 
 
 (lib.雨滴 = function() {
-	this.initialize(ss["端午动画_atlas_"]);
-	this.gotoAndStop(93);
-}).prototype = p = new cjs.Sprite();
-
+	this.initialize(img.雨滴);
+}).prototype = p = new cjs.Bitmap();
+p.nominalBounds = new cjs.Rectangle(0,0,715,243);
 
 
 (lib.黑白龙 = function() {
-	this.initialize(ss["端午动画_atlas_"]);
-	this.gotoAndStop(94);
-}).prototype = p = new cjs.Sprite();
-
+	this.initialize(img.黑白龙);
+}).prototype = p = new cjs.Bitmap();
+p.nominalBounds = new cjs.Rectangle(0,0,670,431);
 
 
 (lib.龙 = function() {
-	this.initialize(ss["端午动画_atlas_"]);
-	this.gotoAndStop(95);
-}).prototype = p = new cjs.Sprite();
-
+	this.initialize(img.龙);
+}).prototype = p = new cjs.Bitmap();
+p.nominalBounds = new cjs.Rectangle(0,0,594,383);
 
 
 (lib.龙_1 = function() {
-	this.initialize(ss["端午动画_atlas_"]);
-	this.gotoAndStop(96);
-}).prototype = p = new cjs.Sprite();
-
+	this.initialize(img.龙_1);
+}).prototype = p = new cjs.Bitmap();
+p.nominalBounds = new cjs.Rectangle(0,0,950,1223);
 
 
 (lib.龙头 = function() {
-	this.initialize(ss["端午动画_atlas_"]);
-	this.gotoAndStop(97);
-}).prototype = p = new cjs.Sprite();
-
+	this.initialize(img.龙头);
+}).prototype = p = new cjs.Bitmap();
+p.nominalBounds = new cjs.Rectangle(0,0,321,259);
 
 
 (lib.龙船景介绍 = function() {
-	this.initialize(ss["端午动画_atlas_"]);
-	this.gotoAndStop(98);
-}).prototype = p = new cjs.Sprite();
-
+	this.initialize(img.龙船景介绍);
+}).prototype = p = new cjs.Bitmap();
+p.nominalBounds = new cjs.Rectangle(0,0,56,208);
 
 
 (lib.龙尾 = function() {
-	this.initialize(ss["端午动画_atlas_"]);
-	this.gotoAndStop(99);
-}).prototype = p = new cjs.Sprite();
-
+	this.initialize(img.龙尾);
+}).prototype = p = new cjs.Bitmap();
+p.nominalBounds = new cjs.Rectangle(0,0,400,290);
 
 
 (lib.龙身 = function() {
-	this.initialize(ss["端午动画_atlas_"]);
-	this.gotoAndStop(100);
-}).prototype = p = new cjs.Sprite();
-// helper functions:
+	this.initialize(img.龙身);
+}).prototype = p = new cjs.Bitmap();
+p.nominalBounds = new cjs.Rectangle(0,0,562,261);// helper functions:
 
 function mc_symbol_clone() {
 	var clone = this._cloneProps(new this.constructor(this.mode, this.startPosition, this.loop));
@@ -3084,7 +2981,7 @@ p.nominalBounds = new cjs.Rectangle(-1469.8,-8049,2358.8,9193);
 		var endY = 10740,
 			startY = 3177,
 			currentFrame = 0;
-		//app.stop();
+		app.stop();
 		
 		createjs.Touch.enable(stage);
 		
@@ -3164,8 +3061,108 @@ lib.properties = {
 	color: "#FFFFFF",
 	opacity: 1.00,
 	manifest: [
-		{src:"images/端午h595002临时.jpg?1558333424405", id:"端午h595002临时"},
-		{src:"images/端午动画_atlas_.png?1558333424054", id:"端午动画_atlas_"}
+		{src:"images/封的符咒_.png", id:"封的符咒"},
+		{src:"images/球_.png", id:"球"},
+		{src:"images/球的底色_.png", id:"球的底色"},
+		{src:"images/清淤泥文案_.png", id:"清淤泥文案"},
+		{src:"images/标题_.png", id:"标题"},
+		{src:"images/标题_1.png", id:"标题_1"},
+		{src:"images/圈圈_.png", id:"圈圈"},
+		{src:"images/鼓1.png", id:"鼓1"},
+		{src:"images/鼓_.png", id:"鼓"},
+		{src:"images/外圈线_.png", id:"外圈线"},
+		{src:"images/星星月亮_.png", id:"星星月亮"},
+		{src:"images/星星点点_.png", id:"星星点点"},
+		{src:"images/_1.png", id:"_1"},
+		{src:"images/_1_1.png", id:"_1_1"},
+		{src:"images/_1云.png", id:"_1云"},
+		{src:"images/_1云_1.png", id:"_1云_1"},
+		{src:"images/_1云层.png", id:"_1云层"},
+		{src:"images/_1波浪.png", id:"_1波浪"},
+		{src:"images/_1龙.png", id:"_1龙"},
+		{src:"images/_2.png", id:"_2"},
+		{src:"images/_2_1.png", id:"_2_1"},
+		{src:"images/_2屋檐云.png", id:"_2屋檐云"},
+		{src:"images/_2云.png", id:"_2云"},
+		{src:"images/_2云层.png", id:"_2云层"},
+		{src:"images/_2波浪.png", id:"_2波浪"},
+		{src:"images/_2龙.png", id:"_2龙"},
+		{src:"images/_3.png", id:"_3"},
+		{src:"images/_3房子底部云.png", id:"_3房子底部云"},
+		{src:"images/_3long.png", id:"_3long"},
+		{src:"images/_3云.png", id:"_3云"},
+		{src:"images/_4.png", id:"_4"},
+		{src:"images/_4云.png", id:"_4云"},
+		{src:"images/水纹路_.png", id:"水纹路"},
+		{src:"images/_5.png", id:"_5"},
+		{src:"images/船只_.png", id:"船只"},
+		{src:"images/戽水_.png", id:"戽水"},
+		{src:"images/放牛_.png", id:"放牛"},
+		{src:"images/房子_.png", id:"房子"},
+		{src:"images/赛龙3.png", id:"赛龙3"},
+		{src:"images/赛龙介绍_.png", id:"赛龙介绍"},
+		{src:"images/bg.png", id:"bg"},
+		{src:"images/bg_1.png", id:"bg_1"},
+		{src:"images/bg船底色.png", id:"bg船底色"},
+		{src:"images/散龙_.png", id:"散龙"},
+		{src:"images/散龙介绍_.png", id:"散龙介绍"},
+		{src:"images/光线_.png", id:"光线"},
+		{src:"images/logo.png", id:"logo"},
+		{src:"images/普通云_.png", id:"普通云"},
+		{src:"images/浮云_.png", id:"浮云"},
+		{src:"images/灯_.png", id:"灯"},
+		{src:"images/山峰右_.png", id:"山峰右"},
+		{src:"images/山峰左_.png", id:"山峰左"},
+		{src:"images/色相_饱和度3拷贝2.png", id:"色相_饱和度3拷贝2"},
+		{src:"images/色相_饱和度3拷贝3.png", id:"色相_饱和度3拷贝3"},
+		{src:"images/色相_饱和度3拷贝4.png", id:"色相_饱和度3拷贝4"},
+		{src:"images/色相_饱和度3拷贝.png", id:"色相_饱和度3拷贝"},
+		{src:"images/色相_饱和度3.png", id:"色相_饱和度3"},
+		{src:"images/女生_.png", id:"女生"},
+		{src:"images/起龙介绍_.png", id:"起龙介绍"},
+		{src:"images/卸龙头_.png", id:"卸龙头"},
+		{src:"images/卸龙尾_.png", id:"卸龙尾"},
+		{src:"images/云龙下方对称_.png", id:"云龙下方对称"},
+		{src:"images/云龙脊处_.png", id:"云龙脊处"},
+		{src:"images/云_.png", id:"云"},
+		{src:"images/云_1.png", id:"云_1"},
+		{src:"images/人_.png", id:"人"},
+		{src:"images/击鼓_.png", id:"击鼓"},
+		{src:"images/右手_.png", id:"右手"},
+		{src:"images/右山_.png", id:"右山"},
+		{src:"images/妇人_.png", id:"妇人"},
+		{src:"images/左手_.png", id:"左手"},
+		{src:"images/左边山峰_.png", id:"左边山峰"},
+		{src:"images/底色_.png", id:"底色"},
+		{src:"images/底部圈_.png", id:"底部圈"},
+		{src:"images/底部云_.png", id:"底部云"},
+		{src:"images/底部云_1.png", id:"底部云_1"},
+		{src:"images/底部云_2.png", id:"底部云_2"},
+		{src:"images/排污水文案_.png", id:"排污水文案"},
+		{src:"images/文案_.png", id:"文案"},
+		{src:"images/文案_1.png", id:"文案_1"},
+		{src:"images/棍棒_.png", id:"棍棒"},
+		{src:"images/波浪1.png", id:"波浪1"},
+		{src:"images/波浪2.png", id:"波浪2"},
+		{src:"images/波浪3.png", id:"波浪3"},
+		{src:"images/炮竹_.png", id:"炮竹"},
+		{src:"images/点点_.png", id:"点点"},
+		{src:"images/点点_1.png", id:"点点_1"},
+		{src:"images/禾秧_.png", id:"禾秧"},
+		{src:"images/端午h595002临时.jpg", id:"端午h595002临时"},
+		{src:"images/组1468.png", id:"组1468"},
+		{src:"images/藏龙标题_.png", id:"藏龙标题"},
+		{src:"images/藏龙_.png", id:"藏龙"},
+		{src:"images/藏龙介绍_.png", id:"藏龙介绍"},
+		{src:"images/采青介绍_.png", id:"采青介绍"},
+		{src:"images/雨滴_.png", id:"雨滴"},
+		{src:"images/黑白龙_.png", id:"黑白龙"},
+		{src:"images/龙_.png", id:"龙"},
+		{src:"images/龙_1.png", id:"龙_1"},
+		{src:"images/龙头_.png", id:"龙头"},
+		{src:"images/龙船景介绍_.png", id:"龙船景介绍"},
+		{src:"images/龙尾_.png", id:"龙尾"},
+		{src:"images/龙身_.png", id:"龙身"}
 	],
 	preloads: []
 };
