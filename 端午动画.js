@@ -3084,7 +3084,7 @@ p.nominalBounds = new cjs.Rectangle(-1469.8,-8049,2358.8,9193);
 		var endY = 10740,
 			startY = 3177,
 			currentFrame = 0;
-		app.stop();
+		//app.stop();
 		
 		createjs.Touch.enable(stage);
 		
