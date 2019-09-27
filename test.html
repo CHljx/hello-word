@@ -12,9 +12,13 @@
     </style>
 </head>
 <body>
+	<div style="width:100%;height:50px;background:blue;"></div>
     <div style="width:700px;height:100px;background:red;"></div>
 <script>
     window.addEventListener("load",function(){
+        alert(window.innerWidth+"."+screen.width+","+document.body.offsetWidth)
+    })
+	window.addEventListener("resize",function(){
         alert(window.innerWidth+"."+screen.width+","+document.body.offsetWidth)
     })
 </script>
