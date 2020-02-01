@@ -19,20 +19,20 @@ textarea{    display: block;
 </head> 
 <body> 
 <div id=app>  
-	<textarea></textarea>
-	<textarea></textarea>
-	<textarea></textarea>
-	<textarea></textarea>
-	<textarea></textarea>
-	<textarea></textarea>
-	<textarea></textarea>
-	<textarea></textarea>
-	<textarea></textarea>
-	<textarea></textarea>
-	<textarea></textarea>
-	<textarea></textarea>
-	<textarea></textarea>
-	<textarea></textarea>
+	<textarea data-id=1></textarea>
+	<textarea data-id=2></textarea>
+	<textarea data-id=3></textarea>
+	<textarea data-id=4></textarea>
+	<textarea data-id=5></textarea>
+	<textarea data-id=6></textarea>
+	<textarea data-id=7></textarea>
+	<textarea data-id=8></textarea>
+	<textarea data-id=9></textarea>
+	<textarea data-id=10></textarea>
+	<textarea data-id=11></textarea>
+	<textarea data-id=12></textarea>
+	<textarea data-id=13></textarea>
+	<textarea data-id=14></textarea>
 </div>
 <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.js"></script>
 <script>
@@ -41,13 +41,10 @@ textarea{    display: block;
 	$("textarea:last").on("focus",function(){
 		if(!d){return};
 		d=false;
-		$("textarea").val(document.body.offsetHeight+","+document.documentElement.offsetHeight+","+document.body.scrollTop+","+document.documentElement.scrollTop)
-
+		$("textarea").val($(this).data("id")+","+document.body.offsetHeight+","+document.documentElement.offsetHeight+","+document.body.scrollTop+","+document.documentElement.scrollTop)
+document.body.scrollTop=0;
+document.documentElement.scrollTop=0;
 	});
-
-	$(window).on("resize",function(){
-		alert("size")
-	})
 </script>
 </body>
 </html> 
