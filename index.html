@@ -15,7 +15,7 @@ textarea{    display: block;
     resize: none;
     padding-right: .6rem;
     box-sizing: border-box;}
-	html,body{width:100%;height:100%;padding:0;margin:0;}
+	html,body{padding:0;margin:0;}
 </style>
 </head> 
 <body> 
@@ -40,13 +40,13 @@ textarea{    display: block;
 
 	$("textarea").on("focus",function(){
 	
-		setTimeout(function(){
-					$("textarea").val(document.body.clientHeight+","+document.documentElement.clientHeight)
-
-
-		},1000)
+		$("body").css("paddingBottom",document.documentElement.clientHeight/2);
 	})
-	$("textarea").val(document.body.clientHeight+","+document.documentElement.clientHeight)
+
+	$("textarea").on("blur",function(){
+	
+		$("body").css("paddingBottom",0);
+	})
 
 </script>
 </body>
