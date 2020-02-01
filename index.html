@@ -43,6 +43,10 @@ textarea{    display: block;
 		d=false;
 		alert(document.body.offsetHeight+","+document.documentElement.offsetHeight+","+document.body.scrollTop+","+document.documentElement.scrollTop)
 
+	});
+
+	$(window).on("resize",function(){
+		alert("size")
 	})
 </script>
 </body>
