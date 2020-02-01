@@ -57,9 +57,16 @@ textarea{    display: block;
 		if(navigator.userAgent.match(/(iphone|ipad)/gi)){return true};
 		return false;
 	}
-
+	
 
 	var originalHeight=document.documentElement.clientHeight ||document.body.clientHeight;
+
+	$("textarea").on("focus",function(){
+		var ele=this;
+		ele.scrollIntoView();
+		ele.scrollIntoViewIfNeeded();
+	})
+
 	window.οnresize=function(){
 		//键盘弹起与隐藏都会引起窗口的高度发生变化
 		   var resizeHeight=document.documentElement.clientHeight || document.body.clientHeight;
