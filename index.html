@@ -15,6 +15,7 @@ textarea{    display: block;
     resize: none;
     padding-right: .6rem;
     box-sizing: border-box;}
+	html,body{width:100%;height:100%;padding:0;margin:0;}
 </style>
 </head> 
 <body> 
@@ -36,14 +37,9 @@ textarea{    display: block;
 </div>
 <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.js"></script>
 <script>
-	var d=true;
-	alert(document.body.offsetHeight+","+document.documentElement.offsetHeight)
-	$("textarea:last").on("focus",function(){
-		if(!d){return};
-		d=false;
-		$("textarea").val($(this).data("id")+","+document.body.offsetHeight+","+document.documentElement.offsetHeight+","+document.body.scrollTop+","+document.documentElement.scrollTop)
-document.body.scrollTop=0;
-document.documentElement.scrollTop=0;
+	$("textarea").on("focus",function(){
+		$("textarea").val(document.body.offsetHeight+","+document.documentElement.offsetHeight+","+document.body.scrollTop+","+document.documentElement.scrollTop)
+
 	});
 </script>
 </body>
