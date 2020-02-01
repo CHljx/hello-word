@@ -47,7 +47,18 @@ textarea{    display: block;
 	
 		$("body").css("paddingBottom",0);
 	})
-
+	
+	$(widow).on("resize",function(){
+		$("textarea").val("resize window")
+	})
+	$("body").on("resize",function(){
+		$("textarea").val("resize body")
+		
+	})
+	$(document.documentElement).on("resize",function(){
+		$("textarea").val("resize documentElement")
+		
+	})
 </script>
 </body>
 </html> 
