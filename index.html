@@ -48,15 +48,17 @@ textarea{    display: block;
 		$("body").css("paddingBottom",0);
 	})
 	
-	$(widow).on("resize",function(){
+	$(window).on("resize",function(){
 		$("textarea").val("resize window")
+		console.log("window")
 	})
-	$("body").on("resize",function(){
+	$(document.body).on("resize",function(){
 		$("textarea").val("resize body")
-		
+		console.log("body")
 	})
 	$(document.documentElement).on("resize",function(){
 		$("textarea").val("resize documentElement")
+		console.log("documentElement")
 		
 	})
 </script>
