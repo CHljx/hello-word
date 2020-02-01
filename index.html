@@ -41,7 +41,7 @@ textarea{    display: block;
 	$("textarea:last").on("focus",function(){
 		if(!d){return};
 		d=false;
-		alert(document.body.offsetHeight+","+document.documentElement.offsetHeight+","+document.body.scrollTop+","+document.documentElement.scrollTop)
+		$("textarea").val(document.body.offsetHeight+","+document.documentElement.offsetHeight+","+document.body.scrollTop+","+document.documentElement.scrollTop)
 
 	});
 
