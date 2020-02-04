@@ -53,6 +53,9 @@ textarea{    display: block;
 <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.js"></script>
 <script>
 	
+	var isFocus=false;
+	var lastScrollTop=0;
+
 	function isIphone(){
 		if(navigator.userAgent.match(/(iphone|ipad)/gi)){return true};
 		return false;
@@ -63,8 +66,10 @@ textarea{    display: block;
 
 	$("textarea").on("focus",function(){
 		var ele=this;
-		ele.scrollIntoView();
-		ele.scrollIntoViewIfNeeded();
+		$(ele).val("testarea:"+$(ele).attr("data-id"))
+		focusScroll(ele.offsetTop);
+	}).on("blur",function(){
+		blurReset();
 	})
 
 	window.οnresize=function(){
@@ -76,19 +81,28 @@ textarea{    display: block;
 				$("body").css("paddingBottom",0);
 			 }
 	}
-	document.body.addEventListener('focusin', () => {
-            //软键盘弹出的事件处理
-            if(isIphone()）{
-				alert("focusin")
-            }
-        })
-  document.body.addEventListener('focusout', () => {
-       //软键盘收起的事件处理
-        if(isIphone()）{
 
-				alert("focusout")
-        }
-   })
+	function focusScroll(offsetTop){
+
+		if(isIphone()){
+		
+			var doc=document.documentElement;
+			lastScrollTop=doc.scrollTop;
+			if(doc.scrollTop+doc.clientHeight/2<=offsetTop){
+				$("body").css("paddingBottom",offsetTop-(doc.scrollTop+doc.clientHeight/2));
+				doc.scrollTop+=doc.clientHeight/2;
+			}
+		}
+	}
+
+	function blurReset(){
+		if(isIphone){
+			var doc=document.documentElement;
+			doc.scrollTop=lastScrollTop;
+			
+				$("body").css("paddingBottom",0);
+		}
+	}
 </script>
 </body>
 </html> 
