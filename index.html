@@ -73,13 +73,7 @@ textarea{    display: block;
 	})
 
 	window.οnresize=function(){
-		//键盘弹起与隐藏都会引起窗口的高度发生变化
-		   var resizeHeight=document.documentElement.clientHeight || document.body.clientHeight;
-			if(resizeHeight-0<originalHeight-0){
-				$("body").css("paddingBottom",originalHeight-resizeHeight);
-			 }else{
-				$("body").css("paddingBottom",0);
-			 }
+		$("textarea").val("windowresie")
 	}
 
 	function focusScroll(offsetTop){
@@ -89,7 +83,7 @@ textarea{    display: block;
 			var doc=document.documentElement;
 			lastScrollTop=doc.scrollTop;
 			if(doc.scrollTop+doc.clientHeight/2<=offsetTop){
-				$("body").css("paddingBottom",offsetTop-(doc.scrollTop+doc.clientHeight/2));
+				$("body").css("paddingBottom",doc.clientHeight/2);
 				doc.scrollTop+=doc.clientHeight/2;
 			}
 		}
