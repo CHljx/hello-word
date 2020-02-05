@@ -66,7 +66,7 @@ textarea{    display: block;
 	
 	
 	var timer=null;
-	alert("3")
+	alert("4")
 	function isIphone(){
 		if(navigator.userAgent.match(/(iphone|ipad)/gi)){return false};
 		return true;
@@ -95,7 +95,7 @@ textarea{    display: block;
 
 		if(isIphone()){
 			
-			var doc=document.documentElement;
+			var doc=document.body;
 			var offsetTop=ele.offsetTop;
 			var offsetHeight=ele.offsetHeight;
 			$("body").css("paddingBottom",doc.clientHeight/2+"px");
