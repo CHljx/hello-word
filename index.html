@@ -17,6 +17,16 @@ textarea{    display: block;
     box-sizing: border-box;}
 	html,body{padding:0;margin:0;}
 	body{font-size:.20rem}
+
+#mask{
+	position:fixed;
+	left:0;
+	right:0;
+	bottom:0;
+	height:50%;
+	display:none;
+	background:#000;
+}
 </style>
 </head> 
 <body> 
@@ -50,12 +60,12 @@ textarea{    display: block;
 	<p>textarea14</p>
 	<textarea data-id=14></textarea>
 </div>
+<div id="mask"></div>
 <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.js"></script>
 <script>
 	
-	var isFocus=false;
-	var lastScrollTop=0;
-alert("1")
+	
+	var timer=null;
 	function isIphone(){
 		if(navigator.userAgent.match(/(iphone|ipad)/gi)){return true};
 		return false;
@@ -67,24 +77,35 @@ alert("1")
 	$("textarea").on("focus",function(){
 		var ele=this;
 		$(ele).val("testarea:"+$(ele).attr("data-id"))
-		focusScroll(ele.offsetTop);
+		focusScroll(ele);
+		clearTimeout(timer)
 	}).on("blur",function(){
-		blurReset();
+		timer=setTimeout(function(){
+		blurReset();},500);
+	}).on("input",function(){
+		var ele=this;
 	})
 
 	window.οnresize=function(){
 		$("textarea").val("windowresie")
 	}
 
-	function focusScroll(offsetTop){
+	function scrollToView(offsetTop){
+		
+	}
+
+	function focusScroll(ele){
 
 		if(isIphone()){
-		
+			
 			var doc=document.documentElement;
-			lastScrollTop=doc.scrollTop;
-			if(doc.scrollTop+doc.clientHeight/2<=offsetTop){
-				$("body").css("paddingBottom",doc.clientHeight/2);
-				doc.scrollTop+=doc.clientHeight/2;
+			var offsetTop=ele.offsetTop;
+			var offsetHeight=ele.offsetHeight;
+			$("body").css("paddingBottom",doc.clientHeight/2+"px");
+			$("#mask").show();
+			
+			if(offsetTop+offsetHeight>=doc.scrollTop+doc.clientHeight/2){
+				doc.scrollTop+=(offsetTop+ele.offsetHeight-(doc.scrollTop+doc.clientHeight/2));
 			}
 		}
 	}
@@ -92,9 +113,9 @@ alert("1")
 	function blurReset(){
 		if(isIphone){
 			var doc=document.documentElement;
-			doc.scrollTop=lastScrollTop;
+			$("body").css("paddingBottom","0");
 			
-				$("body").css("paddingBottom",0);
+			$("#mask").hide();
 		}
 	}
 </script>
