@@ -103,7 +103,6 @@ textarea{    display: block;
 			var offsetTop=ele.offsetTop;
 			var offsetHeight=ele.offsetHeight;
 			$("body").css("paddingBottom",doc.clientHeight/2+"px");
-			$("#mask").show();
 			
 			if(offsetTop+offsetHeight>=doc.scrollTop+doc.clientHeight/2){
 				doc.scrollTop+=(offsetTop+ele.offsetHeight-(doc.scrollTop+doc.clientHeight/2));
@@ -116,7 +115,6 @@ textarea{    display: block;
 			var doc=document.documentElement;
 			$("body").css("paddingBottom","0");
 			
-			$("#mask").hide();
 		}
 	}
 </script>
