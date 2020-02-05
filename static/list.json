@@ -1,0 +1,16 @@
+{
+  "code": 0,
+  "version": 1,
+  "minversion": 1,
+  "data": {
+    "dailyinfo": {
+      "status":"2,3,4",
+      "mark":"adatest"
+    },
+    "holidaysummary":{
+      "status_for_contact":"",
+      "address":"广东四会ada"
+    }
+  },
+  "message": ""
+}
