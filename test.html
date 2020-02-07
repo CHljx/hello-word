@@ -30,26 +30,9 @@ textarea{    display: block;
 </style>
 </head> 
 <body> 
-<div id=app>  
-	<p>textarea1</p>
-	<textarea data-id=1></textarea>
-</div>
-<div id="mask"></div>
-<script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.js"></script>
 <script>
 
-
-	var originalHeight=document.documentElement.clientHeight ||document.body.clientHeight;
-
-	$("textarea").val(originalHeight);
-
-	window.addEventListener("resize",function(){
-		
-		setTimeout(function(){
-			var originalHeight=document.documentElement.clientHeight ||document.body.clientHeight;
-			$("textarea").val(originalHeight);
-		},300);
-	});
+document.write(navigator.userAgent)
 </script>
 </body>
 </html> 
