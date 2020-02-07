@@ -33,86 +33,23 @@ textarea{    display: block;
 <div id=app>  
 	<p>textarea1</p>
 	<textarea data-id=1></textarea>
-	<p>textarea2</p>
-	<textarea data-id=2></textarea>
-	<p>textarea3</p>
-	<textarea data-id=3></textarea>
-	<p>textarea4</p>
-	<textarea data-id=4></textarea>
-	<p>textarea5</p>
-	<textarea data-id=5></textarea>
-	<p>textarea6</p>
-	<textarea data-id=6></textarea>
-	<p>textarea7</p>
-	<textarea data-id=7></textarea>
-	<p>textarea8</p>
-	<textarea data-id=8></textarea>
-	<p>textarea9</p>
-	<textarea data-id=9></textarea>
-	<p>textarea10</p>
-	<textarea data-id=10></textarea>
-	<p>textarea11</p>
-	<textarea data-id=11></textarea>
-	<p>textarea12</p>
-	<textarea data-id=12></textarea>
-	<p>textarea13</p>
-	<textarea data-id=13></textarea>
-	<p>textarea14</p>
-	<textarea data-id=14></textarea>
 </div>
 <div id="mask"></div>
 <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.js"></script>
 <script>
-	
-	
-	var timer=null;
-	alert("4")
-	function isIphone(){
-		if(navigator.userAgent.match(/(iphone|ipad)/gi)){return false};
-		return true;
-	}
-	
+
 
 	var originalHeight=document.documentElement.clientHeight ||document.body.clientHeight;
 
-	$("textarea").on("focus",function(){
-		var ele=this;
-		$(ele).val("testarea:"+$(ele).attr("data-id"))
-		focusScroll(ele);
-		clearTimeout(timer)
-	}).on("blur",function(){
-		timer=setTimeout(function(){
-		blurReset();},500);
-	}).on("input",function(){
-		var ele=this;
-	})
+	$("textarea").val(originalHeight);
 
-	function scrollToView(offsetTop){
+	window.addEventListener("resize",function(){
 		
-	}
-
-	function focusScroll(ele){
-
-		if(isIphone()){
-			
-			var doc=document.body;
-			var offsetTop=ele.offsetTop;
-			var offsetHeight=ele.offsetHeight;
-			$("body").css("paddingBottom",doc.clientHeight/2+"px");
-			
-			if(offsetTop+offsetHeight>=doc.scrollTop+doc.clientHeight/2){
-				doc.scrollTop+=(offsetTop+ele.offsetHeight-(doc.scrollTop+doc.clientHeight/2));
-			}
-		}
-	}
-
-	function blurReset(){
-		if(isIphone){
-			var doc=document.documentElement;
-			$("body").css("paddingBottom","0");
-			
-		}
-	}
+		setTimeout(function(){
+			var originalHeight=document.documentElement.clientHeight ||document.body.clientHeight;
+			$("textarea").val(originalHeight);
+		},300);
+	});
 </script>
 </body>
 </html> 
