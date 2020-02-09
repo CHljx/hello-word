@@ -30,12 +30,13 @@ textarea{    display: block;
 </style>
 </head> 
 <body> 
+<button onclick="getLocation()">点击获取GPS</button>
 <script src="https://cdn.bootcss.com/vConsole/3.3.4/vconsole.min.js"></script>
 <script>new VConsole();</script>
 <script>
 function getLocation(){
        var options={
-           enableHighAccuracy:true, 
+           //enableHighAccuracy:true, 
            maximumAge:1000
        }
        if(navigator.geolocation){
@@ -74,7 +75,6 @@ function getLocation(){
                }
 
            }
-		   getLocation();
 </script>
 </body>
 </html> 
