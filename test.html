@@ -30,9 +30,51 @@ textarea{    display: block;
 </style>
 </head> 
 <body> 
+<script src="https://cdn.bootcss.com/vConsole/3.3.4/vconsole.min.js"></script>
+<script>new VConsole();</script>
 <script>
+function getLocation(){
+       var options={
+           enableHighAccuracy:true, 
+           maximumAge:1000
+       }
+       if(navigator.geolocation){
+           //浏览器支持geolocation
+           // alert("浏览器支持geolocation");
+           navigator.geolocation.getCurrentPosition(onSuccess,onError,options);
 
-document.write(navigator.userAgent)
+        }else{
+            //浏览器不支持geolocation
+             console.log("浏览器不支持geolocation");
+        }
+  }
+
+  function onSuccess(pos){
+        console.log("经度："+pos.coords.longitude+
+                "纬度："+pos.coords.latitude)
+ }
+ function onError(error){
+               switch(error.code){
+
+                   case 1:
+                    console.log("位置服务被拒绝");
+                   break;
+
+                   case 2:
+                    console.log("暂时获取不到位置信息");
+                   break;
+
+                   case 3:
+                    console.log("获取信息超时");
+                   break;
+
+                   case 4:
+                     console.log("未知错误");
+                   break;
+               }
+
+           }
+		   getLocation();
 </script>
 </body>
 </html> 
