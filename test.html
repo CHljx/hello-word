@@ -34,6 +34,7 @@ textarea{    display: block;
 <script src="https://cdn.bootcss.com/vConsole/3.3.4/vconsole.min.js"></script>
 <script>new VConsole();</script>
 <script>
+alert("d")
 function getLocation(){
        var options={
            //enableHighAccuracy:true, 
@@ -51,7 +52,7 @@ function getLocation(){
   }
 
   function onSuccess(pos){
-        console.log("经度："+pos.coords.longitude+
+        alert("经度："+pos.coords.longitude+
                 "纬度："+pos.coords.latitude)
  }
  function onError(error){
