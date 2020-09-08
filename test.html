@@ -1,5 +1,129 @@
-<!doctype html> <html> <head> <meta charset=UTF-8> <meta name=viewport content="width=device-width,initial-scale=1,minimum-scale=1,user-scalable=no"/> <title>test</title> </head>
+
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <meta charset=UTF-8>
+    <meta http-equiv=X-UA-Compatible content="IE=edge">
+    <meta name=viewport content="width=device-width,initial-scale=1">
+    <style>
+        div{
+            margin:20px 0;
+        }
+    </style>
+</head>
 <body>
-	<script>alert(navigator.userAgent)</script>
-</body> 
-</html> 
+    <div id="app">
+        <div v-for="item in actions">
+            <button v-html="item.fn" @click="actAction(item)"></button>
+        </div>
+    </div>
+    <script src="https://lib.baomitu.com/vue/2.6.11/vue.min.js"></script>
+    <script>
+        new Vue({
+            el:"#app",
+            data:{
+                actions:[
+                    {
+                        fn:"beckHomeJS",
+                    },
+                    {
+                        fn:"phoneNum",
+                        arg:[
+                            "15914283006"
+                        ]
+                    },
+                    {
+                        fn:"openColumnsJS",
+                        arg:[
+                            "栏目名",
+                            "758"
+                        ]
+                    },
+                    {
+                        fn:"openColumnsJS",
+                        arg:[
+                            "栏目名",
+                            "758"
+                        ]
+                    },
+                    {
+                        fn:"openArticleJS",
+                        arg:[
+                            "测试标题","737","26232","0","https://37hwapp.37.com/index.php?c=article&a=view&aid=26232&type=0","1","0"
+                        ]
+                    },
+                    {
+                        fn:"showCloseBtnJS"
+                    },
+                    {
+                        fn:"showRightButtonJS",
+                        arg:[
+                            "按钮标",
+                            "beckHomeJS()"
+                        ]
+                    },
+                    {
+                        fn:"showAddBtnJS",
+                        arg:[
+                            "一吐为快|类型|标题|正文|-","0","802|一吐为快"
+                        ]
+                    },
+                    {
+                        fn:"showAddBtnJS",
+                        arg:[
+                            "一吐为快|类型|标题|正文|-","0","802|一吐为快"
+                        ]
+                    },
+                    {
+                        fn:"refreshPreWebView"
+                    },
+                    {
+                        fn:"pushWebView",
+                        arg:[
+                            "https://www.baidu.com","百度",false,false,false
+                        ]
+                    },
+                    {
+                        fn:"rightBtnClickExJs",
+                        arg:[
+                            "test"
+                        ]
+                    },
+                    {
+                        fn:"showWebViewTitleJS",
+                        arg:[
+                            "标题"
+                        ]
+                    },
+                    {
+                        fn:"executeAppJs",
+                        arg:[
+                            "openImgsPreview"
+                        ]
+                    }
+                ]
+            },
+            methods:{
+                actAction:function(item){
+                    var _window=(window.parent==window?window :window.parent);
+                    var arg=item.arg;
+                    if(_window[item.fn]){
+                        _window[item.fn].apply(null,arg);
+                    }else if(_window.sdkCtrl&&_window.sdkCtrl[item.fn]){
+                        _window.sdkCtrl[item.fn].apply(null,arg);
+                    }else if(_window.webkit&&_window.webkit.messageHandlers&&_window.webkit.messageHandlers[item.fn]){
+                        _window.webkit.messageHandlers[item.fn].apply(null,arg);
+                    }else{
+                       alert("方法未注册")
+                    }
+                }
+            }
+        });
+
+
+        function test(){
+            alert("D")
+        }
+    </script>
+</body>
+</html>
